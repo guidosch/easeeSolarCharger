@@ -90,7 +90,7 @@ A web app that allows users to set an end time by which their car should be full
 - Google Cloud Firebase for storage.
 - Google Cloud buckets for static web page hosting.
 - Deploy everything from the git repo.
-- A system cloud function scheduled to run regularly (every minute) that performs all optimization and assigns / connects / disconnects chargers.
+- A system cloud function scheduled to run regularly (every 5 minutes) that performs all optimization and assigns / connects / disconnects chargers.
 - Passwords and API tokens are stored in Google Secret Manager.
 - Code is stored on GitHub, in the repository where this file lives.
 
@@ -104,22 +104,22 @@ A web app that allows users to set an end time by which their car should be full
 
 ### API budget & polling cadence
 
-The SolarEdge monitoring API allows only ~300 requests per day per site, so the one-minute control loop must not read it every cycle.
+The SolarEdge monitoring API allows only ~300 requests per day per site. The control loop cadence is chosen to match that budget: at 5 minutes, daylight only, the loop can read the site power once per cycle and still stay inside the limit.
 
 | Source | Cadence | Rationale |
 | --- | --- | --- |
 | SolarEdge site power | every **5 min**, **daylight only** (sunrise–sunset, Europe/Zurich) | 288 calls/day worst case, inside the ~300/day limit; no production at night |
 | Easee chargers | only for chargers with an **active schedule or running session** | avoids 30 × 1440 calls/day |
-| OpenWeatherMap | once per day (day-ahead forecast) | forecast only changes the defer/no-defer decision |
-| Optimizer loop | every **1 min** | acts on the last known surplus value |
+| OpenWeatherMap | four times per day (day-ahead forecast) | forecast only changes the defer/no-defer decision, but a stale morning forecast would strand a deferred target; four refreshes keep the decision current at negligible call cost |
+| Optimizer loop | every **5 min** | matches the SolarEdge cadence; fast enough for the optimization cycle, and slow enough to stay inside the API budget |
 
-- The control loop runs at one-minute resolution but consumes a surplus value that is up to 5 minutes old. The optimizer must treat the surplus reading as stale-tolerant and avoid rapid setpoint oscillation.
+- The control loop and the SolarEdge poll run at the same 5-minute cadence, so the surplus value is normally at most one cycle old. It is not guaranteed fresh: a failed, rate-limited or skipped poll means the previous value is reused. The optimizer must therefore treat the surplus reading as stale-tolerant (carrying its age) and avoid rapid setpoint oscillation.
 - During the winter window no solar optimization happens, so SolarEdge polling can be reduced or skipped entirely from 1 October to the end of February.
 
 ### Physical constraints
 
 - Chargers have a maximum output of 11 kW.
-- A **dynamic load management system is already installed and stays in place.** This system will not replace it. Two lines with 15 chargers each, max 64 A per line, max 128 A in total. The owner will provide a list of all parking lots with their charger and their line assignment.
+- A **dynamic load management system is already installed and stays in place.** This system will not replace it. Two lines with 15 chargers each, max 63 A per line, max 126 A in total. The owner will provide a list of all parking lots with their charger and their line assignment.
 - PV power is measured **per site only.** There is **no** meter separating house load, heat pumps and chargers, so surplus has to be derived from site-level production and consumption figures.
 
 ## Non-Functional Requirements
@@ -136,7 +136,7 @@ The SolarEdge monitoring API allows only ~300 requests per day per site, so the 
   { "UserId": "12345", "email": "test@gmail.com" }
   ```
   `UserId` is the reference key for the user. The rest of the data model will evolve during implementation and testing.
-- **Write volume:** do not persist one record per charger per cycle — that would exceed the Firestore free tier (~1.3M writes/month). Persist **state changes** plus a **periodic snapshot (~15 min)** per active charger.
+- **Write volume:** do not persist one record per charger per cycle. At a 5-minute cadence that is 30 × 288 ≈ 8,600 writes/day (~260k/month) for no added insight, a large share of the Firestore free tier before sessions and state changes are counted. Persist **state changes** plus a **periodic snapshot (~15 min)** per active charger.
 - **Retention:** users see their last five sessions; admin monitoring data is kept for one month, then deleted.
 - **Deletion:** a user can delete all of their data on the Google Cloud side with a single button.
 
@@ -183,9 +183,9 @@ The SolarEdge monitoring API allows only ~300 requests per day per site, so the 
 | --- | --- |
 | **Surplus** | PV production minus site consumption, i.e. the power that would otherwise be exported to the grid. |
 | **Session** | One charging process, from plug-in (or first energy delivered) until the requested kWh is reached or the car is unplugged. |
-| **Cycle** | One run of the scheduled optimizer function (every minute). |
+| **Cycle** | One run of the scheduled optimizer function (every 5 minutes). |
 | **Parking lot number** | The physical identifier of a charger; used as the user-facing charger name. |
-| **Line** | One of the two 64 A supply lines, each serving 15 chargers. |
+| **Line** | One of the two 63 A supply lines, each serving 15 chargers. |
 | **High-price window** | 11:00–13:00 and 18:00–20:00 Europe/Zurich. |
 | **Winter window** | 1 October – end of February; no solar optimization. |
 
@@ -194,4 +194,4 @@ The SolarEdge monitoring API allows only ~300 requests per day per site, so the 
 All inception-level questions are answered. Two design details follow from the answers above and belong in the plan phase, not here:
 
 1. **Plug-in and session-end detection.** Chargers are only polled while a schedule or session is active, but the system still has to notice a car being plugged in when nothing is scheduled, and has to detect session end to auto-clear the "charge now" override. Options to evaluate against the Easee docs: a low-frequency sweep of all chargers (e.g. every 15 min) versus Easee's real-time observation/streaming API, which would remove the need for polling here.
-2. **Surplus estimation from site-level metering.** With no submetering, surplus = site production − site consumption, where consumption includes the heat pumps and the chargers themselves. The plan needs an explicit formula that subtracts the system's own charging power, plus a smoothing/hysteresis rule so a 5-minute-old reading does not cause setpoint oscillation.
+2. **Surplus estimation from site-level metering.** With no submetering, surplus = site production − site consumption, where consumption includes the heat pumps and the chargers themselves. The plan needs an explicit formula that subtracts the system's own charging power, plus a smoothing/hysteresis rule so a stale reading does not cause setpoint oscillation.

@@ -1,6 +1,35 @@
 <!--
 Sync Impact Report
 ==================
+Version change: 2.0.0 → 2.1.0 (MINOR)
+
+Rationale for MINOR: the optimizer control-loop cadence changes from one minute to five minutes, to
+match the SolarEdge ~300 requests/day/site budget. No principle is removed or redefined and the
+Principle I precedence ladder is untouched, so this is not MAJOR; but it is a semantic change to a
+stated requirement (a one-minute deployment would no longer be compliant), so it is not PATCH.
+
+Modified principles:
+- IV. Resilient, Budgeted Integrations — optimizer loop cadence 1 min → 5 min; cadence is now
+  explicitly derived from the SolarEdge budget and MUST NOT be shortened without re-deriving it.
+  Stale-tolerance reworded: loop and poll now share a cadence, so the surplus reading is normally
+  one cycle old, but staleness still arises from failed/rate-limited/skipped/night-time polls.
+- V. Stateless, Single-Flight Serverless Units — single-flight window is the cycle interval rather
+  than one minute.
+- VI. Free-Tier Frugality & Data Minimalism — write-volume rationale restated for the 5-minute
+  cadence (~260k writes/month if written per charger per cycle).
+
+Modified sections:
+- Technology & Deployment Constraints → Scheduling: five-minute optimizer cycle.
+
+Added / removed sections: none.
+
+Deferred TODOs: none.
+
+Companion change: .specify/Arch-inception-canvas.md updated in the same amendment (stack, API
+budget table, staleness note, write-volume figure, glossary "Cycle").
+
+--- Previous amendment ---
+
 Version change: 1.0.0 → 2.0.0 (MAJOR)
 
 Rationale for MAJOR: Principle I is redefined in a backward-incompatible way. v1.0.0 required
@@ -126,12 +155,15 @@ honoured and MUST be enforced in code, not merely documented:
 - Easee chargers: polled for chargers with an active schedule or running session; any sweep covering
   all 30 chargers MUST be low-frequency and explicitly budgeted.
 - OpenWeatherMap: four times per day for the day-ahead forecast.
-- Optimizer loop: every minute, acting on the last known surplus value.
+- Optimizer loop: every 5 minutes, acting on the last known surplus value. The loop cadence is
+  derived from the SolarEdge budget above and MUST NOT be shortened without re-deriving that budget.
 
-Because the loop runs at one-minute resolution on a surplus reading up to five minutes old, the
-optimizer MUST be stale-tolerant: readings carry an age, and setpoint changes MUST be damped by an
-explicit smoothing or hysteresis rule so a stale value cannot cause oscillation. The surplus formula
-MUST subtract the system's own charging power, since only site-level metering exists.
+Because loop and poll share the same cadence, the surplus reading is normally one cycle old but is
+never guaranteed fresh — a failed, rate-limited, skipped or night-time poll means the previous value
+is reused. The optimizer MUST therefore be stale-tolerant: readings carry an age, that age MUST be
+part of the decision, and setpoint changes MUST be damped by an explicit smoothing or hysteresis rule
+so a stale value cannot cause oscillation. The surplus formula MUST subtract the system's own charging
+power, since only site-level metering exists.
 
 When any provider is unavailable or rate-limited, the system MUST fail safe to charging from the grid
 while still respecting the high-price rule. Failure MUST NOT surface as an unhandled exception or an
@@ -153,9 +185,9 @@ local disk across requests. Units MUST tolerate cold starts, concurrent instance
 delivery from Cloud Scheduler or Pub/Sub, so every trigger handler MUST be idempotent for a given
 trigger key.
 
-The one-minute optimizer additionally MUST be single-flight: a new cycle MUST NOT begin while the
+The five-minute optimizer additionally MUST be single-flight: a new cycle MUST NOT begin while the
 previous cycle is still running, enforced by a durable lock or lease rather than by assuming the run
-finishes in under a minute. A skipped cycle MUST be logged.
+finishes within the cycle interval. A skipped cycle MUST be logged.
 
 Configuration and secrets MUST come from environment variables and Secret Manager — Easee
 credentials (including the dedicated technical optimizer account), SolarEdge keys, OpenWeatherMap
@@ -183,9 +215,9 @@ Only data needed to operate the system is stored. `UserId` from the Easee token 
 key; the system MUST NOT accumulate personal data beyond what the token and the owner-provided
 parking-lot mapping supply.
 
-Rationale: cost is a stated quality goal for a single-operator private installation. At 30 chargers a
-one-minute loop trivially exceeds the Firestore free tier, so write discipline and retention are
-architectural requirements rather than later optimizations.
+Rationale: cost is a stated quality goal for a single-operator private installation. At 30 chargers
+even a five-minute loop writing per charger per cycle is ~260k writes/month for no added insight, so
+write discipline and retention are architectural requirements rather than later optimizations.
 
 ### VII. Type-Safe Simplicity
 
@@ -210,8 +242,8 @@ the main source of unreviewable scheduling logic — and there is one developer 
   `tsconfig.json` MUST enable `strict`. One package manager and one committed lockfile, used by CI.
 - **Storage**: Firebase/Firestore for charger, session, and monitoring data; Cloud Storage for static
   hosting and blobs. Introducing another storage or messaging primitive requires an amendment.
-- **Scheduling**: Cloud Scheduler drives the one-minute optimizer cycle (subject to Principle V's
-  single-flight rule) and the once-daily forecast fetch.
+- **Scheduling**: Cloud Scheduler drives the five-minute optimizer cycle (subject to Principle V's
+  single-flight rule) and the day-ahead forecast fetches.
 - **Deployment**: from this GitHub repository only, via committed build and deploy configuration. No
   configuration drift — what is in the repository is what runs.
 - **Authentication**: users log in with their Easee account. The backend MUST verify the JWT
@@ -282,4 +314,4 @@ Quality Gates). Additionally, the principles here are the checklist used by `/sp
 plan-time constitution checks; a plan that cannot show compliance MUST be revised before
 implementation begins.
 
-**Version**: 2.0.0 | **Ratified**: 2026-08-14 | **Last Amended**: 2026-08-14
+**Version**: 2.1.0 | **Ratified**: 2026-08-14 | **Last Amended**: 2026-08-14
