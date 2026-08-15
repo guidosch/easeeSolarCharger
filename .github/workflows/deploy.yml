@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 env:
-  PROJECT: easee-solar-charger
+  PROJECT: solarpowerconsumptionoptimizer
   REGION: europe-west6
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
       - uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/${{ secrets.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github/providers/github
-          service_account: easee-deployer@easee-solar-charger.iam.gserviceaccount.com
+          service_account: easee-deployer@solarpowerconsumptionoptimizer.iam.gserviceaccount.com
 
       - uses: google-github-actions/setup-gcloud@v2
 

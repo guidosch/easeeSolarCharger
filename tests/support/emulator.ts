@@ -15,7 +15,7 @@ type Firestore = ReturnType<typeof getDb>
  * developer without Java installed still gets a green unit and contract run. CI always has one
  * (`.github/workflows/ci.yml` runs the suite inside `emulators:exec`).
  */
-export const PROJECT_ID = process.env['GOOGLE_CLOUD_PROJECT'] ?? 'easee-solar-charger'
+export const PROJECT_ID = process.env['GOOGLE_CLOUD_PROJECT'] ?? 'solarpowerconsumptionoptimizer'
 export const EMULATOR_HOST = process.env['FIRESTORE_EMULATOR_HOST'] ?? 'localhost:8080'
 
 export async function emulatorAvailable(timeoutMs = 750): Promise<boolean> {

@@ -21,16 +21,16 @@ spec:
       containerConcurrency: 1
       # Longer than the 90-second performance goal, shorter than the four-minute lease.
       timeoutSeconds: 180
-      serviceAccountName: easee-optimizer@easee-solar-charger.iam.gserviceaccount.com
+      serviceAccountName: easee-optimizer@solarpowerconsumptionoptimizer.iam.gserviceaccount.com
       containers:
-        - image: europe-west6-docker.pkg.dev/easee-solar-charger/services/easee-optimizer:latest
+        - image: europe-west6-docker.pkg.dev/solarpowerconsumptionoptimizer/services/easee-optimizer:latest
           resources:
             limits:
               cpu: '1'
               memory: 512Mi
           env:
             - name: GOOGLE_CLOUD_PROJECT
-              value: easee-solar-charger
+              value: solarpowerconsumptionoptimizer
             - name: SCHEDULER_VERSION
               value: '1.0.0'
             - name: SITE_LATITUDE

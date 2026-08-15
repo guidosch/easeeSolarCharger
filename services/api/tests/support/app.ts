@@ -27,7 +27,7 @@ export function buildTestApi(nowMs = Date.now()): {
 
   const deps = buildApiDeps({
     env: loadEnv({
-      GOOGLE_CLOUD_PROJECT: 'easee-solar-charger',
+      GOOGLE_CLOUD_PROJECT: 'solarpowerconsumptionoptimizer',
       ADMIN_USERNAME: 'admin',
       ADMIN_PASSWORD: 's3cret',
     }),

@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "easee-solar-charger"
+    "default": "solarpowerconsumptionoptimizer"
   },
   "targets": {
-    "easee-solar-charger": {
+    "solarpowerconsumptionoptimizer": {
       "hosting": {
-        "web": ["easee-solar-charger"],
-        "admin": ["easee-solar-charger-admin"]
+        "web": ["solarpowerconsumptionoptimizer"],
+        "admin": ["solarpowerconsumptionoptimizer-admin"]
       }
     }
   }

@@ -22,7 +22,7 @@ Firestore itself is the failure, the log entry is the only signal left.
 ## 2. The log-based metric
 
 ```bash
-PROJECT=easee-solar-charger
+PROJECT=solarpowerconsumptionoptimizer
 
 gcloud logging metrics create optimizer_cycle_failures \
   --project="$PROJECT" \

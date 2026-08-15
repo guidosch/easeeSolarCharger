@@ -30,9 +30,10 @@ rule, not a convention, keeps a clock or a random source out of it.
 ## Getting started
 
 ```bash
-pnpm install
+rm -rf node_modules apps/*/node_modules packages/*/node_modules services/*/node_modules # clean when coming from lima VM (different arch)
+pnpm install                        # corepack enable pnpm if not installed
 cp .env.example .env.local          # all values optional for the fixture-driven tests
-pnpm emulators                      # Firestore on :8080 (needs Java 11+)
+pnpm emulators                      # Firestore on :8080 (needs Java 11+): pnpm add -Dw firebase-tools if not installed
 pnpm seed:lots                      # the operator's parking-lot ↔ user mapping
 ```
 

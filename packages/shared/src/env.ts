@@ -10,7 +10,7 @@ import { z } from 'zod'
 const nonEmpty = z.string().min(1)
 
 export const EnvSchema = z.object({
-  GOOGLE_CLOUD_PROJECT: z.string().default('easee-solar-charger'),
+  GOOGLE_CLOUD_PROJECT: z.string().default('solarpowerconsumptionoptimizer'),
   FIRESTORE_EMULATOR_HOST: z.string().optional(),
 
   EASEE_API_BASE: z.string().url().default('https://api.easee.com'),

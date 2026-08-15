@@ -24,7 +24,7 @@ Everything below is done once, by hand, and never again. `deploy.yml` does the r
 ### 1. Project and APIs
 
 ```bash
-PROJECT=easee-solar-charger
+PROJECT=solarpowerconsumptionoptimizer
 REGION=europe-west6   # Zürich — the data is about a building in Switzerland
 
 gcloud config set project "$PROJECT"

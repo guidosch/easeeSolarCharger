@@ -12,7 +12,7 @@
 # an at-least-once delivery of the same instant overwrites its own record rather than acting twice.
 set -euo pipefail
 
-PROJECT="${PROJECT:-easee-solar-charger}"
+PROJECT="${PROJECT:-solarpowerconsumptionoptimizer}"
 REGION="${REGION:-europe-west6}"
 OPTIMIZER_URL="$(gcloud run services describe easee-optimizer \
   --project="$PROJECT" --region="$REGION" --format='value(status.url)')"

@@ -9,7 +9,7 @@ TTL policies are not expressible in `firestore.indexes.json`, so they are applie
 one-time setup checklist.
 
 ```bash
-PROJECT=easee-solar-charger
+PROJECT=solarpowerconsumptionoptimizer
 
 for COLLECTION in cycles chargerSnapshots chargerEvents; do
   gcloud firestore fields ttls update expiresAt \

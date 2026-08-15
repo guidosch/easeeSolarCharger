@@ -28,7 +28,7 @@
     "autoClose": "3600s"
   },
   "notificationChannels": [
-    "projects/easee-solar-charger/notificationChannels/REPLACE_WITH_CHANNEL_ID"
+    "projects/solarpowerconsumptionoptimizer/notificationChannels/REPLACE_WITH_CHANNEL_ID"
   ],
   "enabled": true
 }
