@@ -1,0 +1,16 @@
+{
+  "name": "@app/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "comment": "Deliberately dependency-free: this package is the reproducibility boundary (Principle III). Anything it could import that performs I/O is banned by the purity lint rule in eslint.config.js.",
+  "dependencies": {}
+}

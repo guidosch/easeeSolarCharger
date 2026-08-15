@@ -1,0 +1,6243 @@
+{
+  "fixture": "summer-override",
+  "schedulerVersion": "1.0.0",
+  "cycles": [
+    {
+      "cycleId": "2026-06-10T07:00:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T07:00:00.000Z",
+        "now": "2026-06-10T07:00:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T07:00:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T07:00:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 2,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 0,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T07:00:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T07:05:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T07:05:00.000Z",
+        "now": "2026-06-10T07:05:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T07:05:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T07:05:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 1,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T07:05:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T07:10:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T07:10:00.000Z",
+        "now": "2026-06-10T07:10:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T07:10:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T07:10:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 2,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T07:10:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T07:15:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T07:15:00.000Z",
+        "now": "2026-06-10T07:15:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T07:15:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T07:15:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 3,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T07:15:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T07:20:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T07:20:00.000Z",
+        "now": "2026-06-10T07:20:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T07:20:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T07:20:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 4,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T07:20:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T07:25:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T07:25:00.000Z",
+        "now": "2026-06-10T07:25:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T07:25:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T07:25:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 5,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T07:25:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T07:30:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T07:30:00.000Z",
+        "now": "2026-06-10T07:30:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T07:30:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T07:30:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 6,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T07:30:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T07:35:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T07:35:00.000Z",
+        "now": "2026-06-10T07:35:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T07:35:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T07:35:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 7,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T07:35:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T07:40:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T07:40:00.000Z",
+        "now": "2026-06-10T07:40:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T07:40:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T07:40:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 8,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T07:40:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T07:45:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T07:45:00.000Z",
+        "now": "2026-06-10T07:45:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T07:45:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T07:45:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 9,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T07:45:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T07:50:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T07:50:00.000Z",
+        "now": "2026-06-10T07:50:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T07:50:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T07:50:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 10,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T07:50:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T07:55:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T07:55:00.000Z",
+        "now": "2026-06-10T07:55:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T07:55:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T07:55:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 11,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T07:55:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T08:00:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T08:00:00.000Z",
+        "now": "2026-06-10T08:00:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T08:00:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T08:00:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 12,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T08:00:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T08:05:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T08:05:00.000Z",
+        "now": "2026-06-10T08:05:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T08:05:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T08:05:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 13,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T08:05:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T08:10:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T08:10:00.000Z",
+        "now": "2026-06-10T08:10:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T08:10:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T08:10:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 14,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T08:10:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T08:15:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T08:15:00.000Z",
+        "now": "2026-06-10T08:15:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T08:15:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T08:15:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 15,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T08:15:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T08:20:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T08:20:00.000Z",
+        "now": "2026-06-10T08:20:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T08:20:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T08:20:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 16,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T08:20:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T08:25:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T08:25:00.000Z",
+        "now": "2026-06-10T08:25:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T08:25:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T08:25:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 17,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T08:25:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T08:30:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T08:30:00.000Z",
+        "now": "2026-06-10T08:30:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T08:30:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T08:30:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 18,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T08:30:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T08:35:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T08:35:00.000Z",
+        "now": "2026-06-10T08:35:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T08:35:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T08:35:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 19,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T08:35:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T08:40:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T08:40:00.000Z",
+        "now": "2026-06-10T08:40:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T08:40:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T08:40:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 20,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T08:40:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T08:45:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T08:45:00.000Z",
+        "now": "2026-06-10T08:45:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T08:45:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T08:45:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 21,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T08:45:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T08:50:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T08:50:00.000Z",
+        "now": "2026-06-10T08:50:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T08:50:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T08:50:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 22,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T08:50:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T08:55:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T08:55:00.000Z",
+        "now": "2026-06-10T08:55:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T08:55:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T08:55:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 23,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T08:55:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "awaiting_surplus",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T09:00:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T09:00:00.000Z",
+        "now": "2026-06-10T09:00:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T09:00:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T09:00:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 24,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T09:00:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "high_price_blocked",
+            "ladderRule": 3,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T09:05:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T09:05:00.000Z",
+        "now": "2026-06-10T09:05:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T09:05:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T09:05:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 25,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T09:05:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "high_price_blocked",
+            "ladderRule": 3,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T09:10:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T09:10:00.000Z",
+        "now": "2026-06-10T09:10:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T09:10:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T09:10:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 26,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T09:10:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "high_price_blocked",
+            "ladderRule": 3,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T09:15:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T09:15:00.000Z",
+        "now": "2026-06-10T09:15:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T09:15:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T09:15:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 27,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T09:15:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "high_price_blocked",
+            "ladderRule": 3,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T09:20:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T09:20:00.000Z",
+        "now": "2026-06-10T09:20:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T09:20:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T09:20:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 28,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T09:20:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "high_price_blocked",
+            "ladderRule": 3,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T09:25:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T09:25:00.000Z",
+        "now": "2026-06-10T09:25:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T09:25:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T09:25:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 29,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T09:25:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "high_price_blocked",
+            "ladderRule": 3,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T09:30:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T09:30:00.000Z",
+        "now": "2026-06-10T09:30:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T09:30:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T09:30:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 30,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T09:30:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "high_price_blocked",
+            "ladderRule": 3,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T09:35:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T09:35:00.000Z",
+        "now": "2026-06-10T09:35:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T09:35:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T09:35:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 31,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T09:35:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "high_price_blocked",
+            "ladderRule": 3,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T09:40:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T09:40:00.000Z",
+        "now": "2026-06-10T09:40:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T09:40:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T09:40:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 32,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T09:40:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "high_price_blocked",
+            "ladderRule": 3,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T09:45:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T09:45:00.000Z",
+        "now": "2026-06-10T09:45:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T09:45:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T09:45:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 33,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T09:45:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "high_price_blocked",
+            "ladderRule": 3,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T09:50:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T09:50:00.000Z",
+        "now": "2026-06-10T09:50:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T09:50:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T09:50:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 34,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T09:50:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "high_price_blocked",
+            "ladderRule": 3,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T09:55:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T09:55:00.000Z",
+        "now": "2026-06-10T09:55:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T09:55:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T09:55:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 35,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T09:55:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "high_price_blocked",
+            "ladderRule": 3,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T10:00:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T10:00:00.000Z",
+        "now": "2026-06-10T10:00:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T10:00:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -4,
+          "observedAt": "2026-06-10T10:00:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 6,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 36,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T10:00:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T10:05:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T10:05:00.000Z",
+        "now": "2026-06-10T10:05:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T10:05:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 0.435,
+          "observedAt": "2026-06-10T10:05:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 0.924,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 37,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 0.924
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T10:05:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T10:10:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T10:10:00.000Z",
+        "now": "2026-06-10T10:10:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T10:10:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 3.096,
+          "observedAt": "2026-06-10T10:10:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 1.848,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 38,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 1.848
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T10:10:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T10:15:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T10:15:00.000Z",
+        "now": "2026-06-10T10:15:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T10:15:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 4.693,
+          "observedAt": "2026-06-10T10:15:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 2.772,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 39,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 2.772
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T10:15:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T10:20:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T10:20:00.000Z",
+        "now": "2026-06-10T10:20:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T10:20:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 5.651,
+          "observedAt": "2026-06-10T10:20:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 3.696,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 40,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 3.696
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T10:20:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T10:25:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T10:25:00.000Z",
+        "now": "2026-06-10T10:25:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T10:25:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 6.226,
+          "observedAt": "2026-06-10T10:25:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 4.62,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 41,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 4.62
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T10:25:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T10:30:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T10:30:00.000Z",
+        "now": "2026-06-10T10:30:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T10:30:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 6.571,
+          "observedAt": "2026-06-10T10:30:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 5.544,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 42,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 5.544
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T10:30:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T10:35:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T10:35:00.000Z",
+        "now": "2026-06-10T10:35:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T10:35:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 6.778,
+          "observedAt": "2026-06-10T10:35:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 6.468,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 43,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 6.468
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T10:35:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T10:40:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T10:40:00.000Z",
+        "now": "2026-06-10T10:40:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T10:40:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 6.902,
+          "observedAt": "2026-06-10T10:40:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 7.392,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 44,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 7.392
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T10:40:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T10:45:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T10:45:00.000Z",
+        "now": "2026-06-10T10:45:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T10:45:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 6.976,
+          "observedAt": "2026-06-10T10:45:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 8.316,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 45,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 8.316
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T10:45:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T10:50:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T10:50:00.000Z",
+        "now": "2026-06-10T10:50:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T10:50:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 7.021,
+          "observedAt": "2026-06-10T10:50:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 9.24,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 46,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 9.24
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T10:50:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T10:55:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T10:55:00.000Z",
+        "now": "2026-06-10T10:55:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T10:55:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 7.048,
+          "observedAt": "2026-06-10T10:55:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "high",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 10.164,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 47,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 10.164
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T10:55:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T11:00:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T11:00:00.000Z",
+        "now": "2026-06-10T11:00:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T11:00:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 7.064,
+          "observedAt": "2026-06-10T11:00:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 11.088,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 48,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 11.088
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T11:00:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T11:05:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T11:05:00.000Z",
+        "now": "2026-06-10T11:05:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T11:05:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 7.074,
+          "observedAt": "2026-06-10T11:05:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 12.012,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 49,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 12.012
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T11:05:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T11:10:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T11:10:00.000Z",
+        "now": "2026-06-10T11:10:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T11:10:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 7.08,
+          "observedAt": "2026-06-10T11:10:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 12.936,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 50,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 12.936
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T11:10:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T11:15:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T11:15:00.000Z",
+        "now": "2026-06-10T11:15:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T11:15:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 7.083,
+          "observedAt": "2026-06-10T11:15:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 13.86,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 51,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 13.86
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T11:15:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T11:20:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T11:20:00.000Z",
+        "now": "2026-06-10T11:20:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T11:20:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 7.085,
+          "observedAt": "2026-06-10T11:20:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 14.784,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 52,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 14.784
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T11:20:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T11:25:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T11:25:00.000Z",
+        "now": "2026-06-10T11:25:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T11:25:00.000Z",
+        "surplus": {
+          "rawKw": 7.088,
+          "smoothedKw": 7.086,
+          "observedAt": "2026-06-10T11:25:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": 7.088,
+        "ownChargingKw": 11.088,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 3,
+            "deliveredCurrentA": 16,
+            "dynamicChargerCurrentA": 16,
+            "commandedCurrentA": 16,
+            "totalPowerKw": 11.088,
+            "sessionEnergyKwh": 15.708,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": true,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 53,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 15.708
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T11:25:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 16,
+            "reason": "override",
+            "ladderRule": 2,
+            "expectedKwhThisCycle": 0.924,
+            "attribution": "grid",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T11:30:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T11:30:00.000Z",
+        "now": "2026-06-10T11:30:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T11:30:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": 2.652,
+          "observedAt": "2026-06-10T11:30:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 1,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 54,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 16.632
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T11:30:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "not_plugged_in",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T11:35:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T11:35:00.000Z",
+        "now": "2026-06-10T11:35:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T11:35:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -0.009,
+          "observedAt": "2026-06-10T11:35:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 1,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 0,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 16.632
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T11:35:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "not_plugged_in",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T11:40:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T11:40:00.000Z",
+        "now": "2026-06-10T11:40:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T11:40:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -1.605,
+          "observedAt": "2026-06-10T11:40:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 1,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 0,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 16.632
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T11:40:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "not_plugged_in",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T11:45:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T11:45:00.000Z",
+        "now": "2026-06-10T11:45:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T11:45:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -2.563,
+          "observedAt": "2026-06-10T11:45:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 1,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 0,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 16.632
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T11:45:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "not_plugged_in",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T11:50:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T11:50:00.000Z",
+        "now": "2026-06-10T11:50:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T11:50:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -3.138,
+          "observedAt": "2026-06-10T11:50:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 1,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 0,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 16.632
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T11:50:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "not_plugged_in",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T11:55:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T11:55:00.000Z",
+        "now": "2026-06-10T11:55:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T11:55:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -3.483,
+          "observedAt": "2026-06-10T11:55:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 1,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 0,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 16.632
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T11:55:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "not_plugged_in",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    },
+    {
+      "cycleId": "2026-06-10T12:00:00.000Z",
+      "inputs": {
+        "cycleId": "2026-06-10T12:00:00.000Z",
+        "now": "2026-06-10T12:00:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "randomSeed": "2026-06-10T12:00:00.000Z",
+        "surplus": {
+          "rawKw": -4,
+          "smoothedKw": -3.69,
+          "observedAt": "2026-06-10T12:00:00.000Z",
+          "ageMinutes": 0,
+          "quality": "fresh"
+        },
+        "gridExportKw": -4,
+        "ownChargingKw": 0,
+        "daylight": true,
+        "seasonMode": "solar",
+        "tariffWindow": "low",
+        "forecast": null,
+        "chargers": [
+          {
+            "chargerId": "EH100001",
+            "lotNumber": "A01",
+            "userId": "U1001",
+            "line": "L1",
+            "phases": 3,
+            "maxCurrentA": 16,
+            "opMode": 1,
+            "deliveredCurrentA": 0,
+            "dynamicChargerCurrentA": 0,
+            "commandedCurrentA": 0,
+            "totalPowerKw": 0,
+            "sessionEnergyKwh": 0,
+            "observedAt": "1970-01-01T00:00:00.000Z",
+            "overrideActive": false,
+            "consecutiveAboveFloor": 0,
+            "consecutiveBelowFloor": 0,
+            "target": {
+              "energyKwh": 40,
+              "deadline": "2026-06-10T23:00:00+02:00",
+              "deliveredKwh": 16.632
+            }
+          }
+        ],
+        "fairness": {
+          "U1001": {
+            "solarKwhReceived": 0
+          }
+        },
+        "lineLimits": {
+          "L1": 63,
+          "L2": 63,
+          "total": 126
+        },
+        "config": {
+          "minCurrentA": 6,
+          "ewmaAlpha": 0.4,
+          "deadbandA": 1,
+          "startDelayCycles": 2,
+          "stopDelayCycles": 2,
+          "stalenessCutoffMinutes": 15,
+          "highPriceWindows": [
+            [
+              "11:00",
+              "13:00"
+            ],
+            [
+              "18:00",
+              "20:00"
+            ]
+          ],
+          "winterWindow": {
+            "from": "10-01",
+            "toExclusive": "03-01"
+          },
+          "timezone": "Europe/Zurich"
+        }
+      },
+      "decision": {
+        "cycleId": "2026-06-10T12:00:00.000Z",
+        "schedulerVersion": "1.0.0",
+        "decisions": [
+          {
+            "chargerId": "EH100001",
+            "targetCurrentA": 0,
+            "reason": "not_plugged_in",
+            "ladderRule": null,
+            "expectedKwhThisCycle": 0,
+            "attribution": "none",
+            "reachability": {
+              "state": "reachable",
+              "expectedShortfallKwh": 0
+            }
+          }
+        ],
+        "surplusAllocatedKw": 0,
+        "notes": [
+          "no forecast available — deferral not considered (FR-044)"
+        ]
+      }
+    }
+  ],
+  "outcomes": {
+    "A01": {
+      "deliveredKwh": 16.632,
+      "solarKwh": 0,
+      "gridKwh": 16.632,
+      "targetEnergyKwh": 40,
+      "deadline": "2026-06-10T23:00:00+02:00",
+      "targetMet": false,
+      "setpointChanges": 1,
+      "startStopInstants": [
+        "2026-06-10T10:00:00.000Z"
+      ]
+    }
+  },
+  "firestoreWrites": 207
+}

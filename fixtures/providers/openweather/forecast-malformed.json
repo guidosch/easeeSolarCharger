@@ -1,0 +1,14 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "cod": "200",
+    "list": [
+      {
+        "dt": "not-a-number"
+      }
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "status": 429,
+  "headers": {
+    "retry-after": "60",
+    "content-type": "text/plain"
+  },
+  "body": {
+    "String": "Too many requests. The daily quota for this site has been exceeded."
+  }
+}

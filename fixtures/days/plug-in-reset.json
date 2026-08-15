@@ -1,0 +1,42 @@
+{
+  "name": "plug-in-reset",
+  "description": "20 January 2026. A01 is commanded before the car arrives, then plugged in at 19:00 — which resets dynamicChargerCurrent to zero. The optimizer must notice and re-apply rather than assume its previous write survived (research R5).",
+  "schedulerVersion": "1.0.0",
+  "lots": [
+    {
+      "lotNumber": "A01",
+      "chargerId": "EH100001",
+      "serialNumber": "SN500001",
+      "easeeUserId": "U1001",
+      "line": "L1",
+      "phases": 3,
+      "maxCurrentA": 16
+    }
+  ],
+  "targets": [
+    {
+      "lotNumber": "A01",
+      "energyKwh": 30,
+      "deadline": "2026-01-20T07:00:00+01:00"
+    }
+  ],
+  "plugged": [
+    {
+      "lotNumber": "A01",
+      "from": "2026-01-20T19:00:00+01:00",
+      "to": "2026-01-20T23:59:00+01:00",
+      "resetsSetpointOnPlugIn": true
+    }
+  ],
+  "overrides": [],
+  "surplus": {
+    "mode": "none",
+    "samples": []
+  },
+  "forecast": null,
+  "cycles": {
+    "from": "2026-01-20T18:00:00+01:00",
+    "to": "2026-01-20T23:30:00+01:00",
+    "stepMinutes": 5
+  }
+}

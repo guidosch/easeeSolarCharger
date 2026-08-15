@@ -1,0 +1,12 @@
+{
+  "status": 429,
+  "headers": {
+    "retry-after": "30",
+    "content-type": "application/json"
+  },
+  "body": {
+    "errorCode": 429,
+    "errorCodeName": "TooManyRequests",
+    "title": "Too Many Requests"
+  }
+}

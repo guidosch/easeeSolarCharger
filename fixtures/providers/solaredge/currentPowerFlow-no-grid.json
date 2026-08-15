@@ -1,0 +1,26 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "siteCurrentPowerFlow": {
+      "updateRefreshRate": 3,
+      "unit": "kW",
+      "connections": [
+        {
+          "from": "PV",
+          "to": "Load"
+        }
+      ],
+      "LOAD": {
+        "status": "Active",
+        "currentPower": 3.1
+      },
+      "PV": {
+        "status": "Active",
+        "currentPower": 7.3
+      }
+    }
+  }
+}

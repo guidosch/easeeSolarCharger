@@ -113,7 +113,8 @@ double the call cost and introduce a timestamp-skew error between the two readin
 metering installed. The canvas states site-level metering exists. A one-off spike must confirm the
 endpoint returns `LOAD` and `GRID` for this specific site before the surplus formula is built on it
 — if it does not, the fallback is `PV.currentPower` minus a consumption series, at twice the call
-cost.
+cost. **Confirmed 2026-08-15** (open item O1): a live daylight reading returns both elements, so the
+formula above stands unchanged.
 
 ---
 
@@ -348,7 +349,7 @@ cycle replays byte-identically (SC-010).
 
 | # | Item | Status | Resolution path |
 | --- | --- | --- | --- |
-| O1 | Confirm `currentPowerFlow` returns `LOAD` and `GRID` for this specific site | **OPEN** — blocked on a SolarEdge API key + site ID | scripted: `python3 scripts/spikes/o1_solaredge_powerflow.py`, one call, **must be run in daylight** |
+| O1 | Confirm `currentPowerFlow` returns `LOAD` and `GRID` for this specific site | **CLOSED (2026-08-15)** — both present in a live daylight reading (PV 46.33 kW, LOAD 23.12 kW, GRID 23.21 kW exporting, direction stated as `{from: "LOAD", to: "Grid"}`). R2's formula holds as written and the R3 budget is unchanged | done — evidence in `fixtures/providers/solaredge/currentPowerFlow-live.json` |
 | O2 | Confirm Easee publishes no JWKS | **CLOSED (2026-08-14)** — a JWKS **does** exist and **does** sign our tokens; signature verified. D1 withdrawn, local verification adopted (see R6 spike findings) | done |
 | O3 | Confirm the 63 A / 126 A line limits against the installer's documentation | **OPEN** | owner action, before the per-line headroom check is implemented |
 | O4 | Confirm whether `dynamicChargerCurrent` expires on a watchdog timer | **OPEN** — needs Easee credentials and several hours of observation on the owner's lot | scripted: `python3 scripts/spikes/o4_dynamic_current_watchdog.py --hours 6`. If it does expire, every cycle must rewrite every active charger, which changes the write budget in R5/R8 and undermines the deadband |

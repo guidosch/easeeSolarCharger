@@ -1,0 +1,51 @@
+{
+  "name": "easee-solar-charger",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.21.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm -r --parallel --if-present dev",
+    "build": "pnpm -r --workspace-concurrency=1 --if-present build",
+    "typecheck": "tsc -p tsconfig.json && pnpm -r --if-present typecheck",
+    "lint": "eslint .",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "test": "vitest run --no-file-parallelism",
+    "test:unit": "vitest run --project unit",
+    "test:contract": "vitest run --project contract",
+    "test:integration": "vitest run --project integration --no-file-parallelism",
+    "test:dst": "vitest run --project unit tests/dst.test.ts",
+    "test:determinism": "tsx scripts/determinism.ts",
+    "test:single-flight": "vitest run --project integration --no-file-parallelism services/optimizer/tests/single-flight.test.ts",
+    "test:deletion": "vitest run --project integration --no-file-parallelism services/api/tests/deletion.test.ts",
+    "seed:lots": "tsx scripts/seed-lots.ts",
+    "replay": "tsx scripts/replay.ts",
+    "replay:all-cycles": "tsx scripts/replay.ts --all-cycles",
+    "cycle": "tsx scripts/cycle.ts",
+    "cycle:dry-run": "tsx scripts/dry-run.ts",
+    "report:writes": "tsx scripts/report-writes.ts",
+    "emulators": "firebase emulators:start"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@types/node": "^22.10.2",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.39.5",
+    "globals": "^15.14.0",
+    "prettier": "^3.9.6",
+    "tsx": "^4.23.12",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.67.0",
+    "vitest": "^3.2.7"
+  },
+  "dependencies": {
+    "@app/adapters": "workspace:*",
+    "@app/core": "workspace:*",
+    "@app/shared": "workspace:*",
+    "zod": "^4.4.3"
+  }
+}

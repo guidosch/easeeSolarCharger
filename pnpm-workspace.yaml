@@ -1,0 +1,11 @@
+packages:
+  - 'apps/*'
+  - 'services/*'
+  - 'packages/*'
+
+# pnpm requires dependency build scripts to be allow-listed explicitly, so a transitive dependency
+# cannot run arbitrary code at install time without review.
+allowBuilds:
+  '@firebase/util': true
+  esbuild: true
+  protobufjs: true

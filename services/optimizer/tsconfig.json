@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@app/shared": ["../../packages/shared/src/index.ts"],
+      "@app/core": ["../../packages/core/src/index.ts"],
+      "@app/adapters": ["../../packages/adapters/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

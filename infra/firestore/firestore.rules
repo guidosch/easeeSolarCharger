@@ -1,0 +1,15 @@
+rules_version = '2';
+
+// Clients never talk to Firestore directly: both frontends go through `services/api`, which holds
+// the only credentials, and authorization is enforced there against `parkingLots` (FR-003).
+//
+// Denying everything is therefore both simpler and stricter than mirroring the parking-lot mapping
+// into rules — there is no second copy of the authorization logic to drift (data-model.md,
+// "Indexes and rules"). The Admin SDK used by the services bypasses these rules by design.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,150 @@
+/* Desktop-only operator surface: dense tables, no responsive work (constitution). */
+:root {
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  color: #16221c;
+  background: #f6f7f5;
+  font-size: 14px;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  padding: 0.75rem 1.5rem;
+  background: #16221c;
+  color: #fff;
+}
+
+header h1 {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+}
+nav a {
+  color: #b9cdc2;
+  text-decoration: none;
+}
+nav a.router-link-active {
+  color: #fff;
+  border-bottom: 2px solid #0b6e4f;
+}
+
+button.link {
+  background: none;
+  border: 0;
+  color: #b9cdc2;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+}
+
+main {
+  padding: 1.5rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background: #fff;
+}
+th,
+td {
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid #e3e8e5;
+  white-space: nowrap;
+}
+th {
+  background: #eef2f0;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+tr:hover td {
+  background: #f8faf9;
+}
+
+.ok {
+  color: #0b6e4f;
+}
+.warn {
+  color: #a4341f;
+  font-weight: 600;
+}
+.warn-row td {
+  background: #fdf6f4;
+}
+.error {
+  color: #a4341f;
+  font-weight: 600;
+}
+.hint {
+  color: #5d6b63;
+}
+
+.health {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.tile {
+  background: #fff;
+  border: 1px solid #e3e8e5;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  min-width: 11rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.tile span {
+  color: #5d6b63;
+  font-size: 0.85rem;
+}
+.tile strong {
+  font-size: 1.25rem;
+}
+.tile.bad {
+  border-color: #a4341f;
+}
+
+.range {
+  display: flex;
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 1rem;
+}
+.signin {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 20rem;
+}
+
+pre {
+  background: #fff;
+  border: 1px solid #e3e8e5;
+  padding: 1rem;
+  overflow: auto;
+  max-height: 40rem;
+  font-size: 12px;
+}
+code {
+  background: #eef2f0;
+  padding: 0 0.25rem;
+  border-radius: 3px;
+}

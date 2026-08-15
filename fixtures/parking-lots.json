@@ -1,0 +1,272 @@
+[
+  {
+    "lotNumber": "A01",
+    "chargerId": "EH100001",
+    "serialNumber": "SN500001",
+    "easeeUserId": "U1001",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "A02",
+    "chargerId": "EH100002",
+    "serialNumber": "SN500002",
+    "easeeUserId": "U1002",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "A03",
+    "chargerId": "EH100003",
+    "serialNumber": "SN500003",
+    "easeeUserId": "U1003",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "A04",
+    "chargerId": "EH100004",
+    "serialNumber": "SN500004",
+    "easeeUserId": "U1004",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "A05",
+    "chargerId": "EH100005",
+    "serialNumber": "SN500005",
+    "easeeUserId": "U1005",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "A06",
+    "chargerId": "EH100006",
+    "serialNumber": "SN500006",
+    "easeeUserId": "U1006",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "A07",
+    "chargerId": "EH100007",
+    "serialNumber": "SN500007",
+    "easeeUserId": "U1007",
+    "line": "L1",
+    "phases": 1,
+    "maxCurrentA": 32
+  },
+  {
+    "lotNumber": "A08",
+    "chargerId": "EH100008",
+    "serialNumber": "SN500008",
+    "easeeUserId": "U1008",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "A09",
+    "chargerId": "EH100009",
+    "serialNumber": "SN500009",
+    "easeeUserId": "U1009",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "A10",
+    "chargerId": "EH100010",
+    "serialNumber": "SN500010",
+    "easeeUserId": "U1010",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "A11",
+    "chargerId": "EH100011",
+    "serialNumber": "SN500011",
+    "easeeUserId": "U1011",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "A12",
+    "chargerId": "EH100012",
+    "serialNumber": "SN500012",
+    "easeeUserId": "U1012",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "A13",
+    "chargerId": "EH100013",
+    "serialNumber": "SN500013",
+    "easeeUserId": "U1013",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "A14",
+    "chargerId": "EH100014",
+    "serialNumber": "SN500014",
+    "easeeUserId": "U1014",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "A15",
+    "chargerId": "EH100015",
+    "serialNumber": "SN500015",
+    "easeeUserId": "U1015",
+    "line": "L1",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B01",
+    "chargerId": "EH100016",
+    "serialNumber": "SN500016",
+    "easeeUserId": "U1001",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B02",
+    "chargerId": "EH100017",
+    "serialNumber": "SN500017",
+    "easeeUserId": "U1017",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B03",
+    "chargerId": "EH100018",
+    "serialNumber": "SN500018",
+    "easeeUserId": "U1018",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B04",
+    "chargerId": "EH100019",
+    "serialNumber": "SN500019",
+    "easeeUserId": "U1019",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B05",
+    "chargerId": "EH100020",
+    "serialNumber": "SN500020",
+    "easeeUserId": "U1020",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B06",
+    "chargerId": "EH100021",
+    "serialNumber": "SN500021",
+    "easeeUserId": "U1021",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B07",
+    "chargerId": "EH100022",
+    "serialNumber": "SN500022",
+    "easeeUserId": "U1022",
+    "line": "L2",
+    "phases": 1,
+    "maxCurrentA": 32
+  },
+  {
+    "lotNumber": "B08",
+    "chargerId": "EH100023",
+    "serialNumber": "SN500023",
+    "easeeUserId": "U1023",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B09",
+    "chargerId": "EH100024",
+    "serialNumber": "SN500024",
+    "easeeUserId": "U1024",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B10",
+    "chargerId": "EH100025",
+    "serialNumber": "SN500025",
+    "easeeUserId": "U1025",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B11",
+    "chargerId": "EH100026",
+    "serialNumber": "SN500026",
+    "easeeUserId": "U1026",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B12",
+    "chargerId": "EH100027",
+    "serialNumber": "SN500027",
+    "easeeUserId": "U1027",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B13",
+    "chargerId": "EH100028",
+    "serialNumber": "SN500028",
+    "easeeUserId": "U1028",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B14",
+    "chargerId": "EH100029",
+    "serialNumber": "SN500029",
+    "easeeUserId": "U1029",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  },
+  {
+    "lotNumber": "B15",
+    "chargerId": "EH100030",
+    "serialNumber": "SN500030",
+    "easeeUserId": "",
+    "line": "L2",
+    "phases": 3,
+    "maxCurrentA": 16
+  }
+]

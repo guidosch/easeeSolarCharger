@@ -12,7 +12,7 @@ Secrets come from the environment only — never commit them, and never paste a 
 
 | Spike | Question | Status | Cost |
 | --- | --- | --- | --- |
-| `o1_solaredge_powerflow.py` | Does `currentPowerFlow` return `LOAD` and `GRID` for this site? | **OPEN** — needs SolarEdge API key + site ID | 1 call of 300/day |
+| `o1_solaredge_powerflow.py` | Does `currentPowerFlow` return `LOAD` and `GRID` for this site? | **CLOSED 2026-08-15** — both present, exporting; R2 formula holds, R3 budget unchanged | 1 call of 300/day |
 | `o2_easee_token_issuer.py` | Is there a JWKS, and does it sign the tokens we receive? | **CLOSED 2026-08-14** — yes and yes; RS256 signature verified, D1 withdrawn | 1 login |
 | `o4_dynamic_current_watchdog.py` | Does `dynamicChargerCurrent` decay on its own? | **OPEN** — needs Easee credentials + several hours on the owner's lot | ~1 call / 5 min |
 

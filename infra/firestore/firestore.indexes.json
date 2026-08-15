@@ -1,0 +1,54 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "targets",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "deadline", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "targets",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "chargerId", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "cycles",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "outcome", "order": "ASCENDING" },
+        { "fieldPath": "startedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "chargerSnapshots",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "chargerId", "order": "ASCENDING" },
+        { "fieldPath": "observedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "chargerEvents",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "chargerId", "order": "ASCENDING" },
+        { "fieldPath": "at", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "targets",
+      "fieldPath": "status",
+      "indexes": [
+        { "order": "ASCENDING", "queryScope": "COLLECTION" },
+        { "order": "ASCENDING", "queryScope": "COLLECTION_GROUP" }
+      ]
+    }
+  ]
+}

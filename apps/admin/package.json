@@ -1,0 +1,22 @@
+{
+  "name": "@app/admin",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5174",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@app/shared": "workspace:*",
+    "vue": "^3.5.41",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.8",
+    "vite": "^7.3.6",
+    "vue-tsc": "^3.3.9"
+  }
+}

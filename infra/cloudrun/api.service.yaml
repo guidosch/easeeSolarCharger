@@ -1,0 +1,48 @@
+# Cloud Run service for the user + admin API (T137).
+#
+# `min-instances: "0"` is not a tuning choice: scale-to-zero is what keeps the deployment inside the
+# free tier (SC-012), and it is why nothing in either service may hold state in memory between
+# requests (Principle V).
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: easee-api
+  labels:
+    cloud.googleapis.com/location: europe-west6
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: '0'
+        autoscaling.knative.dev/maxScale: '4'
+        run.googleapis.com/execution-environment: gen2
+    spec:
+      containerConcurrency: 40
+      timeoutSeconds: 30
+      serviceAccountName: easee-api@easee-solar-charger.iam.gserviceaccount.com
+      containers:
+        - image: europe-west6-docker.pkg.dev/easee-solar-charger/services/easee-api:latest
+          resources:
+            limits:
+              cpu: '1'
+              memory: 512Mi
+          env:
+            - name: GOOGLE_CLOUD_PROJECT
+              value: easee-solar-charger
+            - name: SCHEDULER_VERSION
+              value: '1.0.0'
+            - name: SITE_LATITUDE
+              value: '47.3769'
+            - name: SITE_LONGITUDE
+              value: '8.5417'
+            - name: ADMIN_USERNAME
+              value: admin
+            # Secrets are mounted from Secret Manager, never baked into the image (Principle V).
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: admin-password
+                  key: latest
+  traffic:
+    - percent: 100
+      latestRevision: true

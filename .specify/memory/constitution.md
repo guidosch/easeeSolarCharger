@@ -1,6 +1,38 @@
 <!--
 Sync Impact Report
 ==================
+Version change: 2.1.0 → 2.2.0 (MINOR)
+
+PROPOSED — not yet adopted. Per the Amendment procedure below, this is adopted when the pull
+request carrying it is approved and merged by the owner. It accompanies the first implementation
+pull request, as plan.md requires.
+
+Rationale for MINOR: a permitted technology is widened, and no principle is removed, redefined or
+reordered. The Principle I precedence ladder is untouched, so this is not MAJOR; but a deployment
+serving static assets from Firebase Hosting would not have been compliant with v2.1.0, so it is not
+PATCH either.
+
+Modified sections:
+- Technology & Deployment Constraints → Frontend: static assets may be served from Firebase Hosting
+  as well as Cloud Storage.
+
+Motivation (deviation D2 in specs/001-solar-charging-mvp/plan.md): Cloud Storage cannot serve HTTPS
+on a custom domain without an external HTTP(S) Load Balancer. That load balancer has no free tier
+and costs roughly USD 18/month — on its own it would break SC-012 ("running the system costs the
+operator nothing per month"), which is a stated quality goal of the feature this constitution
+governs. Firebase Hosting provides free managed HTTPS, a CDN, 10 GB of storage and 360 MB/day of
+transfer, is already part of the same Firebase project that holds Firestore, and adds no new vendor.
+
+Impact on existing specifications, plans and tasks: none beyond removing the recorded deviation.
+`specs/001-solar-charging-mvp/plan.md` lists D2 in Complexity Tracking and `research.md` R8 states
+the same reasoning; both may drop the "deviation" framing once this is adopted. No work in flight is
+invalidated, so no migration steps are required.
+
+Alternative rejected: serving the bundles from the bucket's default `storage.googleapis.com` URL.
+It is free, but it has no custom domain and a poor PWA install story for a phone-first application.
+
+--- Previous amendment ---
+
 Version change: 2.0.0 → 2.1.0 (MINOR)
 
 Rationale for MINOR: the optimizer control-loop cadence changes from one minute to five minutes, to
@@ -237,7 +269,10 @@ the main source of unreviewable scheduling logic — and there is one developer 
 ## Technology & Deployment Constraints
 
 - **Frontend**: Vue.js progressive web app, responsive and mobile-first, served as static assets from
-  Cloud Storage. The admin view is a separate desktop-only surface; it need not be responsive.
+  Cloud Storage or Firebase Hosting. The admin view is a separate desktop-only surface; it need not
+  be responsive. Firebase Hosting is permitted because Cloud Storage cannot serve HTTPS on a custom
+  domain without a load balancer that has no free tier; any *other* static host requires an
+  amendment.
 - **Backend**: TypeScript on Node.js (current active LTS) running as Cloud Run functions.
   `tsconfig.json` MUST enable `strict`. One package manager and one committed lockfile, used by CI.
 - **Storage**: Firebase/Firestore for charger, session, and monitoring data; Cloud Storage for static
@@ -314,4 +349,4 @@ Quality Gates). Additionally, the principles here are the checklist used by `/sp
 plan-time constitution checks; a plan that cannot show compliance MUST be revised before
 implementation begins.
 
-**Version**: 2.1.0 | **Ratified**: 2026-08-14 | **Last Amended**: 2026-08-14
+**Version**: 2.2.0 | **Ratified**: 2026-08-14 | **Last Amended**: 2026-08-15

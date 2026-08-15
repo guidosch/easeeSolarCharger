@@ -1,0 +1,21 @@
+{
+  "name": "@app/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --target=node22 --outfile=dist/index.js --external:firebase-admin --banner:js=\"import{createRequire}from'node:module';const require=createRequire(import.meta.url);\"",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@app/adapters": "workspace:*",
+    "@app/core": "workspace:*",
+    "@app/shared": "workspace:*",
+    "@hono/node-server": "^1.19.17",
+    "firebase-admin": "^13.10.0",
+    "hono": "^4.13.2",
+    "zod": "^4.4.3"
+  }
+}

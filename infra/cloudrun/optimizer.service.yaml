@@ -1,0 +1,67 @@
+# Cloud Run service for the five-minute optimizer cycle (T137).
+#
+# Reachable only by the Cloud Scheduler service account: the cycle handler is not a public endpoint,
+# and its OIDC caller is the only identity granted run.invoker.
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: easee-optimizer
+  labels:
+    cloud.googleapis.com/location: europe-west6
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: '0'
+        # One at a time. The Firestore lease is the real guard (FR-026), but there is no reason to
+        # let Cloud Run start a second instance that will only find the lease held.
+        autoscaling.knative.dev/maxScale: '1'
+        run.googleapis.com/execution-environment: gen2
+    spec:
+      containerConcurrency: 1
+      # Longer than the 90-second performance goal, shorter than the four-minute lease.
+      timeoutSeconds: 180
+      serviceAccountName: easee-optimizer@easee-solar-charger.iam.gserviceaccount.com
+      containers:
+        - image: europe-west6-docker.pkg.dev/easee-solar-charger/services/easee-optimizer:latest
+          resources:
+            limits:
+              cpu: '1'
+              memory: 512Mi
+          env:
+            - name: GOOGLE_CLOUD_PROJECT
+              value: easee-solar-charger
+            - name: SCHEDULER_VERSION
+              value: '1.0.0'
+            - name: SITE_LATITUDE
+              value: '47.3769'
+            - name: SITE_LONGITUDE
+              value: '8.5417'
+            - name: EASEE_TECHNICAL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: easee-technical-username
+                  key: latest
+            - name: EASEE_TECHNICAL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: easee-technical-password
+                  key: latest
+            - name: SOLAREDGE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: solaredge-api-key
+                  key: latest
+            - name: SOLAREDGE_SITE_ID
+              valueFrom:
+                secretKeyRef:
+                  name: solaredge-site-id
+                  key: latest
+            - name: OPENWEATHER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: openweather-api-key
+                  key: latest
+  traffic:
+    - percent: 100
+      latestRevision: true

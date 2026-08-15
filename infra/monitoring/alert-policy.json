@@ -1,0 +1,34 @@
+{
+  "displayName": "Optimizer cycles failing",
+  "documentation": {
+    "content": "Two or more optimizer cycles failed or were skipped within fifteen minutes. One transient provider failure is expected and handled by the fail-safe (FR-044); two consecutive means the fail-safe has become the steady state. Start at GET /api/admin/cycles?outcome=failed, then open the cycle record — it carries the full input set and the correlation ID that links it to the provider calls it made.",
+    "mimeType": "text/markdown"
+  },
+  "combiner": "OR",
+  "conditions": [
+    {
+      "displayName": "optimizer_cycle_failures >= 2 in 15 minutes",
+      "conditionThreshold": {
+        "filter": "metric.type=\"logging.googleapis.com/user/optimizer_cycle_failures\" AND resource.type=\"cloud_run_revision\"",
+        "aggregations": [
+          {
+            "alignmentPeriod": "300s",
+            "perSeriesAligner": "ALIGN_SUM",
+            "crossSeriesReducer": "REDUCE_SUM"
+          }
+        ],
+        "comparison": "COMPARISON_GT",
+        "thresholdValue": 1,
+        "duration": "0s",
+        "trigger": { "count": 1 }
+      }
+    }
+  ],
+  "alertStrategy": {
+    "autoClose": "3600s"
+  },
+  "notificationChannels": [
+    "projects/easee-solar-charger/notificationChannels/REPLACE_WITH_CHANNEL_ID"
+  ],
+  "enabled": true
+}

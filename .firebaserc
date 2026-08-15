@@ -1,0 +1,13 @@
+{
+  "projects": {
+    "default": "easee-solar-charger"
+  },
+  "targets": {
+    "easee-solar-charger": {
+      "hosting": {
+        "web": ["easee-solar-charger"],
+        "admin": ["easee-solar-charger-admin"]
+      }
+    }
+  }
+}

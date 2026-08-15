@@ -1,0 +1,49 @@
+{
+  "firestore": {
+    "rules": "infra/firestore/firestore.rules",
+    "indexes": "infra/firestore/firestore.indexes.json"
+  },
+  "hosting": [
+    {
+      "target": "web",
+      "public": "apps/web/dist",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "/api/**",
+          "run": { "serviceId": "easee-api", "region": "europe-west6" }
+        },
+        { "source": "**", "destination": "/index.html" }
+      ],
+      "headers": [
+        {
+          "source": "/api/**",
+          "headers": [{ "key": "Cache-Control", "value": "no-store" }]
+        }
+      ]
+    },
+    {
+      "target": "admin",
+      "public": "apps/admin/dist",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "/api/**",
+          "run": { "serviceId": "easee-api", "region": "europe-west6" }
+        },
+        { "source": "**", "destination": "/index.html" }
+      ],
+      "headers": [
+        {
+          "source": "/api/**",
+          "headers": [{ "key": "Cache-Control", "value": "no-store" }]
+        }
+      ]
+    }
+  ],
+  "emulators": {
+    "firestore": { "port": 8080 },
+    "ui": { "enabled": true, "port": 4000 },
+    "singleProjectMode": true
+  }
+}

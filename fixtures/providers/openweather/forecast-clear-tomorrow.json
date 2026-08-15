@@ -1,0 +1,585 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "cod": "200",
+    "message": 0,
+    "cnt": 40,
+    "list": [
+      {
+        "dt": 1781049600,
+        "main": {
+          "temp": 18,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 85
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-10 00:00:00"
+      },
+      {
+        "dt": 1781060400,
+        "main": {
+          "temp": 19,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 85
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-10 03:00:00"
+      },
+      {
+        "dt": 1781071200,
+        "main": {
+          "temp": 20,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 85
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-10 06:00:00"
+      },
+      {
+        "dt": 1781082000,
+        "main": {
+          "temp": 21,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 85
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-10 09:00:00"
+      },
+      {
+        "dt": 1781092800,
+        "main": {
+          "temp": 22,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 85
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-10 12:00:00"
+      },
+      {
+        "dt": 1781103600,
+        "main": {
+          "temp": 23,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 85
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-10 15:00:00"
+      },
+      {
+        "dt": 1781114400,
+        "main": {
+          "temp": 24,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 85
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-10 18:00:00"
+      },
+      {
+        "dt": 1781125200,
+        "main": {
+          "temp": 25,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 85
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-10 21:00:00"
+      },
+      {
+        "dt": 1781136000,
+        "main": {
+          "temp": 18,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 20
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-11 00:00:00"
+      },
+      {
+        "dt": 1781146800,
+        "main": {
+          "temp": 19,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 20
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-11 03:00:00"
+      },
+      {
+        "dt": 1781157600,
+        "main": {
+          "temp": 20,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 20
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-11 06:00:00"
+      },
+      {
+        "dt": 1781168400,
+        "main": {
+          "temp": 21,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 20
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-11 09:00:00"
+      },
+      {
+        "dt": 1781179200,
+        "main": {
+          "temp": 22,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 20
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-11 12:00:00"
+      },
+      {
+        "dt": 1781190000,
+        "main": {
+          "temp": 23,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 20
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-11 15:00:00"
+      },
+      {
+        "dt": 1781200800,
+        "main": {
+          "temp": 24,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 20
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-11 18:00:00"
+      },
+      {
+        "dt": 1781211600,
+        "main": {
+          "temp": 25,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 20
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-11 21:00:00"
+      },
+      {
+        "dt": 1781222400,
+        "main": {
+          "temp": 18,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-12 00:00:00"
+      },
+      {
+        "dt": 1781233200,
+        "main": {
+          "temp": 19,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-12 03:00:00"
+      },
+      {
+        "dt": 1781244000,
+        "main": {
+          "temp": 20,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-12 06:00:00"
+      },
+      {
+        "dt": 1781254800,
+        "main": {
+          "temp": 21,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-12 09:00:00"
+      },
+      {
+        "dt": 1781265600,
+        "main": {
+          "temp": 22,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-12 12:00:00"
+      },
+      {
+        "dt": 1781276400,
+        "main": {
+          "temp": 23,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-12 15:00:00"
+      },
+      {
+        "dt": 1781287200,
+        "main": {
+          "temp": 24,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-12 18:00:00"
+      },
+      {
+        "dt": 1781298000,
+        "main": {
+          "temp": 25,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-12 21:00:00"
+      },
+      {
+        "dt": 1781308800,
+        "main": {
+          "temp": 18,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-13 00:00:00"
+      },
+      {
+        "dt": 1781319600,
+        "main": {
+          "temp": 19,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-13 03:00:00"
+      },
+      {
+        "dt": 1781330400,
+        "main": {
+          "temp": 20,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-13 06:00:00"
+      },
+      {
+        "dt": 1781341200,
+        "main": {
+          "temp": 21,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-13 09:00:00"
+      },
+      {
+        "dt": 1781352000,
+        "main": {
+          "temp": 22,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-13 12:00:00"
+      },
+      {
+        "dt": 1781362800,
+        "main": {
+          "temp": 23,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-13 15:00:00"
+      },
+      {
+        "dt": 1781373600,
+        "main": {
+          "temp": 24,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-13 18:00:00"
+      },
+      {
+        "dt": 1781384400,
+        "main": {
+          "temp": 25,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-13 21:00:00"
+      },
+      {
+        "dt": 1781395200,
+        "main": {
+          "temp": 18,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-14 00:00:00"
+      },
+      {
+        "dt": 1781406000,
+        "main": {
+          "temp": 19,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-14 03:00:00"
+      },
+      {
+        "dt": 1781416800,
+        "main": {
+          "temp": 20,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-14 06:00:00"
+      },
+      {
+        "dt": 1781427600,
+        "main": {
+          "temp": 21,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-14 09:00:00"
+      },
+      {
+        "dt": 1781438400,
+        "main": {
+          "temp": 22,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-14 12:00:00"
+      },
+      {
+        "dt": 1781449200,
+        "main": {
+          "temp": 23,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-14 15:00:00"
+      },
+      {
+        "dt": 1781460000,
+        "main": {
+          "temp": 24,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-14 18:00:00"
+      },
+      {
+        "dt": 1781470800,
+        "main": {
+          "temp": 25,
+          "humidity": 60
+        },
+        "clouds": {
+          "all": 55
+        },
+        "wind": {
+          "speed": 2.4
+        },
+        "dt_txt": "2026-06-14 21:00:00"
+      }
+    ],
+    "city": {
+      "id": 2657896,
+      "name": "Zurich",
+      "coord": {
+        "lat": 47.3769,
+        "lon": 8.5417
+      },
+      "country": "CH",
+      "timezone": 7200,
+      "sunrise": 1781060400,
+      "sunset": 1781118000
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // The core never touches Node APIs; omitting the types stops it from accidentally compiling
+    // against `process` or `Buffer` (Principle III).
+    "types": [],
+    "lib": ["ES2023"]
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

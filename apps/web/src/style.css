@@ -1,0 +1,178 @@
+/* Mobile-first: one column, thumb-sized controls, no layout that needs a wide screen. */
+:root {
+  --bg: #f6f7f5;
+  --card: #ffffff;
+  --ink: #16221c;
+  --muted: #5d6b63;
+  --solar: #0b6e4f;
+  --grid: #6b5b95;
+  --warn: #a4341f;
+  --line: #dde3df;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+}
+
+#app {
+  max-width: 30rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+}
+
+h1 {
+  font-size: 1.35rem;
+  margin: 0.5rem 0 1rem;
+}
+
+h2 {
+  font-size: 1.05rem;
+  margin: 0 0 0.5rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+input[type='range'] {
+  width: 100%;
+  height: 2.5rem;
+}
+
+input[type='email'],
+input[type='password'] {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 0;
+  border-radius: 0.6rem;
+  background: var(--solar);
+  color: #fff;
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+
+button:disabled {
+  opacity: 0.55;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.value {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.state {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #e8efe9;
+  color: var(--solar);
+}
+
+.state.grid {
+  background: #eeeaf5;
+  color: var(--grid);
+}
+
+.state.idle,
+.state.waiting {
+  background: #eef0ef;
+  color: var(--muted);
+}
+
+.state.problem {
+  background: #f7e6e2;
+  color: var(--warn);
+}
+
+.warning {
+  border-left: 4px solid var(--warn);
+  padding-left: 0.75rem;
+  color: var(--warn);
+}
+
+.bar {
+  height: 0.6rem;
+  border-radius: 999px;
+  background: #e8efe9;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+
+.bar > span {
+  display: block;
+  height: 100%;
+  background: var(--solar);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+}
+
+nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+nav a {
+  flex: 1;
+  text-align: center;
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: var(--muted);
+  background: var(--card);
+  border: 1px solid var(--line);
+}
+
+nav a.router-link-active {
+  color: var(--solar);
+  border-color: var(--solar);
+}

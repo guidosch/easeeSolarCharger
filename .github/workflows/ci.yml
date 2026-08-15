@@ -1,0 +1,57 @@
+name: CI
+
+# Constitution, Development Workflow & Quality Gates: type check, lint, unit tests and provider
+# contract tests run on every pull request, and a red pipeline blocks merge.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  # Reused by deploy.yml, so a deployment cannot skip the gate.
+  workflow_call:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      # The Firestore emulator is a Java process.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Lint (includes the packages/core purity fence)
+        run: pnpm lint
+
+      - name: Formatting
+        run: pnpm format
+
+      - name: Unit tests (Principle I ladder, floor, winter window, DST, fairness)
+        run: pnpm test:unit
+
+      - name: Provider contract tests (recorded responses only — never a live API)
+        run: pnpm test:contract
+
+      - name: Integration tests (Firestore emulator)
+        run: pnpm dlx firebase-tools@13 emulators:exec --only firestore "pnpm test:integration"
+
+      - name: Determinism gate (SC-010)
+        run: pnpm test:determinism
+
+      - name: Build
+        run: pnpm build

@@ -1,0 +1,10 @@
+{
+  "status": 200,
+  "headers": {},
+  "body": {
+    "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.placeholder.signature",
+    "refreshToken": "b7f1c2d3-refresh",
+    "expiresIn": 3600,
+    "tokenType": "Bearer"
+  }
+}
