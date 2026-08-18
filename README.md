@@ -37,6 +37,11 @@ pnpm emulators                      # Firestore on :8080 (needs Java 11+): pnpm 
 pnpm seed:lots                      # the operator's parking-lot ↔ user mapping
 ```
 
+Every `dev` and script task loads `.env.local` (`node --env-file-if-exists`). Keep
+`FIRESTORE_EMULATOR_HOST` set there: it is the only thing that keeps the Admin SDK on the emulator,
+and without it these commands talk to production Firestore and fail with
+`7 PERMISSION_DENIED: Missing or insufficient permissions`.
+
 ```bash
 pnpm --filter @app/api dev          # :8081
 pnpm --filter @app/optimizer dev    # :8082

@@ -42,6 +42,8 @@ gcloud artifacts repositories create services \
 ```bash
 gcloud firestore databases create --location="$REGION" --type=firestore-native
 
+pnpm dlx firebase-tools login # login to firebase
+
 pnpm dlx firebase-tools deploy --only firestore:rules,firestore:indexes --project "$PROJECT"
 ```
 
@@ -53,11 +55,31 @@ separately. See [`firestore/ttl-policies.md`](firestore/ttl-policies.md).
 Nothing here is ever committed. Committing a secret is a violation that requires **rotation**, not
 just removal (Principle V).
 
+The loop prompts for each value. `read -rs` keeps it off the screen and out of shell history, and
+`printf '%s'` writes it without a trailing newline — a `\n` would be part of the secret and would
+fail the provider login with a 401 that looks like a wrong password. The `describe` guard makes the
+loop re-runnable after a partial run.
+
 ```bash
 for SECRET in easee-technical-username easee-technical-password \
               solaredge-api-key solaredge-site-id openweather-api-key admin-password; do
-  gcloud secrets create "$SECRET" --replication-policy=automatic
+  gcloud secrets describe "$SECRET" >/dev/null 2>&1 || \
+    gcloud secrets create "$SECRET" --replication-policy=automatic
+  printf 'Value for %s: ' "$SECRET" >&2
+  read -rs VALUE; echo >&2
   printf '%s' "$VALUE" | gcloud secrets versions add "$SECRET" --data-file=-
+done
+unset VALUE
+```
+
+Every secret must end up with exactly one enabled version; a secret with none is created but unusable
+and only fails later, at deploy time:
+
+```bash
+for SECRET in easee-technical-username easee-technical-password \
+              solaredge-api-key solaredge-site-id openweather-api-key admin-password; do
+  printf '%s: %s enabled version(s)\n' "$SECRET" \
+    "$(gcloud secrets versions list "$SECRET" --filter='state=ENABLED' --format='value(name)' | wc -l | tr -d ' ')"
 done
 ```
 
@@ -93,12 +115,11 @@ for SECRET in easee-technical-username easee-technical-password \
     --member="serviceAccount:easee-optimizer@$PROJECT.iam.gserviceaccount.com" \
     --role=roles/secretmanager.secretAccessor
 done
-
-# The optimizer is not a public endpoint: only the scheduler may invoke it.
-gcloud run services add-iam-policy-binding easee-optimizer --region="$REGION" \
-  --member="serviceAccount:easee-scheduler@$PROJECT.iam.gserviceaccount.com" \
-  --role=roles/run.invoker
 ```
+
+The scheduler's `run.invoker` binding on the optimizer is **not** here: it names a Cloud Run
+service, and no service exists until the first deploy has run. See
+[step 9](#9-after-the-first-deploy).
 
 ### 5. The cycle
 

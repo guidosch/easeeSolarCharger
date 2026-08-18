@@ -5,7 +5,7 @@
   "type": "module",
   "packageManager": "pnpm@11.21.0",
   "engines": {
-    "node": ">=22"
+    "node": ">=22.9"
   },
   "scripts": {
     "dev": "pnpm -r --parallel --if-present dev",
@@ -19,15 +19,15 @@
     "test:contract": "vitest run --project contract",
     "test:integration": "vitest run --project integration --no-file-parallelism",
     "test:dst": "vitest run --project unit tests/dst.test.ts",
-    "test:determinism": "tsx scripts/determinism.ts",
+    "test:determinism": "tsx --env-file-if-exists=.env.local scripts/determinism.ts",
     "test:single-flight": "vitest run --project integration --no-file-parallelism services/optimizer/tests/single-flight.test.ts",
     "test:deletion": "vitest run --project integration --no-file-parallelism services/api/tests/deletion.test.ts",
-    "seed:lots": "tsx scripts/seed-lots.ts",
-    "replay": "tsx scripts/replay.ts",
-    "replay:all-cycles": "tsx scripts/replay.ts --all-cycles",
-    "cycle": "tsx scripts/cycle.ts",
-    "cycle:dry-run": "tsx scripts/dry-run.ts",
-    "report:writes": "tsx scripts/report-writes.ts",
+    "seed:lots": "tsx --env-file-if-exists=.env.local scripts/seed-lots.ts",
+    "replay": "tsx --env-file-if-exists=.env.local scripts/replay.ts",
+    "replay:all-cycles": "tsx --env-file-if-exists=.env.local scripts/replay.ts --all-cycles",
+    "cycle": "tsx --env-file-if-exists=.env.local scripts/cycle.ts",
+    "cycle:dry-run": "tsx --env-file-if-exists=.env.local scripts/dry-run.ts",
+    "report:writes": "tsx --env-file-if-exists=.env.local scripts/report-writes.ts",
     "emulators": "firebase emulators:start"
   },
   "devDependencies": {
