@@ -4,6 +4,7 @@ dist/
 **/dist/
 .git/
 .github/
+.devcontainer/
 .firebase/
 coverage/
 specs/

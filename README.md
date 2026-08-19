@@ -29,11 +29,17 @@ rule, not a convention, keeps a clock or a random source out of it.
 
 ## Getting started
 
+The repository ships a dev container ([`.devcontainer/`](.devcontainer/)) with Node 22, pnpm and a
+JDK for the Firestore emulator already in place. "Reopen in Container" in VS Code, or
+`devcontainer up --workspace-folder .`, and every command below works as written — `node_modules`
+lives in named volumes, so a host install and a container install never overwrite each other's
+native binaries. Everything from here on applies to both.
+
 ```bash
 rm -rf node_modules apps/*/node_modules packages/*/node_modules services/*/node_modules # clean when coming from lima VM (different arch)
 pnpm install                        # corepack enable pnpm if not installed
 cp .env.example .env.local          # all values optional for the fixture-driven tests
-pnpm emulators                      # Firestore on :8080 (needs Java 11+): pnpm add -Dw firebase-tools if not installed
+pnpm emulators                      # Firestore on :8080 (firebase-tools 15 needs Java 21+): pnpm add -Dw firebase-tools if not installed
 pnpm seed:lots                      # the operator's parking-lot ↔ user mapping
 ```
 

@@ -1,0 +1,73 @@
+{
+  "name": "easeeSolarCharger",
+
+  // Node 22 to match .nvmrc / engines.node. Corepack activates pnpm from packageManager.
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+
+  "features": {
+    // The Firestore emulator is a Java process. The README says Java 11+, but firebase-tools 15
+    // refuses to start the emulator on anything below 21.
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "21",
+      "jdkDistro": "tem",
+      "installGradle": false,
+      "installMaven": false
+    }
+  },
+
+  // node_modules lives in named volumes, never on the bind mount: the host installs macOS/arm64
+  // binaries (esbuild, protobufjs) that the Linux container cannot load, and vice versa. This is
+  // the "clean when coming from lima VM" step in the README, made unnecessary.
+  "mounts": [
+    "source=easee-node-modules-root,target=${containerWorkspaceFolder}/node_modules,type=volume",
+    "source=easee-node-modules-web,target=${containerWorkspaceFolder}/apps/web/node_modules,type=volume",
+    "source=easee-node-modules-admin,target=${containerWorkspaceFolder}/apps/admin/node_modules,type=volume",
+    "source=easee-node-modules-core,target=${containerWorkspaceFolder}/packages/core/node_modules,type=volume",
+    "source=easee-node-modules-adapters,target=${containerWorkspaceFolder}/packages/adapters/node_modules,type=volume",
+    "source=easee-node-modules-shared,target=${containerWorkspaceFolder}/packages/shared/node_modules,type=volume",
+    "source=easee-node-modules-api,target=${containerWorkspaceFolder}/services/api/node_modules,type=volume",
+    "source=easee-node-modules-optimizer,target=${containerWorkspaceFolder}/services/optimizer/node_modules,type=volume",
+    // Survives rebuilds: the emulator JAR download. (The pnpm store lives inside the root
+    // node_modules volume — see post-create.sh.)
+    "source=easee-firebase-cache,target=/home/node/.cache/firebase,type=volume"
+  ],
+
+  "remoteEnv": {
+    // Makes the workspace binaries (firebase, tsx, vitest, eslint, prettier) callable directly,
+    // not only through `pnpm exec`.
+    "PATH": "${containerWorkspaceFolder}/node_modules/.bin:${containerEnv:PATH}"
+  },
+
+  "forwardPorts": [4000, 4400, 5173, 5174, 8080, 8081, 8082],
+  "portsAttributes": {
+    "4000": { "label": "Firebase emulator UI" },
+    "4400": { "label": "Firebase emulator hub" },
+    "5173": { "label": "web (Vue PWA)" },
+    "5174": { "label": "admin (Vue SPA)" },
+    "8080": { "label": "Firestore emulator" },
+    "8081": { "label": "api" },
+    "8082": { "label": "optimizer" }
+  },
+
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "Vue.volar",
+        "vitest.explorer",
+        "toba.vsfire"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "eslint.workingDirectories": [{ "mode": "auto" }],
+        "typescript.tsdk": "node_modules/typescript/lib"
+      }
+    }
+  },
+
+  "remoteUser": "node"
+}
