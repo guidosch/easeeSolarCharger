@@ -17,6 +17,18 @@ repository is what runs").
 | `../services/*/Dockerfile` | the two images |
 | `../.github/workflows/deploy.yml` | deployment from `main`, via Workload Identity Federation |
 
+## Activate GCP Project
+
+```bash
+gcloud config set project solarpowerconsumptionoptimizer
+
+# check logged in user and available configs/projects
+gcloud auth list
+gcloud config list
+gcloud projects list
+```
+
+
 ## One-time setup
 
 Everything below is done once, by hand, and never again. `deploy.yml` does the rest on every merge.
@@ -31,7 +43,8 @@ gcloud config set project "$PROJECT"
 gcloud services enable \
   run.googleapis.com cloudscheduler.googleapis.com firestore.googleapis.com \
   secretmanager.googleapis.com artifactregistry.googleapis.com \
-  iamcredentials.googleapis.com logging.googleapis.com monitoring.googleapis.com
+  iamcredentials.googleapis.com logging.googleapis.com monitoring.googleapis.com \
+  firebase.googleapis.com firebasehosting.googleapis.com firebaserules.googleapis.com
 
 gcloud artifacts repositories create services \
   --repository-format=docker --location="$REGION"
@@ -43,6 +56,12 @@ gcloud artifacts repositories create services \
 gcloud firestore databases create --location="$REGION" --type=firestore-native
 
 pnpm dlx firebase-tools login # login to firebase
+
+# Enabling the APIs is not enough: a plain GCP project is not a Firebase project until it is
+# registered, and the Firebase resources (default Hosting site, Firebase-side project record) only
+# exist afterwards. Skipping this makes every later firebase-tools call fail with a bare
+# `HTTP Error: 404, Requested entity was not found` that names no missing entity.
+pnpm dlx firebase-tools projects:addfirebase "$PROJECT"
 
 pnpm dlx firebase-tools deploy --only firestore:rules,firestore:indexes --project "$PROJECT"
 ```
@@ -154,6 +173,17 @@ gcloud iam service-accounts add-iam-policy-binding \
   "easee-deployer@$PROJECT.iam.gserviceaccount.com" \
   --role=roles/iam.workloadIdentityUser \
   --member="principalSet://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/github/attribute.repository/OWNER/easeeSolarCharger"
+
+# What `deploy.yml` actually does: push two images, replace two services, deploy hosting, rules and
+# indexes. `serviceAccountUser` is the one that is easy to forget — deploying a service that runs as
+# `easee-api`/`easee-optimizer` means acting as those identities, and without it the deploy fails on
+# the `gcloud run services replace` step with a permission error that names neither role.
+for ROLE in roles/artifactregistry.writer roles/run.admin roles/iam.serviceAccountUser \
+            roles/firebasehosting.admin roles/datastore.indexAdmin; do
+  gcloud projects add-iam-policy-binding "$PROJECT" \
+    --member="serviceAccount:easee-deployer@$PROJECT.iam.gserviceaccount.com" \
+    --role="$ROLE"
+done
 ```
 
 ### 8. Hosting
@@ -176,6 +206,7 @@ pnpm dlx firebase-tools target:apply hosting web "$PROJECT" --project "$PROJECT"
 pnpm dlx firebase-tools target:apply hosting admin "$PROJECT-admin" --project "$PROJECT"
 
 pnpm build
+# for this command to work, the easee-api service must be deployed
 pnpm dlx firebase-tools deploy --only hosting --project "$PROJECT"
 ```
 
@@ -205,6 +236,98 @@ pnpm dlx firebase-tools hosting:sites:list --project "$PROJECT"
 # then add the domain in the console or with `firebase hosting:channel`, and follow the DNS records
 # it gives you. Certificates are issued and renewed automatically.
 ```
+
+### 9. After the first deploy
+
+Everything above can be done on an empty project. The two Cloud Run services do not exist yet, so
+anything that *names* one of them has to wait until after the images are in Artifact Registry and the
+service YAMLs have been applied once.
+
+Normally that first deploy is a merge to `main`:
+[`deploy.yml`](../.github/workflows/deploy.yml) builds both images, pushes them to
+`europe-west6-docker.pkg.dev/$PROJECT/services`, and applies the two service YAMLs. But step 7 is
+what makes CI able to do that, so on a fresh project it is usually faster to bootstrap by hand —
+these are the same commands the workflow runs, so nothing here diverges from what CI does later.
+
+**Push the two images.** From the **repository root**, not `infra/` — both Dockerfiles copy the
+workspace manifests and the lockfile, so the build context has to be the root:
+
+```bash
+PROJECT=solarpowerconsumptionoptimizer
+REGION=europe-west6
+REGISTRY="$REGION-docker.pkg.dev/$PROJECT/services"
+
+# One-time per machine: makes docker push use the gcloud credentials.
+gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
+
+for SERVICE in api optimizer; do
+  IMAGE="$REGISTRY/easee-${SERVICE}:$(git rev-parse HEAD)"
+  docker build -f "services/${SERVICE}/Dockerfile" -t "$IMAGE" .
+  docker tag "$IMAGE" "$REGISTRY/easee-${SERVICE}:latest"
+  docker push "$IMAGE"
+  docker push "$REGISTRY/easee-${SERVICE}:latest"
+done
+```
+
+Keep the braces on `${SERVICE}`. In zsh an unbraced `$SERVICE:latest` is parsed as the parameter
+`SERVICE` with the `:l` (lowercase) modifier followed by the literal `atest`, so the tag silently
+becomes `easee-apiatest:latest` — the push succeeds, and the later `replace` fails with
+`Image ... easee-api:latest not found`.
+
+Both tags are pushed on purpose. The commit tag is the immutable record of what a revision contains;
+`:latest` is what the service YAMLs pin, so it is the one a `replace` resolves. On an Apple Silicon
+machine add `--platform linux/amd64` to the build — Cloud Run runs amd64, and an arm64 image is
+accepted by the registry and only fails at container start.
+
+**Create the services** (from `infra/`):
+
+```bash
+for SERVICE in api optimizer; do
+  gcloud run services replace "cloudrun/$SERVICE.service.yaml" \
+    --project="$PROJECT" --region="$REGION"
+done
+```
+
+`replace` is the same verb CI uses, and it both creates and updates: the YAML in the repository is
+the whole definition, so there is nothing to drift (constitution, Technology & Deployment
+Constraints).
+
+**Then the bindings and jobs that needed a service to exist:**
+
+```bash
+# Deferred from step 4 — the scheduler is the optimizer's only permitted caller.
+gcloud run services add-iam-policy-binding easee-optimizer \
+  --project="$PROJECT" --region="$REGION" \
+  --member="serviceAccount:easee-scheduler@$PROJECT.iam.gserviceaccount.com" \
+  --role=roles/run.invoker
+```
+
+Two earlier steps are also in this category and belong here on a first run, after the services
+exist: [step 5](#5-the-cycle) (`optimizer-cycle.sh` starts with a `describe` of `easee-optimizer`)
+and the Hosting service-agent binding in [the `/api/**` rewrite](#the-api-rewrite). Neither is a
+public endpoint: the optimizer is reachable only by the scheduler's OIDC identity, the API only
+through Hosting.
+
+**Verify.** Four things, in the order they can fail:
+
+```bash
+gcloud run services list --project="$PROJECT" --region="$REGION"
+
+API_URL="$(gcloud run services describe easee-api \
+  --project="$PROJECT" --region="$REGION" --format='value(status.url)')"
+curl --fail --silent --show-error "$API_URL/api/health"; echo
+
+gcloud scheduler jobs describe optimizer-cycle --project="$PROJECT" --location="$REGION"
+
+# The first cycle, on demand rather than waiting up to five minutes for one.
+gcloud scheduler jobs run optimizer-cycle --project="$PROJECT" --location="$REGION"
+gcloud logging read \
+  'resource.labels.service_name="easee-optimizer" severity>=WARNING' \
+  --project="$PROJECT" --limit=20 --freshness=10m
+```
+
+A cycle that runs before `parkingLots` is seeded is expected to decide nothing — that is the
+starting point for the rollout below, not a failure.
 
 ## Rollout to the hardware
 

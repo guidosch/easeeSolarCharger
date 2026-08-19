@@ -5,9 +5,14 @@
   "targets": {
     "solarpowerconsumptionoptimizer": {
       "hosting": {
-        "web": ["solarpowerconsumptionoptimizer"],
-        "admin": ["solarpowerconsumptionoptimizer-admin"]
+        "web": [
+          "solarpowerconsumptionoptimizer"
+        ],
+        "admin": [
+          "solarpowerconsumptionoptimizer-admin"
+        ]
       }
     }
-  }
+  },
+  "etags": {}
 }

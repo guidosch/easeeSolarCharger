@@ -28,7 +28,7 @@
     "autoClose": "3600s"
   },
   "notificationChannels": [
-    "projects/solarpowerconsumptionoptimizer/notificationChannels/REPLACE_WITH_CHANNEL_ID"
+    "projects/solarpowerconsumptionoptimizer/notificationChannels/10254084575563438335"
   ],
   "enabled": true
 }

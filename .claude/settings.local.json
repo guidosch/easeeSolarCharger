@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gcloud logging *)",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}

@@ -1,3 +1,4 @@
+import { pathToFileURL } from 'node:url'
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
@@ -72,7 +73,12 @@ export function createApiApp(deps: ApiDeps = buildApiDeps()): Hono<HonoEnv> {
   return app
 }
 
-const isEntrypoint = process.argv[1]?.includes('api')
+// Started directly (`node index.mjs`, `tsx src/index.ts`) rather than imported by a test, which is
+// the only case that should bind a port. Compared as a file URL, not by name: the Cloud Run image
+// runs the bundle as `/app/index.mjs`, so any check against the path spelling silently does nothing
+// there and the container exits 0 before it ever listens on $PORT.
+const isEntrypoint =
+  process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href
 if (isEntrypoint) {
   const env = loadEnv()
   serve({ fetch: createApiApp().fetch, port: env.PORT ?? env.API_PORT }, (info) => {

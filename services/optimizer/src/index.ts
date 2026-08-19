@@ -1,3 +1,4 @@
+import { pathToFileURL } from 'node:url'
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { z } from 'zod'
@@ -60,7 +61,10 @@ export function createOptimizerApp(): Hono {
   return app
 }
 
-const isEntrypoint = process.argv[1]?.includes('optimizer')
+// See the same guard in services/api: a name-based check does not survive being bundled to
+// /app/index.mjs in the Cloud Run image, so the URL comparison is the load-bearing part.
+const isEntrypoint =
+  process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href
 if (isEntrypoint) {
   const env = loadEnv()
   serve({ fetch: createOptimizerApp().fetch, port: env.PORT ?? env.OPTIMIZER_PORT }, (info) => {

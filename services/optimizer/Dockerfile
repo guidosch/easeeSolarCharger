@@ -29,8 +29,10 @@ ENV NODE_ENV=production
 # Pinned to the version the lockfile resolves, so the image is reproducible from this file.
 RUN npm install --omit=dev --no-package-lock --no-audit --no-fund firebase-admin@13.10.0
 
-COPY --from=build /app/services/optimizer/dist/index.js ./index.js
+# `.mjs`, because the package.json npm writes above has no `"type": "module"`: as `.js` the bundle
+# only loads via Node's fallback reparse, which warns on every cold start.
+COPY --from=build /app/services/optimizer/dist/index.js ./index.mjs
 
 # Cloud Run sets PORT; the service reads its own variable, so map it at start.
 ENV NODE_OPTIONS=--enable-source-maps
-CMD ["node", "index.js"]
+CMD ["node", "index.mjs"]
