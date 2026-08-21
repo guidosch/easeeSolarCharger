@@ -1,0 +1,3 @@
+# .pnpmrc
+# Allow re2 to run its build script
+allow-build-scripts=true
