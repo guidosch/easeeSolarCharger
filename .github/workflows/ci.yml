@@ -31,7 +31,7 @@ jobs:
           java-version: '21'
 
       - run: pnpm install --frozen-lockfile
-      
+
       - name: Approve builds
         run: pnpm approve-builds
 

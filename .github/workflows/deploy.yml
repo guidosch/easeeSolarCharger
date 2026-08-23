@@ -65,10 +65,10 @@ jobs:
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
-      
+
       - name: Approve builds
         run: pnpm approve-builds
-      
+
       - run: pnpm build
 
       - name: Deploy the static bundles, rules and indexes
