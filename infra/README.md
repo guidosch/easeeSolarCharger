@@ -160,26 +160,39 @@ handled by the fail-safe.
 
 No service-account key ever enters the repository.
 
+The two values below are placeholders in no way: paste them as they are. An `OWNER` or
+`PROJECT_NUMBER` left literal produces `unauthorized_client: The given credential is rejected by the
+attribute condition`, an error that names neither the condition nor the value that failed it.
+
 ```bash
+REPO=guidosch/easeeSolarCharger
+PROJECT_NUMBER="$(gcloud projects describe "$PROJECT" --format='value(projectNumber)')"
+
 gcloud iam workload-identity-pools create github --location=global
 gcloud iam workload-identity-pools providers create-oidc github \
   --location=global --workload-identity-pool=github \
   --issuer-uri=https://token.actions.githubusercontent.com \
   --attribute-mapping=google.subject=assertion.sub,attribute.repository=assertion.repository \
-  --attribute-condition="assertion.repository=='OWNER/easeeSolarCharger'"
+  --attribute-condition="assertion.repository=='$REPO'"
 
 gcloud iam service-accounts create easee-deployer
+# Without this binding the federated token is minted and then refused at impersonation, one step
+# later than the condition failure above and with an equally unhelpful message.
 gcloud iam service-accounts add-iam-policy-binding \
   "easee-deployer@$PROJECT.iam.gserviceaccount.com" \
   --role=roles/iam.workloadIdentityUser \
-  --member="principalSet://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/github/attribute.repository/OWNER/easeeSolarCharger"
+  --member="principalSet://iam.googleapis.com/projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/github/attribute.repository/$REPO"
 
 # What `deploy.yml` actually does: push two images, replace two services, deploy hosting, rules and
 # indexes. `serviceAccountUser` is the one that is easy to forget — deploying a service that runs as
 # `easee-api`/`easee-optimizer` means acting as those identities, and without it the deploy fails on
 # the `gcloud run services replace` step with a permission error that names neither role.
+# `firebaserules.admin` and `datastore.indexAdmin` are separate grants because `--only
+# firestore:rules` and `--only firestore:indexes` are separate permissions; having one and not the
+# other fails halfway through a single `firebase deploy`.
 for ROLE in roles/artifactregistry.writer roles/run.admin roles/iam.serviceAccountUser \
-            roles/firebasehosting.admin roles/datastore.indexAdmin; do
+            roles/firebasehosting.admin roles/datastore.indexAdmin \
+            roles/firebaserules.admin; do
   gcloud projects add-iam-policy-binding "$PROJECT" \
     --member="serviceAccount:easee-deployer@$PROJECT.iam.gserviceaccount.com" \
     --role="$ROLE"
