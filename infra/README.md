@@ -66,8 +66,9 @@ pnpm dlx firebase-tools projects:addfirebase "$PROJECT"
 pnpm dlx firebase-tools deploy --only firestore:rules,firestore:indexes --project "$PROJECT"
 ```
 
-Then apply the TTL policies — they are not part of `firestore.indexes.json` and must be set
-separately. See [`firestore/ttl-policies.md`](firestore/ttl-policies.md).
+That deploy also applies the one-month TTL policies: they are declared as `fieldOverrides` with
+`"ttl": true` in `firestore.indexes.json`. See [`firestore/ttl-policies.md`](firestore/ttl-policies.md)
+for why they must stay declared there.
 
 ### 3. Secrets
 

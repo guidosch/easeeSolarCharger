@@ -4,22 +4,21 @@ Retention is enforced by the database, not by a cleanup job that might not run (
 FR-047). Every collection that grows carries an `expiresAt` **Timestamp** field, and a TTL policy
 on that field deletes the document one month after it was written.
 
-TTL policies are not expressible in `firestore.indexes.json`, so they are applied once with
-`gcloud`. This file is the record of what must exist; `infra/README.md` links to it from the
-one-time setup checklist.
+The policies are declared in `firestore.indexes.json` as `fieldOverrides` with `"ttl": true`, so
+`firebase deploy --only firestore:indexes` applies them and no manual step is needed. They must be
+declared there even though they already exist in the project: the deploy compares the file against
+every field override the project has, and an override it cannot find in the file is drift it
+refuses to ignore — in `--non-interactive` mode that is a hard `Pass the --force flag` failure, and
+with `--force` it would *delete* the TTL policies and silently end retention.
+
+`"indexes": []` next to the TTL exempts `expiresAt` from single-field indexing. Nothing queries the
+field, and its values are near-monotonic, which is exactly the shape that hotspots an index — so
+the exemption saves three index writes per document and is what Firestore recommends for TTL
+fields.
 
 ```bash
-PROJECT=solarpowerconsumptionoptimizer
-
-for COLLECTION in cycles chargerSnapshots chargerEvents; do
-  gcloud firestore fields ttls update expiresAt \
-    --collection-group="$COLLECTION" \
-    --enable-ttl \
-    --project="$PROJECT"
-done
-
-# Verify — each should report state ACTIVE.
-gcloud firestore fields ttls list --project="$PROJECT"
+# Verify — each of the three should report state ACTIVE.
+gcloud firestore fields ttls list --project=solarpowerconsumptionoptimizer
 ```
 
 ## Which collections do *not* have a TTL, and why
