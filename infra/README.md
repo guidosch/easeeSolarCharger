@@ -218,14 +218,30 @@ hostname to configure per environment. **The order in `firebase.json` matters**:
 first would swallow `/api/**` and hand the PWA an HTML page where it expected JSON — which fails at
 runtime in production only, since the Vite dev server proxies `/api` itself.
 
-That rewrite requires the Hosting service agent to be able to invoke the API:
+That rewrite requires `easee-api` to allow unauthenticated invocations:
 
 ```bash
-PROJECT_NUMBER="$(gcloud projects describe "$PROJECT" --format='value(projectNumber)')"
-gcloud run services add-iam-policy-binding easee-api --region="$REGION" \
-  --member="serviceAccount:service-$PROJECT_NUMBER@gcp-sa-firebasehosting.iam.gserviceaccount.com" \
-  --role=roles/run.invoker
+gcloud run services add-iam-policy-binding easee-api \
+  --project="$PROJECT" --region="$REGION" \
+  --member=allUsers --role=roles/run.invoker
 ```
+
+**`allUsers` is not a shortcut here — it is the only binding that works.** Hosting proxies a rewrite
+to Cloud Run *anonymously*: it attaches no identity token and acts under no service account, so there
+is no principal to grant `roles/run.invoker` to instead. There is no
+`service-$PROJECT_NUMBER@gcp-sa-firebasehosting.iam.gserviceaccount.com` agent — Firebase Hosting is
+not a service-agent-based producer, and `services identity create` rejects it with `Invalid service
+producer`. Granting anything narrower leaves the rewrite returning a Google-generated `403 Forbidden`
+HTML page, which the PWA sees as malformed JSON.
+
+The consequence is that the raw `*.run.app` URL is publicly reachable, not just the Hosting origin.
+That is tolerable only because **`easee-api` authenticates every request itself** and never relies on
+Cloud Run IAM as a gate: `requireAuth` verifies Easee/Keycloak RS256 JWTs against cached JWKS
+(`services/api/src/middleware/easeeAuth.ts`) and maps the caller to their own parking lots
+(`middleware/authorize.ts`), while `/api/admin/**` sits behind `adminBasicAuth`, a Secret
+Manager–backed credential that fails closed when unset. Only `GET /api/health` and the two
+`/api/auth/{login,refresh}` endpoints are deliberately open. Any new route must bring its own
+middleware — the network is not a boundary for this service.
 
 #### Custom domains (optional)
 
@@ -304,9 +320,10 @@ gcloud run services add-iam-policy-binding easee-optimizer \
 
 Two earlier steps are also in this category and belong here on a first run, after the services
 exist: [step 5](#5-the-cycle) (`optimizer-cycle.sh` starts with a `describe` of `easee-optimizer`)
-and the Hosting service-agent binding in [the `/api/**` rewrite](#the-api-rewrite). Neither is a
-public endpoint: the optimizer is reachable only by the scheduler's OIDC identity, the API only
-through Hosting.
+and the `allUsers` binding in [the `/api/**` rewrite](#the-api-rewrite). The two differ in posture:
+the optimizer is reachable only by the scheduler's OIDC identity, whereas the API is reachable by
+anyone at its `*.run.app` URL and is guarded by its own auth middleware rather than by IAM — see
+that section for why Hosting leaves no other option.
 
 **Verify.** Four things, in the order they can fail:
 
