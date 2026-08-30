@@ -6,10 +6,15 @@
  */
 const LOCALE = 'de-CH'
 
-/** A deadline is always within the next two days, so weekday and time say enough. */
+/**
+ * A deadline reaches up to three days out, so the weekday alone is ambiguous only beyond a week —
+ * the calendar day is carried alongside it to keep "Do 07:00" from reading as today's Thursday.
+ */
 export function formatDeadline(value: string | Date): string {
   return new Date(value).toLocaleString(LOCALE, {
     weekday: 'short',
+    day: '2-digit',
+    month: 'short',
     hour: '2-digit',
     minute: '2-digit',
   })

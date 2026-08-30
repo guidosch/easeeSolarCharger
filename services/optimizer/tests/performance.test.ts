@@ -38,8 +38,8 @@ function thirtyChargers(): ChargerInput[] {
     overrideActive: false,
     consecutiveAboveFloor: 2,
     consecutiveBelowFloor: 0,
-    // A deadline two days out is the worst case for the low-price walk.
-    target: { energyKwh: 40, deadline: '2026-06-17T18:00:00+02:00', deliveredKwh: 5 },
+    // Three days out is the slider maximum, so it is the worst case for the low-price walk.
+    target: { energyKwh: 40, deadline: '2026-06-18T12:30:00+02:00', deliveredKwh: 5 },
   }))
 }
 

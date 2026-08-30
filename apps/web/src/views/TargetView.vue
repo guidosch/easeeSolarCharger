@@ -68,7 +68,7 @@ async function confirm(): Promise<void> {
     <label for="deadline" style="margin-top: 1rem">Bereit bis</label>
     <div class="value">{{ deadlineLabel }}</div>
     <p class="muted">in {{ hoursAhead }} Stunde{{ hoursAhead === 1 ? '' : 'n' }}</p>
-    <input id="deadline" v-model.number="hoursAhead" type="range" min="1" max="48" step="1" />
+    <input id="deadline" v-model.number="hoursAhead" type="range" min="1" max="72" step="1" />
   </div>
 
   <p v-if="problem" class="card warning">{{ problem }}</p>
