@@ -27,12 +27,13 @@ async function deleteEverything(): Promise<void> {
   try {
     await session.request('/api/me', {
       method: 'DELETE',
+      // The confirmation token is part of the API contract, not something the user reads.
       body: JSON.stringify({ confirm: 'DELETE' }),
     })
     session.signOut()
     await router.push('/login')
   } catch {
-    problem.value = 'Could not delete your data. Try again.'
+    problem.value = 'Ihre Daten konnten nicht gelöscht werden. Bitte versuchen Sie es erneut.'
   } finally {
     deleting.value = false
   }
@@ -40,38 +41,39 @@ async function deleteEverything(): Promise<void> {
 </script>
 
 <template>
-  <h1>Settings</h1>
+  <h1>Einstellungen</h1>
 
   <div class="card">
-    <h2>Account</h2>
+    <h2>Konto</h2>
     <p class="muted">
-      Signed in as {{ session.session?.email ?? session.session?.userId }}. This system stores only
-      your Easee user reference, your targets and your last five sessions.
+      Angemeldet als {{ session.session?.email ?? session.session?.userId }}. Dieses System
+      speichert nur Ihre Easee-Benutzerkennung, Ihre Ladeziele und Ihre letzten fünf Ladevorgänge.
     </p>
-    <button class="secondary" @click="signOut">Sign out</button>
+    <button class="secondary" @click="signOut">Abmelden</button>
   </div>
 
   <div class="card">
-    <h2>Delete all my data</h2>
+    <h2>Alle meine Daten löschen</h2>
     <p class="muted">
-      This removes your targets, sessions, history and fairness record permanently. It cannot be
-      undone. Any open target and any active "charge now" override on your chargers are cancelled as
-      part of the deletion. Your parking lot stays assigned to you, and you can sign in again
-      immediately as a new user.
+      Damit werden Ihre Ladeziele, Ihre Ladevorgänge, Ihr Verlauf und Ihr Fairness-Eintrag dauerhaft
+      entfernt. Das lässt sich nicht rückgängig machen. Ein offenes Ladeziel und ein aktives «Jetzt
+      laden» an Ihren Ladestationen werden im Rahmen der Löschung abgebrochen. Ihr Parkplatz bleibt
+      Ihnen zugewiesen, und Sie können sich sofort wieder als neue Benutzerin oder neuer Benutzer
+      anmelden.
     </p>
 
     <p v-if="problem" class="warning">{{ problem }}</p>
 
     <button v-if="!confirming" class="secondary" @click="confirming = true">
-      Delete all my data
+      Alle meine Daten löschen
     </button>
     <template v-else>
-      <p class="warning">Are you sure? This is permanent.</p>
+      <p class="warning">Sind Sie sicher? Das ist endgültig.</p>
       <button :disabled="deleting" @click="deleteEverything">
-        {{ deleting ? 'Deleting…' : 'Yes, delete everything' }}
+        {{ deleting ? 'Wird gelöscht…' : 'Ja, alles löschen' }}
       </button>
       <button class="secondary" style="margin-top: 0.5rem" @click="confirming = false">
-        Keep my data
+        Daten behalten
       </button>
     </template>
   </div>

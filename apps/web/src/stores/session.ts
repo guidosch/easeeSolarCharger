@@ -74,13 +74,13 @@ export const useSessionStore = defineStore('session', () => {
         const code = (body as { error?: string } | null)?.error ?? 'unknown'
         error.value =
           code === 'no_charger_mapped'
-            ? 'No charger is assigned to you. Ask the operator to map your parking lot.'
-            : 'Sign-in failed. Check your Easee account details.'
+            ? 'Ihnen ist keine Ladestation zugewiesen. Bitten Sie den Betreiber, Ihren Parkplatz zuzuordnen.'
+            : 'Anmeldung fehlgeschlagen. Bitte prüfen Sie Ihre Easee-Kontodaten.'
         return
       }
       adopt(body as LoginResponse)
     } catch {
-      error.value = 'Could not reach the service.'
+      error.value = 'Der Dienst ist nicht erreichbar.'
     } finally {
       signingIn.value = false
     }

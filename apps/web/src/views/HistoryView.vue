@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import type { SessionSummary } from '@app/shared'
+import { formatMoment } from '../format'
 import { useSessionStore } from '../stores/session'
 
 /**
@@ -15,29 +16,18 @@ const sessions = ref<SessionSummary[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
 
-function when(value: string | null): string {
-  return value
-    ? new Date(value).toLocaleString(undefined, {
-        day: '2-digit',
-        month: 'short',
-        hour: '2-digit',
-        minute: '2-digit',
-      })
-    : '—'
-}
-
 const END_REASONS: Record<string, string> = {
-  target_reached: 'Target reached',
-  unplugged: 'Unplugged early',
-  cancelled: 'Cancelled',
-  deadline_passed: 'Deadline passed',
+  target_reached: 'Ziel erreicht',
+  unplugged: 'Vorzeitig abgesteckt',
+  cancelled: 'Abgebrochen',
+  deadline_passed: 'Termin verstrichen',
 }
 
 onMounted(async () => {
   try {
     sessions.value = await session.request<SessionSummary[]>('/api/sessions')
   } catch {
-    error.value = 'Could not load your history.'
+    error.value = 'Ihr Verlauf konnte nicht geladen werden.'
   } finally {
     loading.value = false
   }
@@ -45,40 +35,42 @@ onMounted(async () => {
 </script>
 
 <template>
-  <h1>History</h1>
+  <h1>Verlauf</h1>
 
-  <p v-if="loading" class="muted">Loading…</p>
+  <p v-if="loading" class="muted">Wird geladen…</p>
   <p v-else-if="error" class="card warning">{{ error }}</p>
-  <p v-else-if="sessions.length === 0" class="muted">No charging sessions yet.</p>
+  <p v-else-if="sessions.length === 0" class="muted">Noch keine Ladevorgänge.</p>
 
   <div v-for="entry in sessions" :key="entry.sessionId" class="card">
     <div class="row">
-      <h2 style="margin: 0">Lot {{ entry.lotNumber }}</h2>
+      <h2 style="margin: 0">Parkplatz {{ entry.lotNumber }}</h2>
       <span :class="entry.targetMet ? 'state' : 'state idle'">
-        {{ entry.targetMet ? 'Target met' : (END_REASONS[entry.endReason ?? ''] ?? 'Ended') }}
+        {{ entry.targetMet ? 'Ziel erreicht' : (END_REASONS[entry.endReason ?? ''] ?? 'Beendet') }}
       </span>
     </div>
     <p class="muted" style="margin: 0.25rem 0 0.75rem">
-      {{ when(entry.startedAt) }} → {{ when(entry.endedAt) }}
+      {{ formatMoment(entry.startedAt) }} → {{ formatMoment(entry.endedAt) }}
     </p>
 
     <div class="row">
-      <span class="muted">Delivered</span><strong>{{ entry.energyKwh.toFixed(1) }} kWh</strong>
+      <span class="muted">Geladen</span><strong>{{ entry.energyKwh.toFixed(1) }} kWh</strong>
     </div>
     <div class="row">
-      <span class="muted">From solar</span><strong>{{ entry.solarKwh.toFixed(1) }} kWh</strong>
+      <span class="muted">Aus Solarstrom</span><strong>{{ entry.solarKwh.toFixed(1) }} kWh</strong>
     </div>
     <div class="row">
-      <span class="muted">From the grid</span><strong>{{ entry.gridKwh.toFixed(1) }} kWh</strong>
+      <span class="muted">Aus dem Netz</span><strong>{{ entry.gridKwh.toFixed(1) }} kWh</strong>
     </div>
     <p v-if="entry.overrideUsed" class="muted" style="margin: 0.5rem 0 0">
-      "Charge now" was used during this session, so optimization was suspended.
+      Während dieses Ladevorgangs wurde «Jetzt laden» verwendet, die Optimierung war deshalb
+      ausgesetzt.
     </p>
   </div>
 
   <p v-if="sessions.length > 0" class="muted">
-    The solar and grid split reflects what the optimizer decided to charge from at each moment. The
-    building has one meter for everything, so this is an attribution rather than a measurement, and
-    only the five most recent sessions are kept.
+    Die Aufteilung in Solar- und Netzstrom bildet ab, wofür sich die Optimierung zum jeweiligen
+    Zeitpunkt entschieden hat. Das Gebäude hat nur einen einzigen Zähler für alles – es handelt sich
+    also um eine Zuordnung und nicht um eine Messung. Aufbewahrt werden nur die fünf jüngsten
+    Ladevorgänge.
   </p>
 </template>

@@ -261,6 +261,8 @@ middleware — the network is not a boundary for this service.
 
 Free managed HTTPS, which is the whole reason for the deviation:
 
+Firebase has itw own console URL ressource: https://console.firebase.google.com/project/solarpowerconsumptionoptimizer/overview
+
 ```bash
 pnpm dlx firebase-tools hosting:sites:list --project "$PROJECT"
 # then add the domain in the console or with `firebase hosting:channel`, and follow the DNS records

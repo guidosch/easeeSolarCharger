@@ -18,18 +18,19 @@ async function submit(): Promise<void> {
 </script>
 
 <template>
-  <h1>Solar charging</h1>
+  <h1>Solarladen</h1>
 
   <form class="card" @submit.prevent="submit">
-    <h2>Sign in</h2>
+    <h2>Anmelden</h2>
     <p class="muted">
-      Use your Easee account. Your password is only forwarded to Easee — never stored.
+      Verwenden Sie Ihr Easee-Konto. Ihr Passwort wird nur an Easee weitergeleitet und nie
+      gespeichert.
     </p>
 
-    <label for="userName">Email</label>
+    <label for="userName">E-Mail</label>
     <input id="userName" v-model="userName" type="email" autocomplete="username" required />
 
-    <label for="password" style="margin-top: 0.75rem">Password</label>
+    <label for="password" style="margin-top: 0.75rem">Passwort</label>
     <input
       id="password"
       v-model="password"
@@ -41,7 +42,7 @@ async function submit(): Promise<void> {
     <p v-if="session.error" class="warning" style="margin-top: 1rem">{{ session.error }}</p>
 
     <button type="submit" :disabled="session.signingIn" style="margin-top: 1rem">
-      {{ session.signingIn ? 'Signing in…' : 'Sign in' }}
+      {{ session.signingIn ? 'Anmeldung läuft…' : 'Anmelden' }}
     </button>
   </form>
 </template>

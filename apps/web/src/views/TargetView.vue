@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { formatDeadline } from '../format'
 import { ApiError } from '../stores/session'
 import { useChargersStore } from '../stores/chargers'
 
@@ -21,13 +22,7 @@ const submitting = ref(false)
 const problem = ref<string | null>(null)
 
 const deadline = computed(() => new Date(Date.now() + hoursAhead.value * 3_600_000))
-const deadlineLabel = computed(() =>
-  deadline.value.toLocaleString(undefined, {
-    weekday: 'short',
-    hour: '2-digit',
-    minute: '2-digit',
-  }),
-)
+const deadlineLabel = computed(() => formatDeadline(deadline.value))
 
 async function confirm(): Promise<void> {
   submitting.value = true
@@ -41,24 +36,20 @@ async function confirm(): Promise<void> {
     if (result.reachability.state === 'unreachable') {
       // Accepted, but the shortfall is stated now rather than discovered at the deadline (FR-036).
       problem.value =
-        `Saved — but this target cannot be met under the price policy. ` +
-        `Expect about ${result.reachability.expectedShortfallKwh.toFixed(1)} kWh short. ` +
-        `A later deadline or less energy would fix it.`
+        `Gespeichert – dieses Ladeziel lässt sich unter der Preisregel aber nicht erreichen. ` +
+        `Es werden voraussichtlich rund ${result.reachability.expectedShortfallKwh.toFixed(1)} kWh fehlen. ` +
+        `Ein späterer Termin oder weniger Energie würde das beheben.`
       return
     }
     await router.push(`/chargers/${props.lotNumber}`)
   } catch (cause) {
     if (cause instanceof ApiError && cause.code === 'deadline_too_soon') {
       const earliest = cause.earliestFeasibleDeadline
-        ? new Date(cause.earliestFeasibleDeadline).toLocaleString(undefined, {
-            weekday: 'short',
-            hour: '2-digit',
-            minute: '2-digit',
-          })
-        : 'later'
-      problem.value = `That deadline is too soon. The earliest that works is ${earliest}.`
+        ? formatDeadline(cause.earliestFeasibleDeadline)
+        : 'später'
+      problem.value = `Dieser Termin ist zu früh. Frühestens möglich ist ${earliest}.`
     } else {
-      problem.value = 'Could not save the target. Try again.'
+      problem.value = 'Das Ladeziel konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.'
     }
   } finally {
     submitting.value = false
@@ -67,29 +58,29 @@ async function confirm(): Promise<void> {
 </script>
 
 <template>
-  <h1>Charge {{ props.lotNumber }}</h1>
+  <h1>Parkplatz {{ props.lotNumber }} laden</h1>
 
   <div class="card">
-    <label for="energy">How much energy?</label>
+    <label for="energy">Wie viel Energie?</label>
     <div class="value">{{ energyKwh }} kWh</div>
     <input id="energy" v-model.number="energyKwh" type="range" min="1" max="100" step="1" />
 
-    <label for="deadline" style="margin-top: 1rem">Ready by</label>
+    <label for="deadline" style="margin-top: 1rem">Bereit bis</label>
     <div class="value">{{ deadlineLabel }}</div>
-    <p class="muted">in {{ hoursAhead }} hour{{ hoursAhead === 1 ? '' : 's' }}</p>
+    <p class="muted">in {{ hoursAhead }} Stunde{{ hoursAhead === 1 ? '' : 'n' }}</p>
     <input id="deadline" v-model.number="hoursAhead" type="range" min="1" max="48" step="1" />
   </div>
 
   <p v-if="problem" class="card warning">{{ problem }}</p>
 
   <button :disabled="submitting" @click="confirm">
-    {{ submitting ? 'Saving…' : 'Confirm' }}
+    {{ submitting ? 'Wird gespeichert…' : 'Bestätigen' }}
   </button>
-  <button class="secondary" style="margin-top: 0.5rem" @click="router.back()">Cancel</button>
+  <button class="secondary" style="margin-top: 0.5rem" @click="router.back()">Abbrechen</button>
 
   <p class="muted" style="margin-top: 1rem">
-    Charging starts at the next optimization cycle, within five minutes. Your car is charged from
-    the building's solar surplus where possible, and never from the grid during the 11:00–13:00 and
-    18:00–20:00 high-price windows.
+    Das Laden beginnt mit dem nächsten Optimierungszyklus, also innerhalb von fünf Minuten. Ihr Auto
+    wird wenn möglich aus dem Solarüberschuss des Gebäudes geladen und während der Hochpreisfenster
+    von 11:00–13:00 und 18:00–20:00 Uhr nie aus dem Netz.
   </p>
 </template>

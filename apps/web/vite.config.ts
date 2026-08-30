@@ -8,10 +8,11 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Solar Charging',
-        short_name: 'Charging',
+        lang: 'de',
+        name: 'Solarladen',
+        short_name: 'Solarladen',
         description:
-          'Set an energy target and a deadline; the building charges your car from its own solar surplus.',
+          'Energiemenge und Termin festlegen – das Gebäude lädt Ihr Auto aus dem eigenen Solarüberschuss.',
         theme_color: '#0b6e4f',
         background_color: '#ffffff',
         display: 'standalone',

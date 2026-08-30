@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
+import { formatDeadline } from '../format'
 import { STATE_LABELS, stateClass, useChargersStore } from '../stores/chargers'
 
 /**
@@ -21,15 +22,7 @@ const progressPercent = computed(() => {
   return Math.min(100, Math.round((t.deliveredKwh / t.energyKwh) * 100))
 })
 
-const deadlineLabel = computed(() =>
-  target.value
-    ? new Date(target.value.deadline).toLocaleString(undefined, {
-        weekday: 'short',
-        hour: '2-digit',
-        minute: '2-digit',
-      })
-    : '',
-)
+const deadlineLabel = computed(() => (target.value ? formatDeadline(target.value.deadline) : ''))
 
 onMounted(() => {
   void chargers.load()
@@ -37,19 +30,20 @@ onMounted(() => {
 </script>
 
 <template>
-  <h1>Parking lot {{ props.lotNumber }}</h1>
+  <h1>Parkplatz {{ props.lotNumber }}</h1>
 
   <p v-if="chargers.error" class="card warning">{{ chargers.error }}</p>
 
   <!-- FR-034: an active override, and the fact that optimization is suspended, must both be visible. -->
   <div v-if="charger?.override.active" class="card warning">
-    <h2 style="margin-top: 0">Charging now, optimization suspended</h2>
+    <h2 style="margin-top: 0">Lädt jetzt, Optimierung ausgesetzt</h2>
     <p style="margin: 0 0 0.75rem">
-      This charger is running at full power regardless of solar surplus, the high-price windows and
-      your deadline. It switches itself off when the session ends.
+      Diese Ladestation lädt mit voller Leistung – unabhängig vom Solarüberschuss, von den
+      Hochpreisfenstern und von Ihrem Termin. Sie schaltet sich am Ende des Ladevorgangs selbst
+      wieder ab.
     </p>
     <button class="secondary" @click="chargers.setOverride(props.lotNumber, false)">
-      Resume optimized charging
+      Optimiertes Laden fortsetzen
     </button>
   </div>
 
@@ -57,43 +51,44 @@ onMounted(() => {
     <span :class="stateClass(charger.state)">{{ STATE_LABELS[charger.state] }}</span>
 
     <div class="row" style="margin-top: 0.75rem">
-      <span class="muted">Current being delivered</span>
+      <span class="muted">Aktueller Ladestrom</span>
       <strong>{{ charger.deliveredCurrentA.toFixed(1) }} A</strong>
     </div>
     <p class="muted" style="margin: 0">
-      Read back from the charger, so it reflects what the building's load management is actually
-      allowing.
+      Von der Ladestation zurückgemeldet – der Wert zeigt also, was das Lastmanagement des Gebäudes
+      tatsächlich freigibt.
     </p>
 
     <p v-if="charger.state === 'waiting_for_surplus'" class="muted" style="margin: 0.75rem 0 0">
-      Your car is plugged in and ready. The system is waiting for enough solar surplus to charge
-      without drawing from the grid — it will charge from the grid later if your deadline needs it.
+      Ihr Auto ist angesteckt und bereit. Das System wartet auf genügend Solarüberschuss, um ohne
+      Netzbezug zu laden – später lädt es aus dem Netz, wenn Ihr Termin es verlangt.
     </p>
   </div>
 
   <div v-if="charger && target" class="card">
-    <h2>{{ target.energyKwh }} kWh by {{ deadlineLabel }}</h2>
+    <h2>{{ target.energyKwh }} kWh bis {{ deadlineLabel }}</h2>
 
     <div class="bar"><span :style="{ width: `${progressPercent}%` }" /></div>
     <div class="row">
-      <span class="muted">Delivered</span>
+      <span class="muted">Geladen</span>
       <strong>{{ target.deliveredKwh.toFixed(1) }} kWh</strong>
     </div>
     <div class="row">
-      <span class="muted">Remaining</span>
+      <span class="muted">Verbleibend</span>
       <strong>{{ target.remainingKwh.toFixed(1) }} kWh</strong>
     </div>
     <div class="row">
-      <span class="muted">From solar so far</span>
+      <span class="muted">Bisher aus Solarstrom</span>
       <strong>{{ target.solarKwh.toFixed(1) }} kWh</strong>
     </div>
     <div class="row">
-      <span class="muted">From the grid so far</span>
+      <span class="muted">Bisher aus dem Netz</span>
       <strong>{{ target.gridKwh.toFixed(1) }} kWh</strong>
     </div>
     <p class="muted" style="margin: 0.25rem 0 0">
-      The building has a single meter, so the split follows what the optimizer chose to charge from
-      at each moment rather than a measurement of where the electrons came from.
+      Das Gebäude hat nur einen einzigen Zähler. Die Aufteilung folgt deshalb dem, wofür sich die
+      Optimierung zum jeweiligen Zeitpunkt entschieden hat, und ist keine Messung der tatsächlichen
+      Herkunft des Stroms.
     </p>
 
     <p
@@ -101,17 +96,16 @@ onMounted(() => {
       class="warning"
       style="margin-top: 0.75rem"
     >
-      This target cannot be met before the deadline under the price policy — expect about
-      {{ target.reachability.expectedShortfallKwh.toFixed(1) }} kWh short. Set a later deadline or a
-      smaller amount.
+      Dieses Ladeziel lässt sich unter der Preisregel bis zum Termin nicht erreichen – es werden
+      voraussichtlich rund {{ target.reachability.expectedShortfallKwh.toFixed(1) }} kWh fehlen.
+      Wählen Sie einen späteren Termin oder eine kleinere Menge.
     </p>
     <p
       v-else-if="target.reachability.state === 'at_risk'"
       class="muted"
       style="margin-top: 0.75rem"
     >
-      On track, but with little room to spare. Charging from the grid will start as soon as the
-      deadline needs it.
+      Auf Kurs, aber ohne viel Reserve. Sobald Ihr Termin es verlangt, wird aus dem Netz geladen.
     </p>
 
     <button
@@ -119,20 +113,20 @@ onMounted(() => {
       style="margin-top: 1rem"
       @click="chargers.cancelTarget(props.lotNumber)"
     >
-      Cancel target
+      Ladeziel löschen
     </button>
   </div>
 
   <div v-else-if="charger" class="card">
-    <h2>No target set</h2>
-    <p class="muted">Tell the system how much energy you need and by when.</p>
+    <h2>Kein Ladeziel gesetzt</h2>
+    <p class="muted">Sagen Sie dem System, wie viel Energie Sie bis wann brauchen.</p>
     <router-link :to="`/chargers/${props.lotNumber}/target`">
-      <button>Set a target</button>
+      <button>Ladeziel setzen</button>
     </router-link>
   </div>
 
   <router-link v-if="charger && target" :to="`/chargers/${props.lotNumber}/target`">
-    <button class="secondary">Change target</button>
+    <button class="secondary">Ladeziel ändern</button>
   </router-link>
 
   <button
@@ -141,8 +135,10 @@ onMounted(() => {
     style="margin-top: 0.5rem"
     @click="chargers.setOverride(props.lotNumber, true)"
   >
-    Charge now (ignore the optimization)
+    Jetzt laden (Optimierung übergehen)
   </button>
 
-  <p v-if="!charger && !chargers.loading" class="muted">No charger found for this parking lot.</p>
+  <p v-if="!charger && !chargers.loading" class="muted">
+    Für diesen Parkplatz wurde keine Ladestation gefunden.
+  </p>
 </template>

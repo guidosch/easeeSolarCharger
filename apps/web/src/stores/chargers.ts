@@ -27,7 +27,8 @@ export const useChargersStore = defineStore('chargers', () => {
     } catch (cause) {
       // A read failure is not a charging failure: the optimizer keeps running under the fail-safe
       // (FR-044), and saying "charging stopped" here would be a lie.
-      error.value = 'Could not refresh the charger status. Charging is unaffected.'
+      error.value =
+        'Der Status der Ladestationen konnte nicht aktualisiert werden. Das Laden läuft unverändert weiter.'
       if (cause instanceof Error && cause.message) console.warn(cause.message)
     } finally {
       loading.value = false
@@ -68,14 +69,14 @@ export const useChargersStore = defineStore('chargers', () => {
 
 /** Wording the user sees. `waiting_for_surplus` versus `charging_grid` is the point (FR-035). */
 export const STATE_LABELS: Record<ChargerView['state'], string> = {
-  idle: 'Idle',
-  waiting_for_car: 'Waiting for your car',
-  waiting_for_surplus: 'Waiting for solar surplus',
-  charging_solar: 'Charging from solar',
-  charging_grid: 'Charging from the grid',
-  complete: 'Complete',
-  error: 'Charger error',
-  offline: 'Charger offline',
+  idle: 'Inaktiv',
+  waiting_for_car: 'Wartet auf Ihr Auto',
+  waiting_for_surplus: 'Wartet auf Solarüberschuss',
+  charging_solar: 'Lädt mit Solarstrom',
+  charging_grid: 'Lädt mit Netzstrom',
+  complete: 'Abgeschlossen',
+  error: 'Fehler an der Ladestation',
+  offline: 'Ladestation offline',
 }
 
 export function stateClass(state: ChargerView['state']): string {
