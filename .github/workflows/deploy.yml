@@ -50,9 +50,49 @@ jobs:
 
       - name: Deploy both services
         run: |
+          REGISTRY="$REGION-docker.pkg.dev/$PROJECT/services"
           for SERVICE in api optimizer; do
-            gcloud run services replace "infra/cloudrun/$SERVICE.service.yaml" \
+            # Pin the revision to this commit's immutable tag. Replacing a spec that still says
+            # `:latest` is a no-op -- Cloud Run resolves the tag to a digest once, at revision
+            # creation, so an unchanged spec creates no revision and the old image keeps serving.
+            sed "s#$REGISTRY/easee-$SERVICE:latest#$REGISTRY/easee-$SERVICE:${{ github.sha }}#" \
+              "infra/cloudrun/$SERVICE.service.yaml" > "/tmp/$SERVICE.service.yaml"
+            gcloud run services replace "/tmp/$SERVICE.service.yaml" \
               --project="$PROJECT" --region="$REGION"
+          done
+
+      - name: Verify both services serve this commit
+        run: |
+          for SERVICE in api optimizer; do
+            # Checking the service spec would be a tautology -- it only echoes back what `replace`
+            # just sent. The question is whether a revision was actually created, so ask the
+            # revision that is serving traffic what image it is running.
+            REVISION="$(gcloud run services describe "easee-$SERVICE" \
+              --project="$PROJECT" --region="$REGION" \
+              --format='value(status.latestReadyRevisionName)')"
+            if [ -z "$REVISION" ]; then
+              echo "easee-$SERVICE: could not determine the serving revision" >&2
+              exit 1
+            fi
+
+            IMAGE="$(gcloud run revisions describe "$REVISION" \
+              --project="$PROJECT" --region="$REGION" \
+              --format='value(spec.containers[0].image)')"
+            if [ -z "$IMAGE" ]; then
+              echo "easee-$SERVICE: could not read the image of revision $REVISION" >&2
+              exit 1
+            fi
+
+            case "$IMAGE" in
+              *:${{ github.sha }})
+                echo "easee-$SERVICE: $REVISION serves ${{ github.sha }}"
+                ;;
+              *)
+                echo "easee-$SERVICE: $REVISION still serves $IMAGE," >&2
+                echo "  expected the image tagged ${{ github.sha }}. No new revision was created." >&2
+                exit 1
+                ;;
+            esac
           done
 
       - uses: pnpm/action-setup@v4
