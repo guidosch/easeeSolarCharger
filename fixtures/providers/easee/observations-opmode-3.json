@@ -3,46 +3,56 @@
   "headers": {
     "content-type": "application/json"
   },
-  "body": [
-    {
-      "id": 109,
-      "timestamp": "2026-08-14T14:35:12.123Z",
-      "value": "3"
-    },
-    {
-      "id": 114,
-      "timestamp": "2026-08-14T14:35:12.123Z",
-      "value": "12"
-    },
-    {
-      "id": 120,
-      "timestamp": "2026-08-14T14:35:12.123Z",
-      "value": "8.31"
-    },
-    {
-      "id": 121,
-      "timestamp": "2026-08-14T14:35:12.123Z",
-      "value": "6.4"
-    },
-    {
-      "id": 124,
-      "timestamp": "2026-08-14T14:35:12.123Z",
-      "value": "1240.9"
-    },
-    {
-      "id": 48,
-      "timestamp": "2026-08-14T14:35:12.123Z",
-      "value": "12"
-    },
-    {
-      "id": 96,
-      "timestamp": "2026-08-14T14:35:12.123Z",
-      "value": "0"
-    },
-    {
-      "id": 103,
-      "timestamp": "2026-08-14T14:35:12.123Z",
-      "value": "1"
-    }
-  ]
+  "body": {
+    "observations": [
+      {
+        "value": 3,
+        "id": 109,
+        "timestamp": "2026-08-14T14:35:12.123Z",
+        "dataType": 4
+      },
+      {
+        "value": 12,
+        "id": 114,
+        "timestamp": "2026-08-14T14:35:12.123Z",
+        "dataType": 3
+      },
+      {
+        "value": 8.31,
+        "id": 120,
+        "timestamp": "2026-08-14T14:35:12.123Z",
+        "dataType": 3
+      },
+      {
+        "value": 6.4,
+        "id": 121,
+        "timestamp": "2026-08-14T14:35:12.123Z",
+        "dataType": 3
+      },
+      {
+        "value": 1240.9,
+        "id": 124,
+        "timestamp": "2026-08-14T14:35:12.123Z",
+        "dataType": 3
+      },
+      {
+        "value": 12,
+        "id": 48,
+        "timestamp": "2026-08-14T14:35:12.123Z",
+        "dataType": 3
+      },
+      {
+        "value": 0,
+        "id": 96,
+        "timestamp": "2026-08-14T14:35:12.123Z",
+        "dataType": 4
+      },
+      {
+        "value": true,
+        "id": 103,
+        "timestamp": "2026-08-14T14:35:12.123Z",
+        "dataType": 2
+      }
+    ]
+  }
 }

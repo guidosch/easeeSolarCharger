@@ -37,6 +37,16 @@ export type RawObservation = z.infer<typeof RawObservation>
 
 export const RawObservationList = z.array(RawObservation)
 
+/**
+ * The envelope the endpoint actually returns: `{ "observations": [ … ] }`, not a bare array
+ * (`Current_Device_State_API_MultiObservationResponse` in the Easee OpenAPI definition). A bare
+ * array is still accepted so an older recording keeps parsing.
+ */
+export const ObservationsResponse = z.union([
+  z.object({ observations: RawObservationList }),
+  RawObservationList.transform((observations) => ({ observations })),
+])
+
 /** The internal domain model — `packages/core` never sees an Easee payload (Principle IV). */
 export type ChargerObservation = {
   opMode: 0 | 1 | 2 | 3 | 4 | 5 | 6

@@ -14,7 +14,7 @@ from the live provider documentation on 2026-08-14; the URLs are listed under So
 cycle**. One request per charger, requesting all needed observation IDs in a single call:
 
 ```
-GET https://api.easee.com/api/state/{serialNumber}/observations?ids=109,114,120,121,124,48,96,103
+GET https://api.easee.com/state/{serialNumber}/observations?ids=109,114,120,121,124,48,96,103
 ```
 
 Plug-in, session start and session end are all derived from transitions of observation **109

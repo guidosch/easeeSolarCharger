@@ -54,8 +54,12 @@ describe('Easee observations — happy-path parse of the committed recording', (
         observedAt: '2026-08-14T14:35:12.123Z',
       })
     }
-    // The deprecated /state endpoint (removed 2026-09-01) must never be called.
-    expect(calls[0]?.url).toContain('/api/state/EH123456/observations?ids=')
+    // The deprecated /api/chargers/{id}/state endpoint (removed 2026-09-01) must never be called,
+    // and the observations endpoint is addressed *without* an `/api` segment — with one, the Easee
+    // API Gateway answers 403 for every charger.
+    expect(calls[0]?.url).toBe(
+      'https://api.easee.com/state/EH123456/observations?ids=109,114,120,121,124,48,96,103',
+    )
     expect(calls[0]?.url).not.toMatch(/\/api\/chargers\/[^/]+\/state/)
   })
 

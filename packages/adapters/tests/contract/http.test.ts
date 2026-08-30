@@ -19,7 +19,7 @@ describe('HttpClient — 429 handling (Principle IV)', () => {
 
     const result = await client.request({
       provider: 'easee',
-      url: 'https://api.easee.com/api/state/X/observations',
+      url: 'https://api.easee.com/state/X/observations',
       parse: passthrough,
     })
 

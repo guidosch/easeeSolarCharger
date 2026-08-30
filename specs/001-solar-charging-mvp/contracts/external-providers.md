@@ -18,7 +18,7 @@ honoured, budget checked *before* the call is made.
 | --- | --- | --- |
 | Login | `POST /api/accounts/login` → `{accessToken, refreshToken, expiresIn: 3600}` | — |
 | Refresh | `POST /api/accounts/refresh_token` | — |
-| **Observations** | `GET /api/state/{serialNumber}/observations?ids=109,114,120,121,124,48,96,103` | **100 requests / rolling 5 min** (enforced from 2026-09-01) |
+| **Observations** | `GET /state/{serialNumber}/observations?ids=109,114,120,121,124,48,96,103` (**no `/api` segment** — with one the gateway answers 403) | **100 requests / rolling 5 min** (enforced from 2026-09-01) |
 | **Set current** | `POST /api/chargers/{chargerId}/settings` `{ "dynamicChargerCurrent": <A> }` | **20 requests / min** |
 
 **Observation IDs consumed**: `109` chargerOpMode, `114` outputCurrent, `120` totalPower,

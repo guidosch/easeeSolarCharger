@@ -6,7 +6,7 @@ import type { ChargerObservation } from './types.js'
 import {
   OBSERVATION_ID_LIST,
   OBSERVATION_IDS,
-  RawObservationList,
+  ObservationsResponse,
   observationId,
   observationNumber,
 } from './types.js'
@@ -24,8 +24,15 @@ export class EaseeObservationsClient {
     private readonly budget: BudgetLimiter,
   ) {}
 
+  /**
+   * Note the missing `/api` segment: the observations endpoint sits at the root of the Easee Cloud
+   * API (`servers: https://api.easee.com` + path `/state/{serialNumber}/observations`), unlike the
+   * older `/api/chargers/...` routes. Sending `/api/state/...` reaches a different API Gateway
+   * route that answers `403 Forbidden` for every charger — an authorization-shaped error with an
+   * addressing cause, which is why it looked like a credentials problem in production.
+   */
   observationsUrl(serialNumber: string): string {
-    return `${this.baseUrl}/api/state/${encodeURIComponent(serialNumber)}/observations?ids=${OBSERVATION_ID_LIST.join(',')}`
+    return `${this.baseUrl}/state/${encodeURIComponent(serialNumber)}/observations?ids=${OBSERVATION_ID_LIST.join(',')}`
   }
 
   async read(
@@ -52,7 +59,7 @@ export function parseObservations(
   payload: unknown,
   observedAtFallback: string,
 ): Result<ChargerObservation> {
-  const parsed = RawObservationList.safeParse(payload)
+  const parsed = ObservationsResponse.safeParse(payload)
   if (!parsed.success) {
     return err({
       kind: 'malformed',
@@ -61,7 +68,7 @@ export function parseObservations(
     })
   }
 
-  const byId = new Map(parsed.data.map((entry) => [observationId(entry), entry]))
+  const byId = new Map(parsed.data.observations.map((entry) => [observationId(entry), entry]))
   const opModeRaw = byId.get(OBSERVATION_IDS.chargerOpMode)
   if (!opModeRaw) {
     return err({

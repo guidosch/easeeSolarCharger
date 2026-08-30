@@ -93,7 +93,21 @@ export async function gather(deps: CycleDeps, cycleId: string): Promise<Gathered
 
   const unreadable = gatheredChargers.filter((c) => c.readError !== null)
   if (unreadable.length > 0) {
-    notes.push(`${unreadable.length} charger(s) could not be read; their last known state is used`)
+    // The count alone hid a total provider outage for as long as it lasted: every charger read
+    // failed, the cycle recorded `charger_error` for all of them, and nothing anywhere said why.
+    // The cause travels with the count now — into the log *and* into the recorded cycle.
+    const causes = [...new Set(unreadable.map((c) => c.readError as string))]
+    notes.push(
+      `${unreadable.length} charger(s) could not be read; their last known state is used ` +
+        `(${causes.slice(0, 3).join('; ')})`,
+    )
+    deps.logger.error('charger reads failed; last known state is carried forward', {
+      cycleId,
+      failed: unreadable.length,
+      total: gatheredChargers.length,
+      causes,
+      chargerIds: unreadable.slice(0, 10).map((c) => c.lot.chargerId),
+    })
   }
 
   const ownChargingKw = gatheredChargers.reduce((sum, charger) => {
