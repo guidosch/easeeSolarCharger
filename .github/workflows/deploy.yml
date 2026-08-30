@@ -46,6 +46,15 @@ jobs:
             docker tag "$IMAGE" "$REGISTRY/easee-$SERVICE:latest"
             docker push "$IMAGE"
             docker push "$REGISTRY/easee-$SERVICE:latest"
+            # Record what we actually pushed. Cloud Run resolves the tag to a digest when it
+            # creates the revision, so the digest -- not the tag -- is what the deployed revision
+            # can later be compared against.
+            DIGEST="$(docker image inspect "$IMAGE" --format '{{index .RepoDigests 0}}' | cut -d@ -f2)"
+            if [ -z "$DIGEST" ]; then
+              echo "easee-$SERVICE: could not read the digest of the image just pushed" >&2
+              exit 1
+            fi
+            echo "DIGEST_$SERVICE=$DIGEST" >> "$GITHUB_ENV"
           done
 
       - name: Deploy both services
@@ -83,16 +92,28 @@ jobs:
               exit 1
             fi
 
+            VAR="DIGEST_$SERVICE"
+            EXPECTED="${!VAR}"
+            if [ -z "$EXPECTED" ]; then
+              echo "easee-$SERVICE: the build step recorded no digest to compare against" >&2
+              exit 1
+            fi
+
+            # Cloud Run rewrites the tag we deploy into `repo@sha256:...`, so compare digests.
+            # The tag form is still accepted in case a revision records it verbatim.
             case "$IMAGE" in
-              *:${{ github.sha }})
-                echo "easee-$SERVICE: $REVISION serves ${{ github.sha }}"
-                ;;
-              *)
-                echo "easee-$SERVICE: $REVISION still serves $IMAGE," >&2
-                echo "  expected the image tagged ${{ github.sha }}. No new revision was created." >&2
-                exit 1
-                ;;
+              *@*)   ACTUAL="${IMAGE##*@}" ;;
+              *)     ACTUAL="" ;;
             esac
+
+            if [ "$ACTUAL" = "$EXPECTED" ] || [ "$IMAGE" != "${IMAGE%:${{ github.sha }}}" ]; then
+              echo "easee-$SERVICE: $REVISION serves ${{ github.sha }} ($IMAGE)"
+            else
+              echo "easee-$SERVICE: $REVISION serves $IMAGE," >&2
+              echo "  expected digest $EXPECTED (built from ${{ github.sha }})." >&2
+              echo "  No new revision was created for this commit." >&2
+              exit 1
+            fi
           done
 
       - uses: pnpm/action-setup@v4
