@@ -19,10 +19,11 @@
  * becoming an unusable authorization entry (FR-003 — this mapping is the *sole* basis for who may
  * act on which charger).
  *
- * `site.json` (the `GET /api/sites/{id}` response) supplies the supply line: each charger sits on a
- * circuit, and that circuit's `circuitPanelId` is the panel it hangs off — panel 1 becomes `L1`,
- * panel 2 becomes `L2`. This is what the optimizer's headroom check groups by, so it has to come
- * from the wiring rather than from a guess.
+ * `site.json` (the `GET /api/sites/{id}` response) supplies the supply line and the serial number.
+ * Each charger sits on a circuit, and that circuit's `circuitPanelId` is the panel it hangs off —
+ * panel 1 becomes `L1`, panel 2 becomes `L2`, which is what the optimizer's headroom check groups
+ * by, so it has to come from the wiring rather than from a guess. The serial number is the
+ * charger's `backPlate.id`; `siteChargers.json` does not carry it at all.
  *
  * Authentication: either `EASEE_ACCESS_TOKEN`, or `EASEE_TECHNICAL_USERNAME` +
  * `EASEE_TECHNICAL_PASSWORD`, in which case the script logs in itself.
@@ -43,7 +44,11 @@ type SiteCharger = { id: string; name: string }
 type SiteUsers = { siteUsers: { userId: number; name: string; email: string }[] }
 type Permission = { userId: number; name: string; email: string }
 type Site = {
-  circuits: { circuitPanelId: number; panelName?: string; chargers: { id: string }[] }[]
+  circuits: {
+    circuitPanelId: number
+    panelName?: string
+    chargers: { id: string; backPlate?: { id?: string } }[]
+  }[]
 }
 type ParkingLot = {
   lotNumber: string
@@ -110,12 +115,15 @@ function toLotNumber(chargerName: string): string {
 }
 
 /**
- * chargerId → supply line, read off the site's circuits. `circuitPanelId` numbers the panel a
- * circuit hangs off, and the model only knows two lines, so anything other than panel 1 or 2 is
- * refused here rather than written out as a line the optimizer cannot group by.
+ * chargerId → supply line and serial number, read off the site's circuits.
+ *
+ * `circuitPanelId` numbers the panel a circuit hangs off, and the model only knows two lines, so
+ * anything other than panel 1 or 2 is refused here rather than written out as a line the optimizer
+ * cannot group by. The serial number is the charger's back plate id — the id the observations
+ * endpoint is addressed by, which `siteChargers.json` does not carry.
  */
-function linesByCharger(site: Site): Map<string, 'L1' | 'L2'> {
-  const lines = new Map<string, 'L1' | 'L2'>()
+function chargerFactsFromSite(site: Site): Map<string, { line: 'L1' | 'L2'; serialNumber: string }> {
+  const facts = new Map<string, { line: 'L1' | 'L2'; serialNumber: string }>()
   for (const circuit of site.circuits ?? []) {
     const line = `L${circuit.circuitPanelId}`
     if (line !== 'L1' && line !== 'L2') {
@@ -124,9 +132,15 @@ function linesByCharger(site: Site): Map<string, 'L1' | 'L2'> {
           `${line}, but the model only has L1 and L2 — map it by hand`,
       )
     }
-    for (const charger of circuit.chargers ?? []) lines.set(charger.id, line)
+    for (const charger of circuit.chargers ?? []) {
+      const serialNumber = charger.backPlate?.id
+      if (!serialNumber) {
+        throw new Error(`charger ${charger.id} has no backPlate.id in site.json`)
+      }
+      facts.set(charger.id, { line, serialNumber })
+    }
   }
-  return lines
+  return facts
 }
 
 async function main(): Promise<void> {
@@ -145,7 +159,7 @@ async function main(): Promise<void> {
   const users = JSON.parse(readFileSync(here('siteUsers.json'), 'utf8')) as SiteUsers
   const site = JSON.parse(readFileSync(here('site.json'), 'utf8')) as Site
   const knownUsers = new Map(users.siteUsers.map((user) => [String(user.userId), user]))
-  const lines = linesByCharger(site)
+  const facts = chargerFactsFromSite(site)
 
   const token = await accessToken()
   const lots: ParkingLot[] = []
@@ -163,21 +177,24 @@ async function main(): Promise<void> {
       console.warn(`${lotNumber}: user ${easeeUserId} (${owner.name}) is not in siteUsers.json`)
     }
 
-    const line = lines.get(charger.id)
-    if (!line) unplaced.push(lotNumber)
+    // A charger on no circuit has neither a line nor a back plate to read, so it falls back to the
+    // charger id as its serial and to `--line`; both are reported at the end.
+    const fact = facts.get(charger.id)
+    if (!fact) unplaced.push(lotNumber)
+    const line = fact?.line ?? fallbackLine
+    const serialNumber = fact?.serialNumber ?? charger.id
 
     lots.push({
       lotNumber,
-      // Easee identifies a charger by its serial number, so the two are the same value here.
       chargerId: charger.id,
-      serialNumber: charger.id,
+      serialNumber,
       easeeUserId,
-      line: line ?? fallbackLine,
+      line,
       phases,
       maxCurrentA,
     })
     console.log(
-      `${lotNumber.padEnd(8)} ${charger.id}  ${(line ?? fallbackLine).padEnd(2)}` +
+      `${lotNumber.padEnd(8)} ${charger.id}  ${serialNumber.padEnd(14)} ${line.padEnd(2)}` +
         `  ${easeeUserId || '(no user)'} ${knownUsers.get(easeeUserId)?.name ?? owner?.name ?? ''}`,
     )
   }
@@ -207,7 +224,8 @@ async function main(): Promise<void> {
   if (orphaned.length > 0) console.log(`orphaned (no user): ${orphaned.join(', ')}`)
   if (unplaced.length > 0) {
     console.warn(
-      `not on any circuit in site.json, defaulted to ${fallbackLine}: ${unplaced.join(', ')}`,
+      `not on any circuit in site.json — line defaulted to ${fallbackLine} and the charger id ` +
+        `used as the serial number: ${unplaced.join(', ')}`,
     )
   }
   console.log(
