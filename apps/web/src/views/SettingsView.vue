@@ -47,7 +47,8 @@ async function deleteEverything(): Promise<void> {
     <h2>Konto</h2>
     <p class="muted">
       Angemeldet als {{ session.session?.email ?? session.session?.userId }}. Dieses System
-      speichert nur Ihre Easee-Benutzerkennung als Nummer, Ihre Ladeziele und Ihre letzten fünf Ladevorgänge.
+      speichert nur Ihre Easee-Benutzerkennung als Nummer, Ihre Ladeziele und Ihre letzten fünf
+      Ladevorgänge.
     </p>
     <button class="secondary" @click="signOut">Abmelden</button>
   </div>
