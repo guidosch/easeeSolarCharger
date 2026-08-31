@@ -23,7 +23,7 @@ async function submit(): Promise<void> {
   <form class="card" @submit.prevent="submit">
     <h2>Anmelden</h2>
     <p class="muted">
-      Verwenden Sie Ihr Easee-Konto. Ihr Passwort wird nur an Easee weitergeleitet und nie
+      Verwenden Sie Ihr <a href="https://portal.easee.com/" target="_blank" rel="noopener noreferrer">Easee-Konto</a>. Ihr Passwort wird nur an Easee weitergeleitet und nie
       gespeichert.
     </p>
 
