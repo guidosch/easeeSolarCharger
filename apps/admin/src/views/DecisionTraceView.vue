@@ -2,6 +2,8 @@
 import { onMounted, ref } from 'vue'
 import type { TraceEntry } from '@app/shared'
 import { adminFetch } from '../api'
+import { LADDER_RULES, TRACE_COLUMNS as COL } from '../columns'
+import ColumnHeader from '../components/ColumnHeader.vue'
 
 /**
  * The per-charger decision trail (T118, FR-042, SC-009).
@@ -16,15 +18,6 @@ const entries = ref<TraceEntry[]>([])
 const error = ref<string | null>(null)
 const from = ref(new Date(Date.now() - 3 * 3_600_000).toISOString().slice(0, 16))
 const to = ref(new Date().toISOString().slice(0, 16))
-
-const RULES: Record<string, string> = {
-  '1': 'line headroom',
-  '2': 'override',
-  '3': 'high price',
-  '4': 'deadline',
-  '5': 'solar',
-  '6': 'fairness',
-}
 
 function local(iso: string): string {
   return new Date(iso).toLocaleTimeString('en-GB', { timeZone: 'Europe/Zurich' })
@@ -59,13 +52,13 @@ onMounted(load)
   <table>
     <thead>
       <tr>
-        <th>Cycle</th>
-        <th>Commanded</th>
-        <th>Delivered</th>
-        <th>Reason</th>
-        <th>Decided by</th>
-        <th>Discrepancy</th>
-        <th>Events</th>
+        <ColumnHeader v-bind="COL.cycle" />
+        <ColumnHeader v-bind="COL.commanded" />
+        <ColumnHeader v-bind="COL.delivered" />
+        <ColumnHeader v-bind="COL.reason" />
+        <ColumnHeader v-bind="COL.ladderRule" />
+        <ColumnHeader v-bind="COL.discrepancy" />
+        <ColumnHeader v-bind="COL.events" />
       </tr>
     </thead>
     <tbody>
@@ -76,7 +69,7 @@ onMounted(load)
         <td>{{ entry.reason }}</td>
         <td>
           <template v-if="entry.ladderRule">
-            rule {{ entry.ladderRule }} — {{ RULES[String(entry.ladderRule)] }}
+            rule {{ entry.ladderRule }} — {{ LADDER_RULES[String(entry.ladderRule)] }}
           </template>
           <template v-else>—</template>
         </td>

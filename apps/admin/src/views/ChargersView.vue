@@ -2,6 +2,8 @@
 import { onMounted, ref } from 'vue'
 import type { AdminChargerView } from '@app/shared'
 import { adminFetch } from '../api'
+import { CHARGER_COLUMNS as COL } from '../columns'
+import ColumnHeader from '../components/ColumnHeader.vue'
 
 /**
  * Every charger, with commanded versus delivered current (T117, FR-040).
@@ -30,18 +32,18 @@ onMounted(load)
   <table>
     <thead>
       <tr>
-        <th>Lot</th>
-        <th>Line</th>
-        <th>State</th>
-        <th>opMode</th>
-        <th>Commanded</th>
-        <th>Delivered</th>
-        <th>Charger believes</th>
-        <th>Discrepancy</th>
-        <th>Target</th>
-        <th>Reachability</th>
-        <th>User</th>
-        <th>Trace</th>
+        <ColumnHeader v-bind="COL.lot" />
+        <ColumnHeader v-bind="COL.line" />
+        <ColumnHeader v-bind="COL.state" />
+        <ColumnHeader v-bind="COL.opMode" />
+        <ColumnHeader v-bind="COL.commanded" />
+        <ColumnHeader v-bind="COL.delivered" />
+        <ColumnHeader v-bind="COL.believes" />
+        <ColumnHeader v-bind="COL.discrepancy" />
+        <ColumnHeader v-bind="COL.target" />
+        <ColumnHeader v-bind="COL.reachability" />
+        <ColumnHeader v-bind="COL.user" />
+        <ColumnHeader v-bind="COL.trace" />
       </tr>
     </thead>
     <tbody>

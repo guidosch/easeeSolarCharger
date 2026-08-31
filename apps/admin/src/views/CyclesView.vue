@@ -2,6 +2,8 @@
 import { onMounted, ref } from 'vue'
 import type { AdminCycleSummary, AdminHealth } from '@app/shared'
 import { adminFetch } from '../api'
+import { CYCLE_COLUMNS as COL } from '../columns'
+import ColumnHeader from '../components/ColumnHeader.vue'
 
 /**
  * Recent cycles and overall health (T116, FR-039).
@@ -67,17 +69,17 @@ onMounted(load)
   <table>
     <thead>
       <tr>
-        <th>Cycle</th>
-        <th>Outcome</th>
-        <th>Duration</th>
-        <th>Surplus</th>
-        <th>Age</th>
-        <th>Quality</th>
-        <th>Tariff</th>
-        <th>Season</th>
-        <th>Acted on</th>
-        <th>Easee</th>
-        <th>SolarEdge</th>
+        <ColumnHeader v-bind="COL.cycle" />
+        <ColumnHeader v-bind="COL.outcome" />
+        <ColumnHeader v-bind="COL.duration" />
+        <ColumnHeader v-bind="COL.surplus" />
+        <ColumnHeader v-bind="COL.age" />
+        <ColumnHeader v-bind="COL.quality" />
+        <ColumnHeader v-bind="COL.tariff" />
+        <ColumnHeader v-bind="COL.season" />
+        <ColumnHeader v-bind="COL.actedOn" />
+        <ColumnHeader v-bind="COL.easee" />
+        <ColumnHeader v-bind="COL.solaredge" />
       </tr>
     </thead>
     <tbody>

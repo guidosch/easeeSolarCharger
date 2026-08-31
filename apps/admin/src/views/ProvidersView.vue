@@ -2,6 +2,8 @@
 import { onMounted, ref } from 'vue'
 import type { AdminProviderHealth } from '@app/shared'
 import { adminFetch } from '../api'
+import { PROVIDER_COLUMNS as COL } from '../columns'
+import ColumnHeader from '../components/ColumnHeader.vue'
 
 /**
  * Per-provider budget, errors and rate limits over 24 hours (T119, FR-041).
@@ -30,13 +32,13 @@ onMounted(load)
   <table>
     <thead>
       <tr>
-        <th>Provider</th>
-        <th>Calls (24 h)</th>
-        <th>Budget</th>
-        <th>Errors</th>
-        <th>Rate limited</th>
-        <th>Daylight gate</th>
-        <th>Last error</th>
+        <ColumnHeader v-bind="COL.provider" />
+        <ColumnHeader v-bind="COL.calls" />
+        <ColumnHeader v-bind="COL.budget" />
+        <ColumnHeader v-bind="COL.errors" />
+        <ColumnHeader v-bind="COL.rateLimited" />
+        <ColumnHeader v-bind="COL.daylightGate" />
+        <ColumnHeader v-bind="COL.lastError" />
       </tr>
     </thead>
     <tbody>
