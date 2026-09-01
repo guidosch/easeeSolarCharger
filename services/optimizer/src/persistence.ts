@@ -1,6 +1,6 @@
 import { ChargerSnapshotsRepo, ChargersRepo, snapshotDue } from '@app/adapters'
 import type { ChargerDoc } from '@app/adapters'
-import { nextHysteresis, solarShares } from '@app/core'
+import { canAcceptSetpoint, nextHysteresis, solarShares } from '@app/core'
 import type { ChargerDecision, CycleInputs } from '@app/core'
 import type { GatheredCharger } from './gather.js'
 import type { CycleDeps } from './ports.js'
@@ -30,7 +30,7 @@ export async function persistChargerState(
   const shares = solarShares(inputs)
   const eligible = new Set(
     inputs.chargers
-      .filter((c) => c.target !== null && c.opMode !== 0 && c.opMode !== 1 && c.opMode !== 5)
+      .filter((c) => c.target !== null && canAcceptSetpoint(c.opMode))
       .map((c) => c.chargerId),
   )
 

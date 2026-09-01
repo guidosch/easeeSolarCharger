@@ -19,8 +19,14 @@ GET https://api.easee.com/state/{serialNumber}/observations?ids=109,114,120,121,
 
 Plug-in, session start and session end are all derived from transitions of observation **109
 (chargerOpMode)**: `0 Offline, 1 Disconnected, 2 AwaitingStart, 3 Charging, 4 Completed, 5 Error,
-6 ReadyToCharge`. A transition `1 → {2,3,6}` is a plug-in; a transition `{2,3,4,6} → 1` is an
-unplug and therefore a session end.
+6 ReadyToCharge, 7 AwaitingAuthentication, 8 De-authenticating`. A transition `1 → {2,3,6,7}` is a
+plug-in; a transition `{2,3,4,6,7,8} → 1` is an unplug and therefore a session end.
+
+7 and 8 are the authorisation handshake on chargers that require an RFID tag or an app
+authorisation. They were absent from the original enumeration here and reached production on
+2026-09-01, where an unlisted value made the whole observation `malformed` and cost that charger its
+cycle. A charger in 7 or 8 is plugged in but will refuse current until it is authorised, so it takes
+no setpoint and is never given a share of the surplus.
 
 **Rationale**: the observations endpoint is rate-limited at **100 requests per 5 minutes**
 (enforced from 2026-09-01). A full sweep of 30 chargers costs 30 requests per cycle — **30% of the

@@ -46,7 +46,9 @@ export function snapshotDue(
   charger: { opMode: number; lastSnapshotAt: string | null },
   nowIso: string,
 ): boolean {
-  const active = charger.opMode === 2 || charger.opMode === 3 || charger.opMode === 6
+  // A car is connected in 2, 3, 6 and 7 — including 7 (awaiting authentication), because a charger
+  // stuck there is exactly the case an operator needs the snapshot history to explain.
+  const active = [2, 3, 6, 7].includes(charger.opMode)
   if (!active) return false
   if (!charger.lastSnapshotAt) return true
   const minutes = (Date.parse(nowIso) - Date.parse(charger.lastSnapshotAt)) / 60_000

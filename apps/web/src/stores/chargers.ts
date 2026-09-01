@@ -71,6 +71,7 @@ export const useChargersStore = defineStore('chargers', () => {
 export const STATE_LABELS: Record<ChargerView['state'], string> = {
   idle: 'Inaktiv',
   waiting_for_car: 'Wartet auf Ihr Auto',
+  awaiting_authentication: 'Wartet auf Freigabe an der Ladestation',
   waiting_for_surplus: 'Wartet auf Solarüberschuss',
   charging_solar: 'Lädt mit Solarstrom',
   charging_grid: 'Lädt mit Netzstrom',

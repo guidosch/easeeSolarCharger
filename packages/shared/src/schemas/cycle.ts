@@ -22,6 +22,7 @@ export const DecisionReason = z.enum([
   'target_met',
   'not_plugged_in',
   'charger_error',
+  'awaiting_authentication',
   'deferred_to_tomorrow',
   'fairness_not_selected',
 ])

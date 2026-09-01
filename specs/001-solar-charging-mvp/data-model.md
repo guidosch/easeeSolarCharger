@@ -58,7 +58,7 @@ what keeps the write budget at ~1,750/day (Principle VI).
 | Field | Type | Notes |
 | --- | --- | --- |
 | `lotNumber`, `line`, `phases` | — | denormalised from `parkingLots` to save a read per cycle |
-| `opMode` | `0..6` | Easee observation 109; see state machine below |
+| `opMode` | `0..8` | Easee observation 109; see state machine below |
 | `outputCurrentA` | number | observation 114 — **the delivered current, the truth** (FR-028) |
 | `dynamicChargerCurrentA` | number | observation 48 — what the charger believes it was told |
 | `totalPowerKw` | number | observation 120 — feeds the own-charging correction in the surplus formula |
@@ -85,14 +85,16 @@ what keeps the write budget at ~1,750/day (Principle VI).
         │                                                                              │
         └──────────────────── unplug ────────────── 4 Completed ◀── target reached ────┘
                                                     5 Error (surfaced to admin, no retry storm)
+7 AwaitingAuthentication / 8 De-authenticating — plugged in, not authorised: counted as a
+  plug-in and as connected, but takes no setpoint and gets no share of the surplus
 ```
 
 **Transitions the system acts on**:
 
 | Transition | Meaning | Action |
 | --- | --- | --- |
-| `1 → {2,3,6}` | car plugged in | open a session; **re-apply the setpoint** — Easee resets `dynamicChargerCurrent` on plug-in (research R5); activate any stored target (FR-010) |
-| `{2,3,4,6} → 1` | car unplugged | close the session as `ended_early` or `completed`; clear any override (FR-033); close the target (spec assumption: no automatic resume) |
+| `1 → {2,3,6,7}` | car plugged in | open a session; **re-apply the setpoint** — Easee resets `dynamicChargerCurrent` on plug-in (research R5); activate any stored target (FR-010) |
+| `{2,3,4,6,7,8} → 1` | car unplugged | close the session as `ended_early` or `completed`; clear any override (FR-033); close the target (spec assumption: no automatic resume) |
 | `→ 5` | error | record, surface to admin, stop commanding that charger this cycle |
 | `→ 0` | offline | treat the reading as stale for that charger; do not infer zero power |
 

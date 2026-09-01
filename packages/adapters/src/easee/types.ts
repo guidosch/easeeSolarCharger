@@ -49,7 +49,7 @@ export const ObservationsResponse = z.union([
 
 /** The internal domain model — `packages/core` never sees an Easee payload (Principle IV). */
 export type ChargerObservation = {
-  opMode: 0 | 1 | 2 | 3 | 4 | 5 | 6
+  opMode: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
   deliveredCurrentA: number
   dynamicCurrentA: number
   totalPowerKw: number

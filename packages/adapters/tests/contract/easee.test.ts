@@ -64,7 +64,7 @@ describe('Easee observations — happy-path parse of the committed recording', (
   })
 
   it('parses every opMode the charger can report', () => {
-    for (const mode of [0, 1, 2, 3, 4, 5, 6]) {
+    for (const mode of [0, 1, 2, 3, 4, 5, 6, 7, 8]) {
       const recording = loadRecording(`providers/easee/observations-opmode-${mode}.json`)
       const parsed = parseObservations(recording.body, OBSERVED_AT)
       expect(parsed.ok).toBe(true)

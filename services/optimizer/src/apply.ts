@@ -31,7 +31,9 @@ export type ApplyResult = {
   commanded: Map<string, number>
 }
 
-const PLUGGED_IN_MODES = new Set([2, 3, 6])
+// 7 (awaiting authentication) counts as plugged in: a car that lands there on plug-in has still
+// reset the setpoint, and it may sit there for minutes before moving on to 6.
+const PLUGGED_IN_MODES = new Set([2, 3, 6, 7])
 
 export function needsWrite(
   charger: GatheredCharger,

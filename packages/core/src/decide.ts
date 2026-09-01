@@ -11,6 +11,7 @@ import type {
   CycleInputs,
   DecisionReason,
   LadderRule,
+  OpMode,
   Reachability,
 } from './types.js'
 
@@ -126,9 +127,24 @@ export function solarShares(inputs: CycleInputs): Map<string, number> {
   return allocateSurplus(inputs, solarUsable, []).shareByChargerId
 }
 
+/**
+ * Can a setpoint be written to a charger in this mode at all?
+ *
+ * Exported because the optimizer advances its hysteresis counters over the same set: a charger this
+ * returns `false` for is not "below the floor", it is simply not in the game this cycle.
+ * 0 (offline), 1 (disconnected) and 5 (error) never take current; 7 (awaiting authentication) and
+ * 8 (de-authenticating) are plugged in but not authorised, so current asked for now would be
+ * refused and surplus allocated to them would be surplus thrown away.
+ */
+export function canAcceptSetpoint(opMode: OpMode): boolean {
+  return COMMANDABLE_OP_MODES.has(opMode)
+}
+
+const COMMANDABLE_OP_MODES = new Set<OpMode>([2, 3, 4, 6])
+
 /** Chargers that could physically absorb surplus this cycle. */
 function isSolarCandidate(charger: ChargerInput): boolean {
-  if (charger.opMode === 0 || charger.opMode === 1 || charger.opMode === 5) return false
+  if (!canAcceptSetpoint(charger.opMode)) return false
   if (charger.overrideActive) return false
   if (!charger.target) return false
   return charger.target.deliveredKwh < charger.target.energyKwh
@@ -274,6 +290,12 @@ function propose(
   }
   if (charger.opMode === 1) {
     return decided(0, 'not_plugged_in', null, 'none')
+  }
+  // opMode 7/8: a car is connected but the charger is still in the authorisation handshake. It
+  // would refuse the current, so none is commanded — and this is deliberately *not* `charger_error`:
+  // the fix is at the charger (present the RFID tag), not in this system.
+  if (charger.opMode === 7 || charger.opMode === 8) {
+    return decided(0, 'awaiting_authentication', null, 'none')
   }
   // FR-030 is unconditional: once the declared energy has been delivered, this system stops asking
   // for current — the override lifts the price policy and the deadline, not the user's own target.

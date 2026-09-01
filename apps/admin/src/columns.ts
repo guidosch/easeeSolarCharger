@@ -60,11 +60,17 @@ const OP_MODE_VALUES = [
   ['4', 'Completed — the car stopped the session itself.'],
   ['5', 'Error — reported by the charger; deliberately not retried.'],
   ['6', 'ReadyToCharge — plugged in and waiting for a setpoint.'],
+  ['7', 'AwaitingAuthentication — plugged in, waiting for an RFID tag or app authorisation.'],
+  ['8', 'De-authenticating — the charger is tearing the authorisation down.'],
 ] as const
 
 const CHARGER_STATE_VALUES = [
   ['idle', 'No car and no target, or plugged in with nothing asked of it.'],
   ['waiting_for_car', 'A target exists but nothing is plugged in.'],
+  [
+    'awaiting_authentication',
+    'Plugged in, but the charger is still waiting for an RFID tag or app authorisation (opMode 7/8) and will refuse current until it has one.',
+  ],
   ['waiting_for_surplus', 'Plugged in with an open target, but no current commanded this cycle.'],
   ['charging_solar', 'Drawing current that was attributed to PV surplus.'],
   ['charging_grid', 'Drawing current that was attributed to the grid (override or deadline).'],
@@ -345,6 +351,10 @@ export const TRACE_COLUMNS = {
       [
         'charger_error',
         'The charger is offline or reporting an error, and is deliberately not retried.',
+      ],
+      [
+        'awaiting_authentication',
+        'A car is connected but the charger has not been authorised yet (opMode 7/8), so no current is commanded. The fix is at the charger, not here.',
       ],
       [
         'deferred_to_tomorrow',

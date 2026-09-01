@@ -15,7 +15,14 @@ export const Reachability = z.object({
 })
 export type Reachability = z.infer<typeof Reachability>
 
-/** Easee observation 109 — the charger operating mode (research R1). */
+/**
+ * Easee observation 109 — the charger operating mode (research R1).
+ *
+ * 7 and 8 belong to the authorisation flow and only appear on chargers that require an RFID/app
+ * authorisation; they were seen in production on 2026-09-01. Every value the documented Easee
+ * enumeration defines is listed here: an unlisted value makes the whole observation `malformed`,
+ * which costs the charger a cycle.
+ */
 export const OpMode = z.union([
   z.literal(0), // Offline
   z.literal(1), // Disconnected
@@ -24,6 +31,8 @@ export const OpMode = z.union([
   z.literal(4), // Completed
   z.literal(5), // Error
   z.literal(6), // ReadyToCharge
+  z.literal(7), // AwaitingAuthentication — plugged in, waiting for RFID/app authorisation
+  z.literal(8), // De-authenticating — the authorisation is being torn down
 ])
 export type OpMode = z.infer<typeof OpMode>
 

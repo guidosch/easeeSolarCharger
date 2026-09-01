@@ -9,8 +9,12 @@ import type { CycleDeps } from './ports.js'
  *
  * | Transition   | Meaning       | Action                                                        |
  * | ------------ | ------------- | ------------------------------------------------------------- |
- * | `1 → {2,3,6}`| car plugged in| open a session, activate any stored target (FR-010)            |
- * | `{2,3,4,6} → 1` | car unplugged | close the session, close the target, clear the override    |
+ * | `1 → {2,3,6,7}`| car plugged in| open a session, activate any stored target (FR-010)          |
+ * | `{2,3,4,6,7,8} → 1` | car unplugged | close the session, close the target, clear the override |
+ *
+ * 7 (awaiting authentication) is a plug-in: the car is connected and the charger is waiting for an
+ * RFID/app authorisation. Leaving it out would mean a charger that goes `1 → 7 → 6` never opens a
+ * session at all, because the `6` arrives with a previous mode of `7` rather than `1`.
  *
  * Delivered energy comes from observation 121, as a *difference* from the value seen last cycle —
  * never as an absolute, because the charger resets that counter when a new session starts.
@@ -30,8 +34,8 @@ import type { CycleDeps } from './ports.js'
  */
 export const FLUSH_INTERVAL_MINUTES = 30
 
-const PLUGGED_IN = new Set([2, 3, 6])
-const CONNECTED = new Set([2, 3, 4, 6])
+const PLUGGED_IN = new Set([2, 3, 6, 7])
+const CONNECTED = new Set([2, 3, 4, 6, 7, 8])
 
 export type SessionOutcome = {
   writes: number

@@ -23,6 +23,20 @@ describe('degraded charger states', () => {
     expect(decision.reason).toBe('charger_error')
   })
 
+  it.each([[7], [8]])(
+    'opMode %i (authorisation handshake) commands no current and says why',
+    (opMode) => {
+      // Not `charger_error`: the charger is healthy and a car is connected — it is waiting for an
+      // RFID tag. Reporting it as an error would send an operator hunting a fault that is not there.
+      const inputs = makeInputs({ chargers: [makeCharger({ opMode: opMode as OpMode })] })
+
+      const decision = decisionFor(decide(inputs), 'EH100001')
+
+      expect(decision.targetCurrentA).toBe(0)
+      expect(decision.reason).toBe('awaiting_authentication')
+    },
+  )
+
   it('does not infer zero power from an offline charger', () => {
     // "Do not infer zero" is about the *surplus* signal: an offline charger contributes no reading,
     // and the decision must not read that as a charger sitting idle at 0 kW.
@@ -35,7 +49,7 @@ describe('degraded charger states', () => {
 
 describe('degraded cycle inputs', () => {
   it('never throws across the whole space of well-typed inputs', () => {
-    const opModes: OpMode[] = [0, 1, 2, 3, 4, 5, 6]
+    const opModes: OpMode[] = [0, 1, 2, 3, 4, 5, 6, 7, 8]
     const qualities = ['fresh', 'stale', 'unusable'] as const
     const seasons = ['solar', 'winter'] as const
     const tariffs = ['low', 'high'] as const

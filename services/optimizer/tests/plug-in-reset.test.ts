@@ -104,6 +104,35 @@ describe.skipIf(await noEmulator())('plug-in resets the setpoint', () => {
     expect(world.written).toEqual([{ chargerId: LOT.chargerId, amps: 16 }])
   })
 
+  it('opens the session when the plug-in lands on opMode 7 and commands once it is authorised', async () => {
+    // A charger that requires an RFID tag goes `1 → 7 → 6`, never `1 → 2`. If 7 were not a plug-in,
+    // the `6` would arrive with a previous mode of 7, no plug-in would ever be detected, and the
+    // stored target would never be activated — the car would sit at 0 A with nothing to show why.
+    const deps = buildTestCycleDeps(world, NOW)
+    await seedCharger(deps, LOT, { opMode: 1, commandedCurrentA: 0, dynamicChargerCurrentA: 0 })
+    await new TargetsRepo(deps.db).createSuperseding(target)
+
+    world.observations.set(
+      LOT.serialNumber,
+      observation({ opMode: 7, deliveredCurrentA: 0, dynamicCurrentA: 0, sessionEnergyKwh: 0 }),
+    )
+    await runCycle(deps, CYCLE_ID)
+
+    // Awaiting authentication: a session is open, but no current is asked for.
+    expect(world.written).toEqual([])
+    const afterPlugIn = await new ChargersRepo(deps.db).byId(LOT.chargerId)
+    expect(afterPlugIn?.activeSessionId).not.toBeNull()
+
+    // The tag is presented and the charger moves on to ReadyToCharge.
+    world.observations.set(
+      LOT.serialNumber,
+      observation({ opMode: 6, deliveredCurrentA: 0, dynamicCurrentA: 0, sessionEnergyKwh: 0 }),
+    )
+    await runCycle(deps, '2026-01-15T21:05:00Z')
+
+    expect(world.written).toEqual([{ chargerId: LOT.chargerId, amps: 16 }])
+  })
+
   it('does not rewrite a setpoint that stuck', async () => {
     const deps = buildTestCycleDeps(world, NOW)
     await seedCharger(deps, LOT, {

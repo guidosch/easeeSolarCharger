@@ -53,7 +53,8 @@ export class EaseeObservationsClient {
   }
 }
 
-const VALID_OP_MODES = [0, 1, 2, 3, 4, 5, 6] as const
+/** The documented Easee `ChargerOpMode` enumeration in full — 7/8 are the authorisation flow. */
+const VALID_OP_MODES = [0, 1, 2, 3, 4, 5, 6, 7, 8] as const
 
 export function parseObservations(
   payload: unknown,

@@ -10,6 +10,7 @@ import { TargetView } from './target.js'
 export const ChargerState = z.enum([
   'idle',
   'waiting_for_car',
+  'awaiting_authentication',
   'waiting_for_surplus',
   'charging_solar',
   'charging_grid',

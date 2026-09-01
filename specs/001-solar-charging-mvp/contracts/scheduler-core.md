@@ -64,7 +64,7 @@ type ChargerInput = {
   line: 'L1' | 'L2'
   phases: 1 | 3
   maxCurrentA: number
-  opMode: 0|1|2|3|4|5|6               // Easee observation 109
+  opMode: 0|1|2|3|4|5|6|7|8           // Easee observation 109
   deliveredCurrentA: number           // observation 114 — the truth
   dynamicChargerCurrentA: number      // observation 48 — what the charger thinks it was told
   commandedCurrentA: number           // what we last wrote
@@ -165,6 +165,9 @@ Applied per cycle, in exactly this order (FR-013, Principle I):
 - `forecast === null` → `deferRecommended` is treated as `false`. A missing forecast may never
   *cause* a deferral, because a wrong deferral risks a deadline.
 - `opMode === 0 or 5` (offline/error) → `targetCurrentA: 0`, no command issued, recorded for admin.
+- `opMode === 7 or 8` (awaiting authentication / de-authenticating) → `targetCurrentA: 0`, reason
+  `awaiting_authentication`, and excluded from the surplus allocation: the charger is plugged in but
+  will refuse current until it is authorised.
 
 ---
 

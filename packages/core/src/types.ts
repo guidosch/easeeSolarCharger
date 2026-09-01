@@ -14,8 +14,11 @@ export type ReachabilityState = 'reachable' | 'at_risk' | 'unreachable'
 export type SupplyLine = 'L1' | 'L2'
 export type Phases = 1 | 3
 
-/** Easee observation 109. `0` Offline, `1` Disconnected, `2` AwaitingStart, `3` Charging, `4` Completed, `5` Error, `6` ReadyToCharge. */
-export type OpMode = 0 | 1 | 2 | 3 | 4 | 5 | 6
+/**
+ * Easee observation 109. `0` Offline, `1` Disconnected, `2` AwaitingStart, `3` Charging,
+ * `4` Completed, `5` Error, `6` ReadyToCharge, `7` AwaitingAuthentication, `8` De-authenticating.
+ */
+export type OpMode = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
 
 export type LadderRule = 1 | 2 | 3 | 4 | 5 | 6 | null
 
@@ -30,6 +33,7 @@ export type DecisionReason =
   | 'target_met'
   | 'not_plugged_in'
   | 'charger_error'
+  | 'awaiting_authentication'
   | 'deferred_to_tomorrow'
   | 'fairness_not_selected' // ladder 6
 

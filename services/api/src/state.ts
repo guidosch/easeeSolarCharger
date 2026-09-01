@@ -13,6 +13,10 @@ export function deriveChargerState(charger: ChargerDoc, target: TargetDoc | null
   if (charger.opMode === 5) return 'error'
   if (charger.opMode === 1) return target ? 'waiting_for_car' : 'idle'
   if (charger.opMode === 4) return 'complete'
+  // 7/8 are the authorisation handshake: the car is connected but the charger will refuse current
+  // until it is authorised. Its own state, because neither "waiting for surplus" nor "error"
+  // describes it and only one of the three tells the user to go and present their tag.
+  if (charger.opMode === 7 || charger.opMode === 8) return 'awaiting_authentication'
 
   // Plugged in (2, 3, 6).
   if (charger.opMode === 3) {
