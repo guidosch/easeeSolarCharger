@@ -15,7 +15,24 @@
         },
         { "source": "**", "destination": "/index.html" }
       ],
+      // Every matching rule is applied in order, so a later rule overrides an earlier one for the
+      // same header. The list therefore goes from the broadest default to the narrowest exception.
       "headers": [
+        {
+          // Hosting's default lets a response sit in a cache for an hour. For anything that
+          // decides *which version runs* -- index.html under any route, sw.js, the manifest --
+          // that hour is an hour of running a release whose asset files the deploy has already
+          // deleted. Revalidate every time; the responses are small and mostly 304s.
+          "source": "**",
+          "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+        },
+        {
+          // The exception: every filename under /assets carries a content hash, so a given URL
+          // can never change meaning. Caching it forever costs nothing and a new release simply
+          // asks for new names.
+          "source": "/assets/**",
+          "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+        },
         {
           "source": "/api/**",
           "headers": [{ "key": "Cache-Control", "value": "no-store" }]
@@ -34,6 +51,14 @@
         { "source": "**", "destination": "/index.html" }
       ],
       "headers": [
+        {
+          "source": "**",
+          "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+        },
+        {
+          "source": "/assets/**",
+          "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+        },
         {
           "source": "/api/**",
           "headers": [{ "key": "Cache-Control", "value": "no-store" }]
