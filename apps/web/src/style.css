@@ -8,6 +8,12 @@
   --grid: #6b5b95;
   --warn: #a4341f;
   --line: #dde3df;
+  /* Pressable states: the solar green darkens on hover and again on press, and the bordered
+     secondary button fills with a neutral tint so it stays quiet next to the primary one. */
+  --solar-hover: #0a6146;
+  --solar-press: #08543c;
+  --fill-hover: #eef0ef;
+  --fill-press: #e3e7e5;
   font-family:
     system-ui,
     -apple-system,
@@ -80,6 +86,13 @@ button {
   border-radius: 0.6rem;
   background: var(--solar);
   color: #fff;
+  cursor: pointer;
+  /* The press feedback below replaces the browser's own tap flash rather than stacking with it. */
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
 }
 
 button.secondary {
@@ -90,6 +103,36 @@ button.secondary {
 
 button:disabled {
   opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Hover is gated on a real pointer: on touch it sticks after the tap, which would leave a button
+   looking pressed long after the finger is gone. Touch gets its feedback from :active instead. */
+@media (hover: hover) and (pointer: fine) {
+  button:not(:disabled):hover {
+    background: var(--solar-hover);
+  }
+
+  button.secondary:not(:disabled):hover {
+    background: var(--fill-hover);
+    border-color: var(--muted);
+    color: var(--ink);
+  }
+}
+
+button:not(:disabled):active {
+  background: var(--solar-press);
+}
+
+button.secondary:not(:disabled):active {
+  background: var(--fill-press);
+  border-color: var(--muted);
+  color: var(--ink);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
 
 .muted {
@@ -170,11 +213,32 @@ nav a {
   color: var(--muted);
   background: var(--card);
   border: 1px solid var(--line);
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
 }
 
 nav a.router-link-active {
   color: var(--solar);
   border-color: var(--solar);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  nav a:hover {
+    background: var(--fill-hover);
+    border-color: var(--muted);
+    color: var(--ink);
+  }
+
+  nav a.router-link-active:hover {
+    border-color: var(--solar);
+    color: var(--solar);
+  }
+}
+
+nav a:active {
+  background: var(--fill-press);
 }
 
 /* The update banner sits above the nav rather than floating over the content: it is an offer, not

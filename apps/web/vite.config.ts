@@ -61,6 +61,9 @@ export default defineConfig({
   ],
   server: {
     port: 5173,
+    // Bind 0.0.0.0, not the default loopback: inside the devcontainer a loopback-only listener
+    // (Node picks ::1) is invisible to the host, so the forwarded port answers nothing.
+    host: true,
     // The PWA never talks to Firestore directly (data-model.md, "Security rules") — everything
     // goes through services/api.
     proxy: { '/api': { target: 'http://localhost:8081', changeOrigin: true } },
