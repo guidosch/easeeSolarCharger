@@ -161,7 +161,7 @@ export async function reconcileSessions(
     // --- Credit the energy delivered since the last cycle ---------------------------------------
     //
     // Accumulated on the charger mirror, which is written once per cycle in a single batch for all
-    // thirty, and flushed to the target and session documents only every ~15 minutes or when
+    // thirty, and flushed to the target and session documents only every half hour or when
     // something closes. Writing them every cycle instead is one write per active charger per cycle
     // — the thing FR-046 names outright — and on a busy day it is the difference between ~1,700
     // and ~3,000 documents.
@@ -186,7 +186,11 @@ export async function reconcileSessions(
     // --- Keep the target's progress and reachability current -------------------------------------
     let closedTarget = false
     let closedTargetStatus: 'met' | 'shortfall' | null = null
-    let flushed = false
+    // Tracked per document rather than as one `flushed` flag: the pending energy may reach the
+    // target, the session, or both in a cycle, and whoever did *not* receive it must still be able
+    // to claim it before the mirror is cleared.
+    let targetGotPending = false
+    let sessionGotPending = false
     if (target) {
       const decision = decisionFor.get(lot.chargerId)
       const deliveredKwh = round(target.deliveredKwh + pendingKwh)
@@ -226,7 +230,7 @@ export async function reconcileSessions(
 
         await targets.patch(target.userId, target.targetId, patchFields)
         outcome.writes += 1
-        flushed = true
+        targetGotPending = true
       }
 
       if (closedTarget && activeSessionId) {
@@ -243,6 +247,11 @@ export async function reconcileSessions(
               }
             : {}),
         })
+        if (session) sessionGotPending = true
+        // Cleared locally as well as on the mirror: a car unplugged on the very cycle its target
+        // was met must not have its session closed a second time below, which would overwrite
+        // `target_reached` with `unplugged`.
+        activeSessionId = null
         patch.activeSessionId = null
         patch.activeTargetPath = null
         clearOverride(previous, patch, outcome, lot)
@@ -260,37 +269,56 @@ export async function reconcileSessions(
           overrideUsed: session.overrideUsed || previous.overrideActive,
         })
         outcome.writes += 1
-        flushed = true
+        sessionGotPending = true
       }
     }
 
     // --- Close the session on unplug -------------------------------------------------------------
     if (unplugged && userId && activeSessionId) {
       const session = await sessions.byId(userId, activeSessionId)
-      const energyKwh = round((session?.energyKwh ?? 0) + (flushed ? 0 : pendingKwh))
+      const unflushedKwh = sessionGotPending ? 0 : pendingKwh
+      const energyKwh = round((session?.energyKwh ?? 0) + unflushedKwh)
       const met = session ? energyKwh >= (session.targetEnergyKwh ?? Infinity) : false
       outcome.writes += await sessions.close(userId, activeSessionId, {
         endedAt: nowIso,
         endReason: met ? 'target_reached' : 'unplugged',
         targetMet: met,
         energyKwh,
-        solarKwh: round((session?.solarKwh ?? 0) + (flushed ? 0 : pendingSolarKwh)),
-        gridKwh: round((session?.gridKwh ?? 0) + (flushed ? 0 : pendingGridKwh)),
+        solarKwh: round((session?.solarKwh ?? 0) + (sessionGotPending ? 0 : pendingSolarKwh)),
+        gridKwh: round((session?.gridKwh ?? 0) + (sessionGotPending ? 0 : pendingGridKwh)),
       })
-      flushed = true
+      sessionGotPending = true
       patch.activeSessionId = null
       patch.activeTargetPath = null
+    }
 
-      // No automatic resume on the next plug-in (spec assumption): the target is closed, and the
-      // user sets a new one.
-      if (target && !closedTarget) {
-        await targets.close(target.userId, target.targetId, 'cancelled', nowIso)
-        outcome.writes += 1
-      }
+    // No automatic resume on the next plug-in (spec assumption): the target is closed, and the user
+    // sets a new one. Closing it is also the **last chance to write the energy this session
+    // measured into it** — the mirror's pending counter is cleared below and the target is never
+    // looked at again. Closing it without that remainder is how a car that had taken 5.5 kWh came
+    // to leave a target reading 0.9: the session document had the energy, the target did not.
+    // Not conditional on a session *document* existing, for the same reason the override clear
+    // below is not: a car plugged in before the first cycle ever ran has no session, and its
+    // target must still be closed out with what it drew.
+    if (unplugged && target && !closedTarget) {
+      await targets.patch(target.userId, target.targetId, {
+        status: 'cancelled',
+        closedAt: nowIso,
+        ...(targetGotPending
+          ? {}
+          : {
+              deliveredKwh: round(target.deliveredKwh + pendingKwh),
+              deliveredSolarKwh: round(target.deliveredSolarKwh + pendingSolarKwh),
+              deliveredGridKwh: round(target.deliveredGridKwh + pendingGridKwh),
+            }),
+      })
+      outcome.writes += 1
+      targetGotPending = true
+      patch.activeTargetPath = null
     }
 
     // The pending counters ride along on the charger mirror, which is written anyway.
-    if (flushed) {
+    if (targetGotPending || sessionGotPending) {
       patch.pendingKwh = 0
       patch.pendingSolarKwh = 0
       patch.pendingGridKwh = 0

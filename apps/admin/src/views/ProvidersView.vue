@@ -4,6 +4,7 @@ import type { AdminProviderHealth } from '@app/shared'
 import { adminFetch } from '../api'
 import { PROVIDER_COLUMNS as COL } from '../columns'
 import ColumnHeader from '../components/ColumnHeader.vue'
+import { formatInstant } from '../time'
 
 /**
  * Per-provider budget, errors and rate limits over 24 hours (T119, FR-041).
@@ -56,9 +57,7 @@ onMounted(load)
         </td>
         <td>
           <template v-if="provider.lastError">
-            {{
-              new Date(provider.lastError.at).toLocaleString('en-GB', { timeZone: 'Europe/Zurich' })
-            }}
+            {{ formatInstant(provider.lastError.at) }}
             — {{ provider.lastError.message }}
             <code>{{ provider.lastError.correlationId }}</code>
           </template>

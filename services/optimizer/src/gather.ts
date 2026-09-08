@@ -191,7 +191,7 @@ export function toChargerInput(charger: GatheredCharger, nowIso: string): Charge
           energyKwh: target.energyKwh,
           deadline: target.deadline,
           // Flushed plus not-yet-flushed: the core must never see less energy than has actually
-          // been delivered, or it would keep charging past a met target for up to fifteen minutes.
+          // been delivered, or it would keep charging past a met target for up to half an hour.
           deliveredKwh: round(target.deliveredKwh + previous.pendingKwh),
         }
       : null,

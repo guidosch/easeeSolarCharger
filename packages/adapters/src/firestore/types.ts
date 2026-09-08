@@ -57,7 +57,7 @@ export type ChargerDoc = {
    * Energy delivered since the target and session documents were last written.
    *
    * The charger mirror is written once per cycle anyway, in a single batch for all thirty; the
-   * target and session documents are not. Accumulating here and flushing every ~15 minutes is what
+   * target and session documents are not. Accumulating here and flushing every half hour is what
    * keeps this from becoming one write per charger per cycle, which FR-046 forbids and which alone
    * would take a busy day from ~1,700 writes to ~3,000.
    *

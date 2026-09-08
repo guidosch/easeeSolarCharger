@@ -4,6 +4,7 @@ import type { TraceEntry } from '@app/shared'
 import { adminFetch } from '../api'
 import { LADDER_RULES, TRACE_COLUMNS as COL } from '../columns'
 import ColumnHeader from '../components/ColumnHeader.vue'
+import { SITE_TIMEZONE, formatTimeOfDay, fromDateTimeLocal, toDateTimeLocal } from '../time'
 
 /**
  * The per-charger decision trail (T118, FR-042, SC-009).
@@ -16,17 +17,16 @@ const props = defineProps<{ lotNumber: string }>()
 
 const entries = ref<TraceEntry[]>([])
 const error = ref<string | null>(null)
-const from = ref(new Date(Date.now() - 3 * 3_600_000).toISOString().slice(0, 16))
-const to = ref(new Date().toISOString().slice(0, 16))
-
-function local(iso: string): string {
-  return new Date(iso).toLocaleTimeString('en-GB', { timeZone: 'Europe/Zurich' })
-}
+// Both ends of the range are site-local wall-clock times, like every other time on this page — the
+// `datetime-local` control carries no zone of its own, so it is filled and read back through the
+// site's zone rather than through UTC or the operator's browser.
+const from = ref(toDateTimeLocal(Date.now() - 3 * 3_600_000))
+const to = ref(toDateTimeLocal(Date.now()))
 
 async function load(): Promise<void> {
   error.value = null
   try {
-    const query = `?from=${new Date(from.value).toISOString()}&to=${new Date(to.value).toISOString()}`
+    const query = `?from=${fromDateTimeLocal(from.value)}&to=${fromDateTimeLocal(to.value)}`
     entries.value = await adminFetch<TraceEntry[]>(
       `/chargers/${encodeURIComponent(props.lotNumber)}/trace${query}`,
     )
@@ -45,6 +45,9 @@ onMounted(load)
     <label>From <input v-model="from" type="datetime-local" /></label>
     <label>To <input v-model="to" type="datetime-local" /></label>
     <button type="submit">Show</button>
+    <!-- The control shows no zone of its own, and which zone it means is the whole question when
+         an operator is matching a user's "it was about half past two". -->
+    <span class="hint">{{ SITE_TIMEZONE }} local time</span>
   </form>
 
   <p v-if="error" class="error">{{ error }}</p>
@@ -63,7 +66,7 @@ onMounted(load)
     </thead>
     <tbody>
       <tr v-for="entry in entries" :key="entry.cycleId">
-        <td>{{ local(entry.startedAt) }}</td>
+        <td>{{ formatTimeOfDay(entry.startedAt) }}</td>
         <td>{{ entry.targetCurrentA }} A</td>
         <td>{{ entry.deliveredCurrentA }} A</td>
         <td>{{ entry.reason }}</td>

@@ -4,6 +4,7 @@ import type { AdminCycleSummary, AdminHealth } from '@app/shared'
 import { adminFetch } from '../api'
 import { CYCLE_COLUMNS as COL } from '../columns'
 import ColumnHeader from '../components/ColumnHeader.vue'
+import { formatInstant } from '../time'
 
 /**
  * Recent cycles and overall health (T116, FR-039).
@@ -15,10 +16,6 @@ import ColumnHeader from '../components/ColumnHeader.vue'
 const cycles = ref<AdminCycleSummary[]>([])
 const health = ref<AdminHealth | null>(null)
 const error = ref<string | null>(null)
-
-function local(iso: string): string {
-  return new Date(iso).toLocaleString('en-GB', { timeZone: 'Europe/Zurich' })
-}
 
 async function load(): Promise<void> {
   try {
@@ -86,7 +83,7 @@ onMounted(load)
       <tr v-for="cycle in cycles" :key="cycle.cycleId">
         <td>
           <router-link :to="`/cycles/${encodeURIComponent(cycle.cycleId)}`">
-            {{ local(cycle.cycleId) }}
+            {{ formatInstant(cycle.cycleId) }}
           </router-link>
         </td>
         <td :class="cycle.outcome === 'completed' ? 'ok' : 'warn'">{{ cycle.outcome }}</td>

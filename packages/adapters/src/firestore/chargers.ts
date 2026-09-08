@@ -17,18 +17,18 @@ export class ChargersRepo {
 
   async listAll(): Promise<ChargerDoc[]> {
     const snap = await this.col().get()
-    return snap.docs.map((d) => d.data() as ChargerDoc)
+    return snap.docs.map((d) => hydrateChargerDoc(d.data() as Partial<ChargerDoc>))
   }
 
   async byId(chargerId: string): Promise<ChargerDoc | null> {
     const doc = await this.col().doc(chargerId).get()
-    return doc.exists ? (doc.data() as ChargerDoc) : null
+    return doc.exists ? hydrateChargerDoc(doc.data() as Partial<ChargerDoc>) : null
   }
 
   async byLotNumber(lotNumber: string): Promise<ChargerDoc | null> {
     const snap = await this.col().where('lotNumber', '==', lotNumber).limit(1).get()
     const first = snap.docs[0]
-    return first ? (first.data() as ChargerDoc) : null
+    return first ? hydrateChargerDoc(first.data() as Partial<ChargerDoc>) : null
   }
 
   async upsert(charger: ChargerDoc): Promise<void> {
@@ -55,6 +55,31 @@ export class ChargersRepo {
       overrideActive: active,
       overrideSince: active ? atIso : null,
     })
+  }
+}
+
+/**
+ * A mirror document as the model requires it, whatever the stored document happens to carry.
+ *
+ * `patchMany` writes a *partial* document every cycle — it never sends a field nothing has touched
+ * yet — and `set(..., { merge: true })` on a missing document creates it from just those fields. A
+ * mirror created that way (a lot added to `parkingLots` without re-running `pnpm seed:lots`) is
+ * therefore missing everything that has never been written, and reading it raw handed `undefined`
+ * to arithmetic: `commandedCurrentA` made the cycle record unwritable (Firestore rejects
+ * `undefined`), and `pendingKwh` turned every energy sum into `NaN`, which silently froze a
+ * target's delivered energy for good. Defaults are applied once, here at the boundary, so no
+ * caller has to know which fields a document happens to have.
+ */
+export function hydrateChargerDoc(stored: Partial<ChargerDoc>): ChargerDoc {
+  return {
+    ...emptyChargerDoc({
+      chargerId: stored.chargerId ?? '',
+      lotNumber: stored.lotNumber ?? '',
+      line: stored.line ?? 'L1',
+      phases: stored.phases ?? 3,
+      maxCurrentA: stored.maxCurrentA ?? 0,
+    }),
+    ...stripUndefined(stored),
   }
 }
 

@@ -30,7 +30,7 @@ export function deriveChargerState(charger: ChargerDoc, target: TargetDoc | null
  * The target as the user sees it.
  *
  * The charger carries energy the optimizer has measured but not yet written through to the target
- * document (it flushes about every fifteen minutes to stay inside the write budget). Adding it back
+ * document (it flushes about every half hour to stay inside the write budget). Adding it back
  * here is what keeps the progress figure live: the saving is in Firestore writes, not in accuracy.
  */
 export function toTargetView(target: TargetDoc, charger?: ChargerDoc): TargetView {
