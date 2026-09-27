@@ -5,6 +5,7 @@ import CycleDetailView from './views/CycleDetailView.vue'
 import CyclesView from './views/CyclesView.vue'
 import DecisionTraceView from './views/DecisionTraceView.vue'
 import ProvidersView from './views/ProvidersView.vue'
+import SessionsView from './views/SessionsView.vue'
 import SignInView from './views/SignInView.vue'
 import { isSignedIn } from './api'
 
@@ -20,6 +21,7 @@ const routes: RouteRecordRaw[] = [
     component: DecisionTraceView,
     props: true,
   },
+  { path: '/sessions', name: 'sessions', component: SessionsView },
   { path: '/providers', name: 'providers', component: ProvidersView },
 ]
 

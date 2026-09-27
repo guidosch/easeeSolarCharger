@@ -50,4 +50,19 @@ export class SessionsRepo {
     const snap = await this.col(userId).orderBy('startedAt', 'desc').limit(limit).get()
     return snap.docs.map((d) => d.data() as SessionDoc)
   }
+
+  /**
+   * The most recent sessions across every user, newest first — the operator's view (admin).
+   *
+   * A collection-group query over each user's `sessions` subcollection; it needs the
+   * collection-group `startedAt` index declared in `firestore.indexes.json`.
+   */
+  async recentAcrossUsers(limit: number): Promise<SessionDoc[]> {
+    const snap = await this.db
+      .collectionGroup(COLLECTIONS.sessions)
+      .orderBy('startedAt', 'desc')
+      .limit(limit)
+      .get()
+    return snap.docs.map((d) => d.data() as SessionDoc)
+  }
 }

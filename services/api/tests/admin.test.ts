@@ -1,6 +1,12 @@
-import { CyclesRepo, expiresAtFrom } from '@app/adapters'
-import type { CycleDoc } from '@app/adapters'
-import type { AdminChargerView, AdminCycleSummary, AdminHealth, TraceEntry } from '@app/shared'
+import { CyclesRepo, SessionsRepo, expiresAtFrom } from '@app/adapters'
+import type { CycleDoc, SessionDoc } from '@app/adapters'
+import type {
+  AdminChargerView,
+  AdminCycleSummary,
+  AdminHealth,
+  AdminSessionView,
+  TraceEntry,
+} from '@app/shared'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { clearFirestore, noEmulator } from '../../../tests/support/emulator.js'
 import { LOT_A01, LOT_A02, buildTestApi, seedLots } from './support/app.js'
@@ -65,6 +71,7 @@ describe.skipIf(await noEmulator())('the admin surface is closed by default', ()
     '/api/admin/cycles',
     '/api/admin/chargers',
     '/api/admin/providers',
+    '/api/admin/sessions',
     '/api/admin/health',
     '/api/admin/chargers/A01/trace',
   ])('refuses %s without a credential (US6 scenario 5)', async (path) => {
@@ -118,6 +125,49 @@ describe.skipIf(await noEmulator())('admin views', () => {
     expect(record.decisions[0]?.ladderRule).toBe(3)
     expect(record.correlationId).toBe('cycle-test')
     expect(record.readBack).toHaveLength(1)
+  })
+
+  it('lists the ten most recent sessions across all users, newest first', async () => {
+    const sessions = new SessionsRepo(deps.db)
+    const session = (userId: string, n: number): SessionDoc => ({
+      sessionId: `s_${n}`,
+      userId,
+      chargerId: LOT_A01.chargerId,
+      lotNumber: LOT_A01.lotNumber,
+      startedAt: `2026-06-${String(n).padStart(2, '0')}T08:00:00Z`,
+      endedAt: `2026-06-${String(n).padStart(2, '0')}T12:00:00Z`,
+      energyKwh: 10,
+      solarKwh: 7,
+      gridKwh: 3,
+      targetEnergyKwh: 10,
+      deadline: null,
+      targetMet: true,
+      endReason: 'target_reached',
+      overrideUsed: false,
+      sessionEnergyAtStartKwh: 0,
+    })
+    // Two users, twelve sessions interleaved between them: the newest ten must win regardless of owner.
+    for (let n = 1; n <= 12; n += 1) await sessions.open(session(n % 2 ? 'U1001' : 'U1002', n))
+    await deps.repos.users.touch({
+      userId: 'U1001',
+      email: 'one@example.com',
+      lotNumbers: [LOT_A01.lotNumber],
+      nowIso: new Date(NOW).toISOString(),
+    })
+
+    const response = await app.request('/api/admin/sessions', { headers: ADMIN })
+    const views = (await response.json()) as AdminSessionView[]
+
+    expect(response.status).toBe(200)
+    expect(views.map((v) => v.sessionId)).toEqual(
+      [12, 11, 10, 9, 8, 7, 6, 5, 4, 3].map((n) => `s_${n}`),
+    )
+    expect(views.find((v) => v.sessionId === 's_11')?.user).toEqual({
+      userId: 'U1001',
+      email: 'one@example.com',
+    })
+    expect(views.find((v) => v.sessionId === 's_12')?.user).toEqual({ userId: 'U1002' })
+    expect(views[0]).not.toHaveProperty('sessionEnergyAtStartKwh')
   })
 
   it('lists every charger, including one with no target and one that is orphaned (FR-040)', async () => {

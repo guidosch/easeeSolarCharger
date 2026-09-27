@@ -78,6 +78,12 @@ The decision trail for one charger over a window: every cycle in range with that
 `targetCurrentA`, `reason`, `ladderRule`, delivered current and events. This is the FR-042 / SC-009
 endpoint.
 
+## `GET /admin/sessions`
+
+The ten most recent charging sessions across all users, newest first. Each entry is the same
+`SessionSummary` a user gets from `GET /sessions`, plus `user: { userId, email? }` naming whose
+session it was. Served by a collection-group query on `sessions` ordered by `startedAt`.
+
 ## `GET /admin/providers`
 
 Rolling 24-hour health per provider (FR-041): call count against budget, error and rate-limit

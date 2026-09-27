@@ -19,6 +19,7 @@ function leave(): void {
     <nav v-if="showNav">
       <router-link to="/cycles">Cycles</router-link>
       <router-link to="/chargers">Chargers</router-link>
+      <router-link to="/sessions">Sessions</router-link>
       <router-link to="/providers">Providers</router-link>
       <button class="link" @click="leave">Sign out</button>
     </nav>

@@ -405,3 +405,57 @@ export const TRACE_COLUMNS = {
     ],
   },
 } as const satisfies Record<string, ColumnHelp>
+
+/** `GET /admin/sessions` — the most recent sessions across all users, as each user sees them. */
+export const SESSION_COLUMNS = {
+  lot: {
+    label: 'Lot',
+    description: 'The parking lot the car was charged at.',
+  },
+  user: {
+    label: 'User',
+    description:
+      'Whose session this was — the email address when known, otherwise the raw Easee user ID.',
+  },
+  started: {
+    label: 'Started',
+    description: 'When the session opened, in Europe/Zurich local time.',
+  },
+  ended: {
+    label: 'Ended',
+    description:
+      'When the session closed, in Europe/Zurich local time. A dash means it is still open.',
+  },
+  outcome: {
+    label: 'Outcome',
+    description:
+      'How the session ended — the same wording the user sees in their history (shown here in English).',
+    values: [
+      ['target reached', 'The declared energy was delivered.'],
+      ['unplugged early', 'The car was unplugged before the target was met.'],
+      ['cancelled', 'The user cancelled the target.'],
+      ['deadline passed', 'The deadline elapsed before the target was met.'],
+      ['ended', 'Closed without a recorded reason.'],
+      ['open', 'The session has not ended yet.'],
+    ],
+  },
+  energy: {
+    label: 'Charged',
+    description: 'Total energy delivered in this session, in kWh.',
+  },
+  solar: {
+    label: 'From solar',
+    description:
+      'The part attributed to PV surplus. An attribution, not a measurement: the building has only site-level metering, so this follows the reason the optimizer chose to charge.',
+  },
+  grid: {
+    label: 'From grid',
+    description:
+      'The part attributed to grid import (override or deadline fallback). Attributed the same way as From solar.',
+  },
+  override: {
+    label: 'Override',
+    description:
+      '"yes" means the user pressed "charge now" during this session, so optimization was suspended for it.',
+  },
+} as const satisfies Record<string, ColumnHelp>

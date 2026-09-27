@@ -13,6 +13,7 @@ import { adminChargerRoutes } from './routes/admin/chargers.js'
 import { adminCycleRoutes } from './routes/admin/cycles.js'
 import { adminHealthRoutes } from './routes/admin/health.js'
 import { adminProviderRoutes } from './routes/admin/providers.js'
+import { adminSessionRoutes } from './routes/admin/sessions.js'
 import { adminTraceRoutes } from './routes/admin/trace.js'
 import { authRoutes } from './routes/auth.js'
 import { chargerRoutes } from './routes/chargers.js'
@@ -68,6 +69,7 @@ export function createApiApp(deps: ApiDeps = buildApiDeps()): Hono<HonoEnv> {
   app.route('/api/admin', adminChargerRoutes(deps))
   app.route('/api/admin', adminTraceRoutes(deps))
   app.route('/api/admin', adminProviderRoutes(deps))
+  app.route('/api/admin', adminSessionRoutes(deps))
   app.route('/api/admin', adminHealthRoutes(deps))
 
   return app

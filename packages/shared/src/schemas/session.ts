@@ -31,3 +31,12 @@ export const SessionSummary = z.object({
   overrideUsed: z.boolean(),
 })
 export type SessionSummary = z.infer<typeof SessionSummary>
+
+/**
+ * `GET /admin/sessions` — the most recent sessions across every user, with the same fields the user
+ * sees in their own history plus whose session it was.
+ */
+export const AdminSessionView = SessionSummary.extend({
+  user: z.object({ userId: z.string(), email: z.string().optional() }),
+})
+export type AdminSessionView = z.infer<typeof AdminSessionView>
