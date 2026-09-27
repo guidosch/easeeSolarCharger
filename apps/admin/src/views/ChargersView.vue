@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import type { AdminChargerView } from '@app/shared'
 import { adminFetch } from '../api'
 import { CHARGER_COLUMNS as COL } from '../columns'
@@ -14,6 +14,13 @@ import ColumnHeader from '../components/ColumnHeader.vue'
  */
 const chargers = ref<AdminChargerView[]>([])
 const error = ref<string | null>(null)
+// Orphaned mappings are an operator data problem, not live charging — hidden unless asked for, so
+// they don't crowd the chargers that actually drive.
+const showOrphaned = ref(false)
+const orphanedCount = computed(() => chargers.value.filter((c) => c.orphaned).length)
+const visibleChargers = computed(() =>
+  showOrphaned.value ? chargers.value : chargers.value.filter((c) => !c.orphaned),
+)
 
 async function load(): Promise<void> {
   try {
@@ -28,6 +35,13 @@ onMounted(load)
 
 <template>
   <p v-if="error" class="error">{{ error }}</p>
+
+  <div class="range">
+    <label>
+      <input v-model="showOrphaned" type="checkbox" />
+      Show orphaned mappings ({{ orphanedCount }})
+    </label>
+  </div>
 
   <table>
     <thead>
@@ -48,7 +62,7 @@ onMounted(load)
     </thead>
     <tbody>
       <tr
-        v-for="charger in chargers"
+        v-for="charger in visibleChargers"
         :key="charger.lotNumber"
         :class="charger.orphaned ? 'warn-row' : ''"
       >
