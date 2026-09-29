@@ -83,4 +83,9 @@ async function confirm(): Promise<void> {
     wird wenn möglich aus dem Solarüberschuss des Gebäudes geladen und während der Hochpreisfenster
     von 11:00–13:00 und 18:00–20:00 Uhr nie aus dem Netz.
   </p>
+  <p>
+    Warum muss ich die Energie und den Termin angeben? Das System kann nur dann optimieren, wenn es
+    weiß, wie viel Energie Sie benötigen und wann Ihr Auto wieder verfügbar sein muss. So kann es
+    die Ladeleistung optimal verteilen und den Solarüberschuss effizient nutzen.
+  </p>
 </template>
